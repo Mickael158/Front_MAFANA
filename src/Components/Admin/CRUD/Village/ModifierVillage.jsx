@@ -21,7 +21,7 @@ const ModifierVillage = () => {
     };  
     useEffect(() => {
       ListeVillage(); 
-    }, []);
+    });
     const VillageById = () => {
         axios.get(`https://localhost:8000/api/village/2`,{
           headers:
@@ -34,7 +34,7 @@ const ModifierVillage = () => {
       };
       useEffect(() => {
         VillageById(); 
-      }, []);
+      });
       console.log(Vallee);
     const [villageModif, setVillageModif] = useState('');
     const [idValle, setIdValle] = useState('');
@@ -57,7 +57,11 @@ const ModifierVillage = () => {
       const [vallees, setVallees] = useState([]);
       const ListeVallees = async () => {
         try {
-          const response = await axios.get('https://localhost:8000/api/valle');
+          const response = await axios.get('https://localhost:8000/api/valle',{
+            headers:{
+              'Authorization':`Bearer ${token}`
+            }
+          });
           setVallees(response.data);
         } catch (error) {
           console.error('Erreur de chargement des vallées', error);
@@ -66,7 +70,7 @@ const ModifierVillage = () => {
     
       useEffect(() => {
         ListeVallees();
-      }, []);
+      });
     
       useEffect(() => {
         if (vallees.length > 0) {

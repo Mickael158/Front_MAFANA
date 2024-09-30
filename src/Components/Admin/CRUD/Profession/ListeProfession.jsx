@@ -16,17 +16,13 @@ const ListeProfession = () => {
         setProfession(response.data)
     });
   };  
-  useEffect(() => {
-    ListeProfession(); 
-  }, []);
-
 
   const SuppressionProfession = async (event , id) => 
     {
       event.preventDefault();
       try
       {
-        axios.post(` https://127.0.0.1:8000/api/Profession/supprimer/${id}`,
+        axios.delete(` https://127.0.0.1:8000/api/Profession/supprimer/${id}`,
         {
           headers: 
           {
@@ -36,7 +32,7 @@ const ListeProfession = () => {
         }
       );
       toast.success("Profession supprimer!");
-
+      ListeProfession();
     }
     catch(error)
     {
@@ -44,6 +40,9 @@ const ListeProfession = () => {
       toast.error("Erreur de suppression");
     }
   }
+  useEffect(() => {
+    ListeProfession(); 
+  });
   return (
     <>
     <ToastContainer />

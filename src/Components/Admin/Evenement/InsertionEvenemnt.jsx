@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import ListeEvenemnt from './ListeEvenemnt';
@@ -15,7 +15,11 @@ const InsertionEvenemnt = () => {
     const token = localStorage.getItem('token');
 
     const ListeTypeEvenement = async () => {
-        const response = await axios.get('https://localhost:8000/api/TypeEvenement');
+        const response = await axios.get('https://localhost:8000/api/TypeEvenement',{
+          headers:{
+            'Authorization':`Bearer ${token}`
+          }
+        });
         setTypeEvenement(response.data);
     }
 
@@ -23,8 +27,8 @@ const Insertion = async (e) => {
     e.preventDefault();
     console.log(Lieu,dateDebut,dateFin,IdTypeEvenement,Description,user);
     try {
-        const response = await axios.post('https://localhost:8000/api/evenement',
-            {description:Description, date_debut:dateDebut,date_fin:dateFin,lieu:Lieu,typeEvenement_id:IdTypeEvenement,association_id:1,user_id:user},
+        await axios.post('https://localhost:8000/api/evenement',
+            {description:Description, date_debut:dateDebut,date_fin:dateFin,lieu:Lieu,typeEvenement_id:IdTypeEvenement,association_id:1,user_id:token},
         {
             headers:
             {
@@ -42,7 +46,7 @@ const Insertion = async (e) => {
 
     useEffect(()=>{
         ListeTypeEvenement();
-    },[]);
+    });
   return (
     <>
     <ToastContainer />

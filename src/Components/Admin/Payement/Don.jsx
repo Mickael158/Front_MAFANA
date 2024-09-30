@@ -6,14 +6,13 @@ import 'react-toastify/dist/ReactToastify.css';
 const Don = () => {
   const [Montant, setMontant] = useState('');
     const [selectedNom, setSelectedNom] = useState('');
-    const user = localStorage.getItem('user');
     const token = localStorage.getItem("token");
     const PayementDonation = (event) => {
       event.preventDefault();
 
       try{
           
-          axios.post(` https://localhost:8000/api/DonationFinancier`,{utilisateur : user, nom_donation_financier : selectedNom , montant : Montant },
+          axios.post(` https://localhost:8000/api/DonationFinancier`,{utilisateur : token, nom_donation_financier : selectedNom , montant : Montant },
               {
                   headers: 
                   {

@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const ListeEvenemnt = () => {
     const [Evenement,setEvenement] = useState('');
     const token = localStorage.getItem("token");
-    console.log(token);
     const ListeEvenement = () => {
       axios.get('https://localhost:8000/api/Evenement',{
         headers:
@@ -20,7 +19,7 @@ const ListeEvenemnt = () => {
     useEffect(() => {
       ListeEvenement();
       SuppressionEvenement();
-    }, []);
+    });
   
   
     const SuppressionEvenement = async (event , id) => 

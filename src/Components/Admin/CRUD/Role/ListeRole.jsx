@@ -17,17 +17,13 @@ const ListeRole = () => {
         setRole(response.data)
     });
   };  
-  useEffect(() => {
-    Listerole(); 
-  }, []);
-
 
   const SuppressionRole = async (event , id) => 
     {
       event.preventDefault();
       try
       {
-        axios.post(` https://127.0.0.1:8000/api/Role/supprimer/${id}`,
+        axios.delete(` https://127.0.0.1:8000/api/Role/supprimer/${id}`,
         {
           headers: 
           {
@@ -37,6 +33,7 @@ const ListeRole = () => {
         }
       );
       toast.success("role supprimer!");
+      Listerole();
     }
     catch(error)
     {
@@ -44,6 +41,9 @@ const ListeRole = () => {
       toast.error("erreur d'insertion!");
     }
   }
+  useEffect(() => {
+    Listerole(); 
+  });
   return (
     <>
     <ToastContainer />

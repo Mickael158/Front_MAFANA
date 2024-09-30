@@ -9,7 +9,6 @@ const Materiel = () => {
     const [IdMateriel, setIdMateriel] = useState();
     const [nombre, setNombre] = useState();
     const [image, setImage] = useState();
-    const user = localStorage.getItem('user');
     const token = localStorage.getItem("token");
     const insertionDonnationMateriel = (event) => 
         {
@@ -18,7 +17,7 @@ const Materiel = () => {
           {
             axios.post(' https://127.0.0.1:8000/api/DonnationMateriel',
                 { 
-                    utilisateur : user,
+                    utilisateur : token,
                     id_materiel_id: IdMateriel, 
                     nom_donnateur_materiel: selectedNom, 
                     nombre: nombre, 

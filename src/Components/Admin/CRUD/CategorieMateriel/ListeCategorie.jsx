@@ -16,18 +16,13 @@ const ListeCategorie = () => {
         setCategorie(response.data)
     });
   };  
-  useEffect(() => {
-    ListeCategorie();
-    SuppressionCategorie();
-  }, []);
-
 
   const SuppressionCategorie = async (event , id) => 
     {
       event.preventDefault();
       try
       {
-        await axios.post(
+        await axios.delete(
               `https://127.0.0.1:8000/api/Categorie/supprimer/${id}`,
               {
                 headers: {
@@ -46,6 +41,9 @@ const ListeCategorie = () => {
       console.error('Erreur de suppression' , error)
     }
   }
+  useEffect(() => {
+    ListeCategorie();
+  });
   return (
     <>
         <ToastContainer />

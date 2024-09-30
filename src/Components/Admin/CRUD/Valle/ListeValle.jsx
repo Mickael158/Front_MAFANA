@@ -23,7 +23,7 @@ const ListeValle = () => {
       event.preventDefault();
       try
       {
-        axios.post(` https://127.0.0.1:8000/api/valle/supprimer/${id}`,
+        axios.delete(` https://127.0.0.1:8000/api/valle/supprimer/${id}`,
         {
           headers:
           {

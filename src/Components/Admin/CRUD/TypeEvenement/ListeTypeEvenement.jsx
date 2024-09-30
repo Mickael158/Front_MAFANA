@@ -16,17 +16,13 @@ const ListeTypeEvenement = () => {
         setTypeEvenement(response.data)
     });
   };  
-  useEffect(() => {
-    ListetypeEvenement(); 
-  }, []);
-
-
+  
   const SuppressiontypeEvenement = async (event , id) => 
     {
       event.preventDefault();
       try
       {
-        axios.post(` https://127.0.0.1:8000/api/TypeEvenement/supprimer/${id}`,
+        axios.delete(` https://127.0.0.1:8000/api/TypeEvenement/supprimer/${id}`,
         {
           headers: 
           {
@@ -35,7 +31,9 @@ const ListeTypeEvenement = () => {
           },
         }
       );
+
       toast.success("Type evenement supprimer!");
+      ListetypeEvenement();
     }
     catch(error)
     {
@@ -43,6 +41,9 @@ const ListeTypeEvenement = () => {
       toast.error("Erreur de suppresion");
     }
   }
+  useEffect(() => {
+    ListetypeEvenement(); 
+  });
   return (
     <>
     <ToastContainer />

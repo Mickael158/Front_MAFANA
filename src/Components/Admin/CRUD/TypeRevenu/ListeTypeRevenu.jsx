@@ -16,17 +16,13 @@ const ListeTypeRevenu = () => {
         setTypeRevenu(response.data)
     });
   };  
-  useEffect(() => {
-    ListetypeRevenu(); 
-  }, []);
-
 
   const SuppressiontypeRevenu = async (event , id) => 
     {
       event.preventDefault();
       try
       {
-        axios.post(` https://127.0.0.1:8000/api/TypeRevenu/supprimer/${id}`,
+        axios.delete(` https://127.0.0.1:8000/api/TypeRevenu/supprimer/${id}`,
         {
           headers: 
           {
@@ -36,7 +32,7 @@ const ListeTypeRevenu = () => {
         }
       );
       toast.success("Type revenu supprimer!");
-
+      ListetypeRevenu();
     }
     catch(error)
     {
@@ -44,6 +40,9 @@ const ListeTypeRevenu = () => {
       toast.error("Erreur de suppression!");
     }
   }
+  useEffect(() => {
+    ListetypeRevenu(); 
+  });
   return (
     <>
       <div className="card">

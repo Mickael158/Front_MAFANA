@@ -16,17 +16,12 @@ const ListeTypeDepense = () => {
         setTypeDepense(response.data)
     });
   };  
-  useEffect(() => {
-    ListeTypeDepense(); 
-  }, []);
-
-
   const SuppressionTypeDepense = async (event , id) => 
     {
       event.preventDefault();
       try
       {
-        axios.post(` https://127.0.0.1:8000/api/TypeDepense/supprimer/${id}`,
+        axios.delete(` https://127.0.0.1:8000/api/TypeDepense/supprimer/${id}`,
         {
           headers: 
           {
@@ -44,6 +39,9 @@ const ListeTypeDepense = () => {
       toast.error("Erreur de suppression");
     }
   }
+  useEffect(() => {
+    ListeTypeDepense(); 
+  });
   return (
     <>
       <div className="card">

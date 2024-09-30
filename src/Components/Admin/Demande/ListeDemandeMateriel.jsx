@@ -14,7 +14,6 @@ const ListeDemandeMateriel = () => {
     const [selectMateriel, setSelectMateriel] = useState('');
     const [stock, setStock] = useState({ nombre: 0 });
     const [error, setError] = useState('');
-    const user = localStorage.getItem('user');
     const token = localStorage.getItem("token");
 
     const fetchListeDemande = () => {
@@ -57,7 +56,7 @@ const ListeDemandeMateriel = () => {
         try {
             await axios.post('https://127.0.0.1:8000/api/ValidationDemandeMateriel',
                 { 
-                    utilisateur: user,
+                    utilisateur: token,
                     id_demande_materiel_id: selectedIdDemande, 
                     Nombre: selectNbr
                 },
@@ -81,7 +80,7 @@ const ListeDemandeMateriel = () => {
             await axios.post(`https://localhost:8000/api/RefuserDemandeMateriel`,
                 {
                     id_demande_materiel_id: id,
-                    utilisateur: parseInt(user)
+                    utilisateur: token
                 },
                 {
                     headers: {

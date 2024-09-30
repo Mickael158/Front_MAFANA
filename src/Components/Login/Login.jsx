@@ -10,15 +10,15 @@ const Login = () => {
   const Authentification = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`https://127.0.0.1:8000/api/login`, { email: Email , password : Password }, {
+      const response = await axios.post(`https://127.0.0.1:8000/api/login`, { username: Email , password : Password }, {
         headers: {
           'content-Type': 'application/json',
         },
       });
       console.log('Verifier', response.data);
       const token = response.data;
-      localStorage.setItem('token',token.Token);
-      localStorage.setItem('user',token.id);
+      console.log(token);
+      localStorage.setItem('token',token.token);
       navigate('/admin')
     } catch (error) {
       console.error('Erreur de Verification', error);
@@ -98,7 +98,7 @@ const Login = () => {
               <form onSubmit={Authentification}>
                 <div className="input-group input-group-outline my-3  " >
                   <label className="form-label">Email</label>
-                  <input type="email" className="form-control" defaultValue={ Email } onChange={(e) => setEmail(e.target.value)}/>
+                  <input type="text" className="form-control" defaultValue={ Email } onChange={(e) => setEmail(e.target.value)}/>
                 </div>
                 <div className="input-group input-group-outline mb-3">
                   <label className="form-label">Mot de passe</label>

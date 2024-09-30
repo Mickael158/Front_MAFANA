@@ -16,17 +16,13 @@ const ListeMateriel = () => {
         setMateriel(response.data)
     });
   };  
-  useEffect(() => {
-    ListeMateriel(); 
-  }, []);
-
 
   const SuppressionMateriel = async (event , id) => 
     {
       event.preventDefault();
       try
       {
-        axios.post(` https://127.0.0.1:8000/api/Materiel/supprimer/${id}`,
+        axios.delete(` https://127.0.0.1:8000/api/Materiel/supprimer/${id}`,
         {
           headers: 
           {
@@ -35,8 +31,8 @@ const ListeMateriel = () => {
           },
         }
       );
-      ListeMateriel();
      toast.success("Supprimer avec success!");
+     ListeMateriel();
     }
     catch(error)
     {
@@ -44,6 +40,9 @@ const ListeMateriel = () => {
       toast.error("Erreur de suppression!");
     }
   }
+  useEffect(() => {
+    ListeMateriel(); 
+  });
   return (
     <>
       <div className="card">

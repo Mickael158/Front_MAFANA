@@ -15,9 +15,10 @@ const Association = () => {
   const [Logo,setLogo] = useState('');
   const [Nom,setNom] = useState('');
   const token = localStorage.getItem('token');
+  console.log(token);
 
   const ListeAssociation = async () => {
-      const response = await axios.get('https://localhost:8000/api/Association/1');
+      const response = await axios.get('https://localhost:8000/api/Associations/1');
       setNom(response.data.Nom);
       setSiege(response.data.Siege);
       setDescription(response.data.Description);

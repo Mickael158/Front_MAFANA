@@ -55,7 +55,7 @@ const ModifierTypeRevenu = () => {
               <div className="col-md-5 pr-1">
                 <div className="form-group">
                   <label>Vallée à modifier</label>
-                  <select className="form-select" onChange={(e) => setIdTypeRevenu(e.target.value)}>
+                  <select className="form-control" onChange={(e) => setIdTypeRevenu(e.target.value)}>
                     {Array.isArray(typeRevenu) ? (
                       typeRevenu.map(TypeRevenus => (
                         <option className="form-control text-center" key={TypeRevenus.id} value={TypeRevenus.id}>

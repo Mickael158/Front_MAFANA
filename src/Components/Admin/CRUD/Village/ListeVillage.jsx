@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const ListeVillage = () => {
     const [village,setVillage] = useState('');
     const token = localStorage.getItem("token");
-    console.log(token);
   const ListeVillage = () => {
     axios.get('https://localhost:8000/api/village',{
       headers:
@@ -25,16 +24,17 @@ const ListeVillage = () => {
       event.preventDefault();
       try
       {
-        axios.post(` https://127.0.0.1:8000/api/village/supprimer/${id}`,
+        axios.delete(` https://127.0.0.1:8000/api/village/supprimer/${id}`,
         {
           headers: 
           {
             'content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
           },
         }
       );
-      toast.success("Village Supprimer !");
       ListeVillage();
+      toast.success("Village Supprimer !");
     }
     catch(error)
     {

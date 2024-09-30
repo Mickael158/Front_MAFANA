@@ -34,7 +34,6 @@ const Cotisation = () => {
             setShowModal(true);
         });
     };
-    const user = localStorage.getItem('user');
 
     const PayementCotisation = (event) => {
         event.preventDefault();
@@ -42,7 +41,7 @@ const Cotisation = () => {
         console.log(devisData);
         try{
             
-            axios.post(`https://localhost:8000/api/Payement`,{data : devisData, utilisateur : user },
+            axios.post(`https://localhost:8000/api/Payement`,{data : devisData, utilisateur : token },
                 {
                     headers: 
                     {

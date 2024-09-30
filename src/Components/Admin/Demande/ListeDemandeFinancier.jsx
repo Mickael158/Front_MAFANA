@@ -13,7 +13,6 @@ const ListeDemandeFinancier = () => {
     const [selectMotif, setMotif] = useState('');
     const [selectPourcentage, setPoucentage] = useState('');
     const [Font, setFont] = useState({});
-    const user = localStorage.getItem('user');
     const token = localStorage.getItem("token");
 
     const fetchListeDemande = () => {
@@ -58,7 +57,7 @@ const ListeDemandeFinancier = () => {
         try {
             await axios.post('https://127.0.0.1:8000/api/ValidationDemandeFinancier',
                 {
-                    utilisateur: user,
+                    utilisateur: token,
                     id_demande_financier_id: selectedIdDemande,
                     Montant: selectMontantV
                 },
@@ -82,7 +81,7 @@ const ListeDemandeFinancier = () => {
             await axios.post('https://localhost:8000/api/RefuserDemandeFinancier',
                 {
                     id_demande_financier_id: id,
-                    utilisateur: parseInt(user)
+                    utilisateur: token
                 },
                 {
                     headers: {

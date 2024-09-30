@@ -7,13 +7,12 @@ const InsertionPrixCotisation = () => {
   const [Montant, setMontant] = useState('');
   const [DateModif, setDateModif] = useState('');
   const token = localStorage.getItem("token");
-  const user = localStorage.getItem("user")
   const insertionPrixCotisation = (event) => 
     {
       event.preventDefault();
       try
       {
-        axios.post(' https://127.0.0.1:8000/api/PrixCotisation',{ Valeur : Montant  , DateModif : DateModif , Utilisateur : user },
+        axios.post(' https://127.0.0.1:8000/api/PrixCotisation',{ Valeur : Montant  , DateModif : DateModif , Utilisateur : token },
         {
           headers: 
           {
