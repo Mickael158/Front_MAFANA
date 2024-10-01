@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 const Etat = () => {
     const [Membre, setMembre] = useState([]);
     const token = localStorage.getItem("token");
+    console.log(token);
     const ListeMembre = () => {
         axios.get('https://localhost:8000/api/Etat',{
             headers:
@@ -12,7 +13,6 @@ const Etat = () => {
             }
           }).then(response => {
             setMembre(response.data);
-            console.log(response.data);
         });
     };
     useEffect(() => {
@@ -60,7 +60,6 @@ const Etat = () => {
                                         } else if (member.pourcentage <= 100) {
                                             color = 'green';
                                         }
-
                                         return (
                                             <tr key={member.personnMembre.id} className="text-center">
                                                 <td>{member.personnMembre.nomMembre} {member.personnMembre.prenomMembre}</td>

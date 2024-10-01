@@ -263,3 +263,11 @@ INSERT INTO tresoreri ( montant, date_tresoreri) VALUES
 ( 4000, '2024-08-01'),
 ( 3700, '2024-08-20'),
 ( 3900, '2024-08-31');
+
+
+
+select pm.* from personne_membre pm
+    LEFT join quitte q on q.id_personne_membre_id=pm.id
+where q.id_personne_membre_id is NULL;
+
+

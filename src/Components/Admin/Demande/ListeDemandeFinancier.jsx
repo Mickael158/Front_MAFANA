@@ -106,6 +106,7 @@ const ListeDemandeFinancier = () => {
         setSelectedNom(member.demandefinancier.idPersonneMembre.Nom_Membre);
         setSelectedIdDemande(member.demandefinancier.id);
         setMontant(member.demandefinancier.Montant);
+        setMontantV(member.demandefinancier.Montant);
         setMotif(member.motif);
         setPoucentage(member.pourcentage);
         setMontantV(selectMontant);
@@ -146,7 +147,7 @@ const ListeDemandeFinancier = () => {
                                                     style={{ width: '50%' }}
                                                     onClick={() => handleSelectMember(demande)}
                                                 >
-                                                    v
+                                                    valider
                                                 </button>
                                             </td>
                                             <td>

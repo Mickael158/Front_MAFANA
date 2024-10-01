@@ -11,10 +11,11 @@ import { useNavigate } from "react-router-dom";
 import ChoixPayement from "../Payement/ChoixPayement"
 import ChoixDemande from "../Demande/ChoixDemande"
 import Etat from "../Etat/Etat";
+import Nouveau from "../Utilisateur/Nouveau"
+import ChoixUtilisateur from "../Utilisateur/ChoixUtilisateur"
 
 const Dashbord = () => {
   const [page, setPage] = useState(0);
-  // const User = localStorage.getItem('users');
   const navigate = useNavigate();
   const deconnexion = () => {
     localStorage.removeItem('token');
@@ -26,11 +27,8 @@ const Dashbord = () => {
       <div className="wrapper ">
       <div className="sidebar" data-color="blue">
       <div className="logo">
-        <a href="#" className="simple-text logo-mini">
-          MA.FA.NA
-        </a>
-        <a href="#" className="simple-text logo-normal">
-          {/* {User.username} */}
+        <a href="#" className="simple-text ">
+        <img className="img img-fluid" style={{ 'width' : '50px' }} src="/affichage/logo.png" alt=""/>  MA.FA.NA
         </a>
       </div>
       <div className="sidebar-wrapper" id="sidebar-wrapper">
@@ -101,6 +99,14 @@ const Dashbord = () => {
               <p>AQUISITION</p>
             </a>
           </li>
+          <li onClick={() => {
+                setPage(8);
+              }}>
+            <a href="#">
+              <i className="now-ui-icons design_bullet-list-67"></i>
+              <p>Utilisateur</p>
+            </a>
+          </li>
           <li className="active-pro" onClick={deconnexion}>
             <a href="#">
               <i className="now-ui-icons arrows-1_cloud-download-93"></i>
@@ -120,6 +126,7 @@ const Dashbord = () => {
         {page === 5 && <ChoixPayement />}
         {page === 6 && <ChoixDemande />}
         {page === 7 && <Etat />}
+        {page === 8 && <ChoixUtilisateur />}
       </div>
     </div>
     

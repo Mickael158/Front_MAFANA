@@ -84,7 +84,7 @@ const Materiel = () => {
                                 </div>
                                 <div className="col-md-3 pr-1">
                                     <div className="form-group">
-                                        <label>Nom de la personne </label>
+                                        <label> Materiel </label>
                                         <select 
                                             className="form-control text-center" 
                                             value={IdMateriel} 

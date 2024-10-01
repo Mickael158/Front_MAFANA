@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const DemandeMateriel = () => {
   const [Materiel, setMateriel] = useState();
@@ -55,9 +57,9 @@ const DemandeMateriel = (event) => {
                 'Authorization': `Bearer ${token}`
               }
             });
-            console.log('Demande Financier inserer');
+            toast.success("Demande Financier inserer");
   }catch(error){
-      console.error('Erreur d\'insertion' , error)
+      toast.error('Erreur d\'insertion' , error);
   }
   
 }
@@ -68,6 +70,7 @@ const DemandeMateriel = (event) => {
   }, []);
   return (
     <>
+    <ToastContainer/>
       <div>
           <div className="card">
               <div className="card-header">

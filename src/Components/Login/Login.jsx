@@ -1,6 +1,8 @@
 import { useEffect , useState } from "react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const [Email,setEmail] = useState('');
@@ -15,14 +17,15 @@ const Login = () => {
           'content-Type': 'application/json',
         },
       });
-      console.log('Verifier', response.data);
       const token = response.data;
-      console.log(token);
-      localStorage.setItem('token',token.token);
-      navigate('/admin')
+      if(token.token != null) {
+        localStorage.setItem('token',token.token);
+        console.log(token);
+        navigate('/admin')
+      }
     } catch (error) {
       console.error('Erreur de Verification', error);
-      setErreur(true);
+      toast.error("Erreur de connexion verifier vos infprmation");
       console.log(erreur);
     }
   };
@@ -44,15 +47,7 @@ const Login = () => {
     });
     Authentification();
   }, [])
-  const AlertErreur = () => {
-    return(
-      <>
-        <div className="alert alert-primary text-center text-white w-50 m-auto">
-          <h5 className="text-white ">Alert</h5>
-        </div>
-      </>
-    )
-  }
+  
   const [Asoociation,setAsoociation] = useState('');
 
   const ListeAssociation = async () => {
@@ -64,7 +59,7 @@ const Login = () => {
 },[]);
   return (
     <>
-      { erreur === true  && <AlertErreur />}
+      <ToastContainer />
       
       <div className="page-header align-items-start min-vh-100" style={{ 'backgroundImage': "url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80')",'loading':'lazy'}}>
     <span className="mask bg-gradient-dark opacity-6"></span>

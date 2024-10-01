@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Modal } from 'react-bootstrap';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const ListeMembre = () => {
   const [Membre,setMembre] = useState('');
@@ -16,7 +18,7 @@ const ListeMembre = () => {
   const [selectedIdProfession, setSelectedIdProfession] = useState('');
     const [selectedId, setSelectedId] = useState('');
   const ListeMembre = () => {
-    axios.get('https://localhost:8000/api/Personne',{
+    axios.get('https://localhost:8000/api/getPersNotQuitte',{
       headers:
       {
         'Authorization' : `Bearer ${token}`
@@ -55,35 +57,39 @@ const VoireProffessionByPersonne = (id) => {
 const Decede = (event) => {
   event.preventDefault();
   try{
-      const response = axios.post(`https://localhost:8000/api/Decede`,
+      axios.post(`https://localhost:8000/api/Decede`,
         {IdPersonneMembre : selectedId, date_dece :  selectedDate},
           {
               headers: 
               {
-                'content-Type': 'application/json'
+                'content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
               }
             });
-            console.log('Declaration decede inserer');
+            setShowModalDece(false);
+            toast.success("Declaration decede inserer");
   }catch(error){
-      console.error('Erreur d\'insertion' , error)
+    toast.error('Erreur d\'insertion' , error);
   }
   
 }
 const AjouterProfessionMembre = (event) => {
   event.preventDefault();
   try{
-      const response = axios.post(`https://localhost:8000/api/PersonneMembreProfession`,
+       axios.post(`https://localhost:8000/api/PersonneMembreProfession`,
         {IdPersonneMembre : selectedId, IdProfession : selectedIdProfession },
           {
               headers: 
               {
-                'content-Type': 'application/json'
+                'content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
               }
             });
           VoireProffessionByPersonne(selectedId);
-            console.log('Ajouter Profession inserer');
+          setShowModal(false);
+            toast.success("Ajouter Profession inserer");
   }catch(error){
-      console.error('Erreur d\'insertion' , error)
+      toast.error('Erreur d\'insertion' , error);
   }
   
 }
@@ -91,39 +97,42 @@ const QuitteMembre = (event) => {
   event.preventDefault();
   try{
       console.log(selectedId,selectedDateQ);
-      const response = axios.post(`https://127.0.0.1:8000/api/Quitte`,
-        {IdPersonneMembre : selectedId, date : selectedDateQ },
+       axios.post(`https://127.0.0.1:8000/api/Quitte`,
+        {IdPersonneMembre : selectedId, date : new Date() },
           {
               headers: 
               {
-                'content-Type': 'application/json'
+                'content-Type': 'application/json',
+                'Authorization' : `Bearer ${token}`
               }
             });
-            console.log('Personne quitter inserer');
+            setShowModalQuitte(false);
+            toast.success("Personne quitter inserer");
   }catch(error){
-      console.error('Erreur d\'insertion' , error)
+      toast.error('Erreur d\'insertion' , error);
   }
   
 }
 
   const handleSelectMember = (member) => {
-    setSelectedNom(member.nomMembre + ' ' + member.prenomMembre);
+    setSelectedNom(member.nom_membre + ' ' + member.prenom_membre);
     setSelectedId(member.id);
     VoireProffession();
     VoireProffessionByPersonne(member.id);
 };
 const handleSelectMemberDece = (member) => {
-  setSelectedNom(member.nomMembre + ' ' + member.prenomMembre);
+  setSelectedNom(member.nom_membre + ' ' + member.prenom_membre);
   setSelectedId(member.id);
   setShowModalDece(true);
 };
 const handleSelectMemberQuitte = (member) => {
-  setSelectedNom(member.nomMembre + ' ' + member.prenomMembre);
+  setSelectedNom(member.nom_membre + ' ' + member.prenom_membre);
   setSelectedId(member.id);
   setShowModalQuitte(true);
 };
   return (
     <>
+    <ToastContainer/>
       <div className="card">
               <div className="card-header">
                 <h4 className="card-title"> Membre</h4>
@@ -165,22 +174,22 @@ const handleSelectMemberQuitte = (member) => {
                             Membre.map(Membre => (
                                 <tr key={Membre.id}>
                                         <td>
-                                            {Membre.nomMembre}
+                                            {Membre.nom_membre}
                                         </td>
                                         <td>
-                                            {Membre.prenomMembre}
+                                            {Membre.prenom_membre}
                                         </td>
                                         <td>
-                                            {Membre.Address}
+                                            {Membre.address}
                                         </td>
                                         <td>
-                                            {Membre.Telephone}
+                                            {Membre.telephone}
                                         </td>
                                         <td>
-                                        {new Date(Membre.dateDeNaissance).toISOString().split('T')[0]}
+                                        {new Date(Membre.date_de_naissance).toISOString().split('T')[0]}
                                         </td>
                                         <td>
-                                            {Membre.Email}
+                                            {Membre.email}
                                         </td>
                                         <td>
                                             <button className="btn btn-danger" style={{'width': '50%' , 'fontSize':'15px'}} onClick={() => handleSelectMemberQuitte(Membre)} ><i className="now-ui-icons shopping_basket"></i></button>
@@ -277,8 +286,6 @@ const handleSelectMemberQuitte = (member) => {
                     <Modal.Title>{selectedNom} va vraiment quitter le groupe </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Date qu il a quitter le groupe</p>
-                        <input type="date" className="form-control" value={selectedDateQ}  onChange={(e) => setSelectedDateQ(e.target.value)} />
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-success" onClick={QuitteMembre} >Quitter</button>

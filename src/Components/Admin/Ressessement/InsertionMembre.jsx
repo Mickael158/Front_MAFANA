@@ -2,6 +2,8 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import '../../../assets/TelInput/css/intlTelInput.min.css'
 import '../../../assets/TelInput/js/intlTelInputWithUtils.js'
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const InsertionMembre = () => 
   {
@@ -67,7 +69,7 @@ const InsertionMembre = () =>
         },
         
       );
-      console.log("Personne inserer");
+      toast.success("Personne inserrer");
       setPersonneMembre({...PersonneMembre,
         Nom: '',
         Prenom: '',
@@ -82,6 +84,7 @@ const InsertionMembre = () =>
     catch(error)
     {
       console.error('Erreur d\'insertion' , error)
+      toast.error("Error de ressesement");
     }
   }
   useEffect(() => {
@@ -91,7 +94,7 @@ const InsertionMembre = () =>
 
   return (
     <div>
-      
+      <ToastContainer/>
       <div className="card">
               <div className="card-header">
                 <h5 className="title">MA.FA.NA</h5>
@@ -145,6 +148,7 @@ const InsertionMembre = () =>
                       <div className="form-group">
                       <label>Genre</label>
                         <select className="form-control" value={ PersonneMembre.IdGenre } onChange={(e) => setPersonneMembre({...PersonneMembre,IdGenre : e.target.value,})}>
+                        <option>CHoisier Genre</option>
                         {Array.isArray(Genre) ? (
                             Genre.map(Genre => (
                                 <option key={Genre.id} value={Genre.id} clasName="form-control">
@@ -160,6 +164,7 @@ const InsertionMembre = () =>
                       <div className="form-group">
                       <label>Village</label>
                         <select className="form-control" value={ PersonneMembre.IdVillage } onChange={(e) => setPersonneMembre({...PersonneMembre,IdVillage : e.target.value,})}>
+                        <option>CHoisier un Village</option>
                         {Array.isArray(Village) ? (
                             Village.map(Village => (
                                 <option key={Village.id} value={Village.id} className="form-control">

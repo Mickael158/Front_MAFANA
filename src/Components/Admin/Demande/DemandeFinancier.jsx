@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const DemandeFinancier = () => {
     const [Membre, setMembre] = useState([]);
@@ -26,7 +28,7 @@ const DemandeFinancier = () => {
         event.preventDefault();
         try{
             
-            const response = axios.post(` https://localhost:8000/api/DemandeFinancier`,{id_personne_membre_id : selectedId, montant : montant, motif: motif },
+             axios.post(` https://localhost:8000/api/DemandeFinancier`,{id_personne_membre_id : selectedId, montant : montant, motif: motif },
                 {
                     headers: 
                     {
@@ -34,9 +36,10 @@ const DemandeFinancier = () => {
                       'Authorization': `Bearer ${token}`
                     }
                   });
-                  console.log('Demande Financier inserer');
+                  toast.success("Demande Financier inserer");
+                  ListeMembre();
         }catch(error){
-            console.error('Erreur d\'insertion' , error)
+            toast.error('Erreur d\'insertion' , error);
         }
         
     }

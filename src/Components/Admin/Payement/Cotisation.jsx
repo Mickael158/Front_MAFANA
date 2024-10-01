@@ -32,6 +32,7 @@ const Cotisation = () => {
             setDevisData(response.data);
             console.log(response.data);
             setShowModal(true);
+            console.log("true");
         });
     };
 
