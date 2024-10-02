@@ -52,13 +52,16 @@ const Modification = () => {
         });
     };
 
-    const attribution = async (e)=> {
+    const attribution =  async (e) => {
         e.preventDefault();
+        console.log(selectedId,selectedRoles);
         try{
-            await axios.post(`https://localhost:8000/api/AttributionRole/${selectedId}`,{roles:selectedRoles},
+            await axios.post(`https://localhost:8000/api/AttributionRole/${selectedId}`,{roles:selectedRoles,token:token},
                 {
-                    'Content-Type':'application/json',
-                    'Authorization':`Bearer ${token}`
+                    headers:{
+                        'Content-Type':'application/json',
+                        'Authorization':`Bearer ${token}`
+                    }
                 }
             );
             toast.success("Role Attribuer!");
@@ -162,15 +165,11 @@ const Modification = () => {
                                     </div>
                                 </div>
                             </div>
-
-
-
-                            <button type='submit' className='btn btn-success'>Valider</button>
+                            <button type="submit" className='btn btn-success'>Valider</button>
                         </form>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className="btn btn-success" >Payer</button>
                     <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Fermer</button>
                 </Modal.Footer>
             </Modal>
