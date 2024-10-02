@@ -8,9 +8,15 @@ const Login = () => {
   const [Email,setEmail] = useState('');
   const [Password,setPassword] = useState('');
   const navigate = useNavigate();
-  const [erreur,setErreur] = useState(false);
-  const Authentification = async (event) => {
-    event.preventDefault();
+  const [Asoociation,setAsoociation] = useState('');
+
+  const ListeAssociation = async () => {
+      const response = await axios.get('https://localhost:8000/api/Associations/1');
+      setAsoociation(response.data);
+  }
+  const Authentification = async (e) => {
+    console.log(Email,Password);
+    e.preventDefault();
     try {
       const response = await axios.post(`https://127.0.0.1:8000/api/login`, { username: Email , password : Password }, {
         headers: {
@@ -26,7 +32,6 @@ const Login = () => {
     } catch (error) {
       console.error('Erreur de Verification', error);
       toast.error("Erreur de connexion verifier vos infprmation");
-      console.log(erreur);
     }
   };
   useEffect( () =>{
@@ -45,18 +50,8 @@ const Login = () => {
         }
       });
     });
-    Authentification();
-  }, [])
-  
-  const [Asoociation,setAsoociation] = useState('');
-
-  const ListeAssociation = async () => {
-      const response = await axios.get('https://localhost:8000/api/Association/1');
-      setAsoociation(response.data);
-  }
-  useEffect(()=>{
     ListeAssociation();
-},[]);
+  }, [])
   return (
     <>
       <ToastContainer />

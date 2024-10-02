@@ -1,6 +1,6 @@
-import React from 'react'
 import Nouveau from './Nouveau';
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Modification from './Modification';
 
 const ChoixUtilisateur = () => {
     const [page, setPage] = useState(0);
@@ -17,13 +17,14 @@ const ChoixUtilisateur = () => {
                   setPage(0);
                 }}>Nouveau</button>
                       <button className="btn btn-success btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
-                  setPage(2);
+                  setPage(1);
                 }}>Modification</button>
                     </div>
                 </div>
               </div>
               <div className="card-body">
                 {page === 0 && <Nouveau />} 
+                {page === 1 && <Modification />} 
               </div>
             </div>
     </>
