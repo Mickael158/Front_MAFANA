@@ -1,5 +1,5 @@
 
-import { useState } from "react"
+import { useState,useEffect } from "react"
 
 import CRUD from "../CRUD/CRUD"
 import Navbars from "../Layout/Navbars"
@@ -15,12 +15,25 @@ import ChoixUtilisateur from "../Utilisateur/ChoixUtilisateur"
 
 const Dashbord = () => {
   const [page, setPage] = useState(0);
+  const [roles, setRoles] = useState([]);
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    const storedRoles = localStorage.getItem('decode');
+    
+    if (storedRoles) {
+      setRoles(storedRoles.split(','));  
+    }
+  }, []);
+
   const deconnexion = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('decode');
     navigate('/login');
   }
-  //  console.log(User);
+  const hasRole = (role) => {
+    return roles.includes(role);
+  };
   return (
     <>
       <div className="wrapper ">
@@ -32,7 +45,7 @@ const Dashbord = () => {
       </div>
       <div className="sidebar-wrapper" id="sidebar-wrapper">
         <ul className="nav">
-          <li className="active"
+        <li className="active"
             onClick={() => {
                 setPage(0);
               }}
@@ -42,6 +55,9 @@ const Dashbord = () => {
               <p>Tableau de bord</p>
             </a>
           </li>
+          {hasRole('ROLE_ADMIN') && (
+                <>
+                  
           <li onClick={() => {
                 setPage(4);
               }}>
@@ -106,6 +122,69 @@ const Dashbord = () => {
               <p>Utilisateur</p>
             </a>
           </li>
+                </>
+              )}
+
+{hasRole('ROLE_CRUD') && (
+                <>
+                  <li onClick={() => setPage(1)}>
+                    <a href="#">
+                      <i className="now-ui-icons ui-1_settings-gear-63"></i>
+                      <p>CRUD</p>
+                    </a>
+                  </li>
+                </>
+              )}
+
+{hasRole('ROLE_ASSOCIATION') && (
+                <>
+                 <li onClick={() => {
+                setPage(4);
+              }}>
+            <a href="#">
+              <i className="now-ui-icons education_atom"></i>
+              <p>Association</p>
+            </a>
+          </li>
+                </>
+              )}
+              {hasRole('ROLE_MEMBRE') && (
+                <>
+                 <li onClick={() => {
+                setPage(3);
+              }}>
+            <a href="#">
+              <i className="now-ui-icons business_badge"></i>
+              <p>Ressessement</p>
+            </a>
+          </li>
+                </>
+              )}
+
+{hasRole('ROLE_DEMANDE') && (
+                <>
+                  <li onClick={() => {
+                setPage(6);
+              }}>
+            <a href="#">
+              <i className="now-ui-icons ui-1_bell-53"></i>
+              <p>Demande</p>
+            </a>
+          </li>
+                </>
+              )}
+              {hasRole('ROLE_PAYEMENT') && (
+                <>
+                  <li onClick={() => {
+                setPage(5);
+              }}>
+            <a href="#">
+              <i className="now-ui-icons design_bullet-list-67"></i>
+              <p>AQUISITION</p>
+            </a>
+          </li>
+                </>
+              )}
           <li className="active-pro" onClick={deconnexion}>
             <a href="#">
               <i className="now-ui-icons arrows-1_cloud-download-93"></i>

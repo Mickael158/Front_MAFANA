@@ -14,6 +14,20 @@ const Login = () => {
       const response = await axios.get('https://localhost:8000/api/Associations/1');
       setAsoociation(response.data);
   }
+  const decodeToken = async (decode) => {
+    try{
+      const response = await axios.post('https://localhost:8000/api/decode',{token:decode},{
+        headers: {
+          'content-Type': 'application/json',
+          'Authorization':`Bearer ${decode}`
+        },
+      });
+      localStorage.setItem('decode',response.data);
+      console.log(response.data);
+    }catch(error){
+    console.log(error)
+    }
+  }
   const Authentification = async (e) => {
     console.log(Email,Password);
     e.preventDefault();
@@ -26,7 +40,7 @@ const Login = () => {
       const token = response.data;
       if(token.token != null) {
         localStorage.setItem('token',token.token);
-        console.log(token);
+        decodeToken(token.token);
         navigate('/admin')
       }
     } catch (error) {
