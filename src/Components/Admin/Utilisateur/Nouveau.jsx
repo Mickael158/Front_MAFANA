@@ -61,7 +61,8 @@ const Nouveau = () => {
                 }
             });
             toast.success("Inserer nouveuau utilisateur");
-    
+            setSelectedRoles([]);
+            setShowModal(false);
         } catch (error) {
             console.log(error);
             toast.error("Erreur d'insertion");
@@ -158,7 +159,7 @@ const Nouveau = () => {
                                 <div className="col-md-12 pr-1">
                                     <div className="form-group texte-center"style={{  "marginLeft":"40%"}} >
                                         <label style={{  "marginLeft":"10%"}} >Ses rôles</label>
-                                        <div className="d-flex flex-wrap gap-5">
+                                        <div>
                                             {Array.isArray(rolee) && rolee.length > 0 ? (
                                                 rolee.map(role => (
                                                     <div key={role.id} >

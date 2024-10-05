@@ -271,3 +271,6 @@ select pm.* from personne_membre pm
 where q.id_personne_membre_id is NULL;
 
 
+insert into vallee ( nom_vallee) (select distinct(trangobe) from import_membre);
+
+
