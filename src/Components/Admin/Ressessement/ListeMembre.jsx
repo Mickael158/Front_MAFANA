@@ -150,7 +150,7 @@ const handleSelectMemberQuitte = (member) => {
                         Adresse
                       </th>
                       <th className="text-left">
-                        Telephone
+                        Téléphone
                       </th >
                       <th className="text-left">
                         Date de naissance
@@ -162,10 +162,10 @@ const handleSelectMemberQuitte = (member) => {
                         Supprimer
                       </th>
                       <th className="text-center">
-                        Professeur
+                        Profession
                       </th>
                       <th className="text-center">
-                        Decede
+                        Décédé
                       </th>
                     </thead>
                     <tbody>
@@ -208,7 +208,7 @@ const handleSelectMemberQuitte = (member) => {
                                         type="button"
                                         onClick={() => handleSelectMemberDece(Membre)}
                                     >
-                                        Marque
+                                        Marquer
                                     </button>
                                         </td>
                                 </tr>

@@ -12,7 +12,7 @@ const Navbars = () => {
                 <span className="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a className="navbar-brand" href="#pablo">Statistic</a>
+            <a className="navbar-brand" href="#pablo">Statistique</a>
           </div>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-bar navbar-kebab"></span>
@@ -20,16 +20,6 @@ const Navbars = () => {
             <span className="navbar-toggler-bar navbar-kebab"></span>
           </button>
           <div className="collapse navbar-collapse justify-content-end" id="navigation">
-            <form>
-              <div className="input-group no-border">
-                <input type="text" value="" className="form-control" placeholder="Recherche..."/>
-                <div className="input-group-append">
-                  <div className="input-group-text">
-                    <i className="now-ui-icons ui-1_zoom-bold"></i>
-                  </div>
-                </div>
-              </div>
-            </form>
             <ul className="navbar-nav">
               <li className="nav-item">
                 <a className="nav-link" href="#pablo">

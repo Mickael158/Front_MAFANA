@@ -16,28 +16,26 @@ const Dashbord = () => {
   const [roles, setRoles] = useState([]);
   const navigate = useNavigate();
 
+  // Charger les rôles dès le chargement du composant
   useEffect(() => {
     const storedRoles = localStorage.getItem("decode");
-
     if (storedRoles) {
       setRoles(storedRoles.split(","));
     }
-  }, []);
+  }, []); // La dépendance vide signifie que cela ne s'exécute qu'une fois, au chargement initial
 
+  // Fonction de déconnexion
   const deconnexion = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("decode");
     navigate("/login");
   };
 
-  
+  // Vérifier si l'utilisateur a un certain rôle
   const hasRole = (role) => {
     return roles.includes(role);
   };
-  useEffect(() => {
-    hasRole();
 
-  });
   return (
     <>
       <div className="wrapper ">
@@ -48,7 +46,7 @@ const Dashbord = () => {
                 className="img img-fluid"
                 style={{ width: "50px" }}
                 src="/affichage/logo.png"
-                alt=""
+                alt="Logo"
               />{" "}
               MA.FA.NA
             </a>
@@ -64,6 +62,7 @@ const Dashbord = () => {
                   <p>Tableau de bord</p>
                 </a>
               </li>
+              {/* Afficher les éléments selon les rôles */}
               {hasRole("ROLE_ADMIN") && (
                 <>
                   <li
@@ -134,7 +133,7 @@ const Dashbord = () => {
                     onClick={() => setPage(8)}
                   >
                     <a href="#">
-                      <i className="now-ui-icons design_bullet-list-67"></i>
+                      <i className="now-ui-icons users_single-02"></i>
                       <p>Utilisateur</p>
                     </a>
                   </li>

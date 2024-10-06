@@ -29,8 +29,22 @@ const Association = () => {
       setSlogan(response.data.Slogan);
       setLogo(response.data.Logo);
   }
+  
   const ModificationAssociation = async (event) => {
     event.preventDefault();
+    // Validation email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(Email)) {
+      toast.error("Veuillez entrer un email valide.");
+      return;
+    }
+
+    // Validation téléphone (doit contenir exactement 10 chiffres)
+    const phoneRegex = /^\d{10}$/;
+    if (!phoneRegex.test(Telephone)) {
+      toast.error("Le numéro de téléphone doit comporter exactement 10 chiffres.");
+      return;
+    }
     try {
       const response = await axios.post(`https://127.0.0.1:8000/api/Association/1`, 
         {

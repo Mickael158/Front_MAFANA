@@ -82,6 +82,7 @@ const Mariage = () => {
                       <div className="form-group">
                       <label>Mari</label>
                         <select className="form-control" value={ IdMari } onChange={(e) => setIdMari(e.target.value)}>
+                        <option>Choisisez le mari</option>
                         {Array.isArray(Mari) ? (
                             Mari.map(Mari => (
                                 <option key={Mari.id} value={Mari.id} clasName="form-control">
@@ -97,6 +98,7 @@ const Mariage = () => {
                       <div className="form-group">
                       <label>Femme</label>
                         <select className="form-control" value={ IdFemme } onChange={(e) => setIdFemme(e.target.value)}>
+                        <option>Choisisez la marie</option>
                         {Array.isArray(Femme) ? (
                             Femme.map(Femme => (
                                 <option key={Femme.id} value={Femme.id} className="form-control">

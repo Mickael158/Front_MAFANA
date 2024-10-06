@@ -47,6 +47,35 @@ const InsertionMembre = () =>
   const insertionMembre = (event) => 
     {
       event.preventDefault();
+       // Regex pour valider le nom et prénom (seulement lettres)
+      const nameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/;
+      // Regex pour valider l'email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      // Regex pour valider le téléphone (10 chiffres)
+      const phoneRegex = /^\d{10}$/;
+
+      // Vérification des champs
+      if (!PersonneMembre.Nom || !nameRegex.test(PersonneMembre.Nom)) {
+          toast.error("Le nom doit contenir uniquement des lettres");
+          return;
+      }
+      if (!PersonneMembre.Prenom || !nameRegex.test(PersonneMembre.Prenom)) {
+          toast.error("Le prénom doit contenir uniquement des lettres");
+          return;
+      }
+      if (!PersonneMembre.Email || !emailRegex.test(PersonneMembre.Email)) {
+          toast.error("Veuillez entrer un email valide");
+          return;
+      }
+      if (!PersonneMembre.Telephone || !phoneRegex.test(PersonneMembre.Telephone)) {
+          toast.error("Le numéro de téléphone doit contenir 10 chiffres");
+          return;
+      }
+      if (!PersonneMembre.Adresse || !PersonneMembre.DateNaissance || 
+          !PersonneMembre.IdGenre || !PersonneMembre.IdVillage) {
+          toast.error("Tous les champs doivent être remplis");
+          return;
+      }
       try
       {
         axios.post('https://127.0.0.1:8000/api/Personne',

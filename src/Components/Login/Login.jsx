@@ -108,17 +108,16 @@ const Login = () => {
                   <label className="form-label">Mot de passe</label>
                   <input type="password" className="form-control" value={ Password } onChange={(e) => setPassword(e.target.value)}/>
                 </div>
-                <div className="form-check form-switch d-flex align-items-center mb-3">
-                  <input className="form-check-input" type="checkbox" id="rememberMe" checked/>
-                  <label className="form-check-label mb-0 ms-3" >Se souvenir de moi</label>
-                </div>
                 <div className="text-center">
                   <button type="submit" className="btn bg-gradient-primary w-100 my-4 mb-2">Connexion</button>
                 </div>
-                <p className="mt-4 text-sm text-center">
-                  S inscrire
-                </p>
               </form>
+              <div className="text-center mt-4">
+                <a href="/" className="btn btn-link text-secondary font-weight-bold">
+                  <i className="fas fa-arrow-left me-2"></i>
+                  Retour à l'accueil
+                </a>
+              </div>
             </div>
           </div>
         </div>
