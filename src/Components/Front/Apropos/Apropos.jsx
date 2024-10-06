@@ -3,8 +3,8 @@ const Apropos = () => {
         <>
 <section className="my-5 py-5">
     <div className="container" id="apropos">
-        <div className="row align-items-center">
-            <div className="col-lg-4 ms-auto me-auto p-lg-0 mt-lg-0">
+        <div className="w-100 row align-items-center">
+            <div className="col-lg-4 p-lg-0 mt-lg-0">
                 <div className="rotating-card-container">
                     <div className="card card-rotate card-background card-background-mask-primary shadow-primary mt-md-0 mt-5">
                         <div className="front front-background w-100" style={{ ' backgroundSize': 'cover'}}>
@@ -50,11 +50,11 @@ const Apropos = () => {
 </section>
 
 
-<section className="my-5 py-5">
-    <div className="container-fluid mt-sm-5 mt-3 w-75">
+<section className="my-5 py-5 container">
+    <div className="w-100">
         <div className="row">
             <div className="col-lg-3">
-                <div className="position-sticky pb-lg-5 pb-3 mt-lg-0 mt-5 ps-2" style={{ 'top': '100px'}}>
+                <div className="position-sticky pb-lg-5 pb-3 mt-lg-0 mt-5 " style={{ 'top': '100px'}}>
                     <h3 className="text-info"><i className="fas fa-info-circle  align-items-center justity-content-center"> </i> A propos</h3>
                     <h6 className="text-secondary font-weight-normal pe-3">Description de l association</h6>
                 </div>
