@@ -35,15 +35,31 @@ const Evenement = () => {
               <div className="col-lg-12 ms-lg-5 scrollable">
                 {evenements.length > 0 && (
                   <>
+                    
+                    <h2 className="text-white">
+                      {evenements[0].nom}
+                    </h2>
+                    <h3 className="text-white">
+                      Aurras lieu a{" "}{evenements[0].lieu_evenement}
+                    </h3>
                     <h4 className="text-white">
-                      Evenement plus proche débute le{" "}
-                      {new Date(evenements[0].date_evenement).toLocaleDateString()} et se termine le{" "}
-                      {new Date(evenements[0].date_fin_evenement).toLocaleDateString()}
+                      Débute le{" "}
+                      {new Date(evenements[0].date_evenement).toLocaleDateString('fr-FR', {
+                        weekday: 'long', // Jour de la semaine (lundi, mardi, etc.)
+                        year: 'numeric', // Année complète
+                        month: 'long',   // Mois complet (janvier, février, etc.)
+                        day: 'numeric'   // Jour du mois (1, 2, etc.)
+                      })} et se termine le{" "}
+                      {new Date(evenements[0].date_fin_evenement).toLocaleDateString('fr-FR', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+
                     </h4>
-                    <h1 className="text-white">
-                      Elle aura lieu à {evenements[0].lieu_evenement}
-                    </h1>
-                    <p className="lead text-white opacity-8 fs-3">
+                    
+                    <p className="lead text-white opacity-8">
                     {evenements[0].description_evenement}
                     </p>
                   </>

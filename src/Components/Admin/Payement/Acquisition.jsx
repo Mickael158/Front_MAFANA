@@ -20,6 +20,7 @@ const Acquisition = () => {
                 console.error("Erreur lors de la récupération des données", error);
             });
     };
+    
     const exportToExcel = () => {
         // Aplatir les données des reçus pour l'exportation
         const dataToExport = Acquisition.map(acquisition => ({

@@ -1,0 +1,29 @@
+.toggle-switch {
+    width: 50px;
+    height: 25px;
+    background-color: #ddd;
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .toggle-switch.toggled {
+    background-color: #f06c5b; /* Couleur pour l'état activé */
+  }
+  
+  .toggle-button {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+    transition: left 0.3s;
+  }
+  
+  .toggle-switch.toggled .toggle-button {
+    left: calc(100% - 22.5px);
+  }
+  

@@ -25,8 +25,7 @@ const InsertionPrixCharge = () => {
     
       useEffect(() => {
         ListeCharge();
-        console.log(Charge);
-      });
+      } , []);
       const InsertionPrixCharge = async (event) => {
         event.preventDefault();
         try {

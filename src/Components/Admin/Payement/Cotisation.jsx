@@ -26,20 +26,17 @@ const Cotisation = () => {
         axios.get(`https://localhost:8000/api/Devis/${selectedId}/${mois}`,{
             headers:
             {
+                'content-Type': 'application/json',
               'Authorization' : `Bearer ${token}`
             }
           }).then(response => {
             setDevisData(response.data);
-            console.log(response.data);
             setShowModal(true);
-            console.log("true");
         });
     };
 
     const PayementCotisation = (event) => {
         event.preventDefault();
-        console.log(token);
-        console.log(devisData);
         try{
             
             axios.post(`https://localhost:8000/api/Payement`,{data : devisData, utilisateur : token },

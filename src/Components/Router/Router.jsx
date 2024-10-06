@@ -19,6 +19,7 @@ const Root = () => {
             import ("../../assets/admin/css/bootstrap.min.css");
             import ("../../assets/admin/css/now-ui-dashboard.min.css");
             import ("../../assets/admin/demo/demo.css");
+            import ("../../assets/admin/css/toggle.css");
         }else{
             import ('../../assets/front/css/nucleo-icons.css');
             import ('../../assets/front/css/nucleo-svg.css');

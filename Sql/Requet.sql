@@ -274,3 +274,19 @@ where q.id_personne_membre_id is NULL;
 insert into vallee ( nom_vallee) (select distinct(trangobe) from import_membre);
 
 
+    
+
+CREATE TABLE personne(
+    id SERIAL PRIMARY KEY,
+    dtn date
+);
+CREATE TABLE mariage(
+    id INT PRIMARY KEY,
+    idMarie INT REFERENCES personne(id),
+    idMarie INT REFERENCES personne(id)
+);
+CREATE TABLE enfant(
+    id SERIAL PRIMARY KEY,
+    idMariage INT REFERENCES mariage(id),
+    idEnfant INT REFERENCES personne(id)
+);

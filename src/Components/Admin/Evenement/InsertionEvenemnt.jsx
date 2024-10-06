@@ -7,6 +7,8 @@ import ListeEvenemnt from './ListeEvenemnt';
 const InsertionEvenemnt = () => {
     const [dateDebut,setDateDebut] = useState('');
     const [dateFin,setDateFin] = useState('');
+    const [nom,setNom] = useState('');
+    const [isToggled, setIsToggled] = useState(false);
     const [Lieu,setLieu] = useState('');
     const [Description,setDescription] = useState('');
     const [IdTypeEvenement,setIdTypeEvenement] = useState('');
@@ -26,7 +28,7 @@ const Insertion = async (e) => {
     e.preventDefault();
     try {
         await axios.post('https://localhost:8000/api/evenement',
-            {description:Description, date_debut:dateDebut,date_fin:dateFin,lieu:Lieu,typeEvenement_id:IdTypeEvenement,association_id:1,user_id:token},
+            {description:Description, date_debut:dateDebut,date_fin:dateFin,lieu:Lieu,typeEvenement_id:IdTypeEvenement,association_id:1,user_id:token,nom:nom,publier:isToggled},
         {
             headers:
             {
@@ -45,6 +47,9 @@ const Insertion = async (e) => {
     useEffect(()=>{
         ListeTypeEvenement();
     } , []);
+    const toggle = () => {
+      setIsToggled(!isToggled);
+    };
   return (
     <>
     <ToastContainer />
@@ -61,14 +66,34 @@ const Insertion = async (e) => {
                   <div className="row">
                     <div className="col-md-6 px-1">
                       <div className="form-group">
+                        <label>Nom de Evenement</label>
+                        <input type="text" className="form-control"  value={nom} onChange={(e) => setNom(e.target.value)}/>
+                      </div>
+                    </div>
+                    <div className="col-md-6 px-1 text-center">
+                      <div className="form-group">
+                        <label>Afficher ou pas</label>
+                        <div className="d-flex justify-content-center text-center">
+                            <span className="me-2">{isToggled ? "Activé" : "Désactivé"}</span>
+                            <div
+                              className={`toggle-switch ${isToggled ? "toggled" : ""}`}
+                              onClick={toggle}
+                            >
+                              <div className="toggle-button" />
+                            </div>
+                          </div>
+                      </div>
+                    </div>
+                    <div className="col-md-6 px-1">
+                      <div className="form-group">
                         <label>Date debut de l evenement</label>
-                        <input type="date" className="form-control" placeholder="Date debut" value={dateDebut} onChange={(e) => setDateDebut(e.target.value)}/>
+                        <input type="date" className="form-control"  value={dateDebut} onChange={(e) => setDateDebut(e.target.value)}/>
                       </div>
                     </div>
                     <div className="col-md-6 pl-1">
                       <div className="form-group">
                         <label >Date fin de l evenement</label>
-                        <input type="date" className="form-control" placeholder="Date fin" value={dateFin} onChange={(e) => setDateFin(e.target.value)}/>
+                        <input type="date" className="form-control" value={dateFin} onChange={(e) => setDateFin(e.target.value)}/>
                       </div>
                     </div>
                   </div>
@@ -83,6 +108,7 @@ const Insertion = async (e) => {
                       <div className="form-group">
                         <label>Type de l evenement</label>
                         <select className="form-control" value={ IdTypeEvenement } onChange={(e) => setIdTypeEvenement(e.target.value)}>
+                          <option value="">Selectionner un Type</option>  
                         {Array.isArray(TypeEvenement) ? (
                             TypeEvenement.map(TypeEvenement => (
                                 <option key={TypeEvenement.id} value={TypeEvenement.id} className="form-control">
