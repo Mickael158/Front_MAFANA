@@ -8,7 +8,6 @@ const ListeMembre = () => {
   const [Membre,setMembre] = useState('');
   const [Fammille,setFamille] = useState([]);
   const token = localStorage.getItem("token");
-  console.log(token);
   const [showModal, setShowModal] = useState(false);
   const [showModaldece, setShowModalDece] = useState(false);
   const [ShowModalQuitte, setShowModalQuitte] = useState(false);
@@ -21,6 +20,7 @@ const ListeMembre = () => {
   const [devisData, setDevisData] = useState([]);
   const [SelectedChoix, setSelectedChoix] = useState('');
   const [SelectedIdChoix, setSelectedIdChoix] = useState('');
+  const [fileName, setFileName] = useState("");
   const ListeMembre = () => {
     axios.get('https://localhost:8000/api/PersonneIndep',{
       headers:
@@ -39,7 +39,6 @@ const ListeMembre = () => {
       }
     }).then(response => {
         setFamille(response.data);
-        console.log(response.data);
     });
   };  
   const VoirePersonneCharge = (id) => {
@@ -77,7 +76,6 @@ const VoireProffessionByPersonne = (id) => {
       }
     }).then(response => {
       setProffesionPerso(response.data);
-      console.log(response.data);
   });
   setShowModal(true);
 };
@@ -128,7 +126,6 @@ const AjouterProfessionMembre = (event) => {
 }
 const QuitteMembre = (event) => {
   event.preventDefault();
-  console.log(devisData);
   try{
        axios.post(`https://127.0.0.1:8000/api/Quitte`,
         {famille : devisData },
@@ -169,13 +166,60 @@ const handleChoix = (member) => {
   setSelectedChoix(member.nomMembre + ' ' + member.prenomMembre);
   setSelectedIdChoix(member.id);
 };
+const handleFileChange = (e) => {
+  const file = e.target.files[0]; // Récupère le premier fichier sélectionné
+  if (file) {
+    setFileName(file.name); // Met à jour l'état avec le nom du fichier
+  }
+};
+const handleExport = async (event) => {
+  event.preventDefault();
+
+  if (!fileName) {
+    toast.error('Veuillez sélectionner un fichier CSV.');
+    return;
+  }
+
+  try {
+    const response = await axios.post(`https://localhost:8000/api/import/${fileName}`, null, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    if (response.status === 200) {
+      toast.success("Importation réussie !");
+    } else {
+      toast.error("Erreur lors de l'importation.");
+    }
+  } catch (error) {
+    console.error('Erreur d\'insertion:', error);
+    toast.error('Erreur lors de l\'importation du fichier.');
+  }
+};
+
   return (
     <>
     <ToastContainer/>
       <div className="card">
-              <div className="card-header">
-                <h4 className="card-title">Membre responsable</h4>
-              </div>
+          <div className="card-header">
+            <h4 className="card-title">Membre responsable</h4>
+            <input 
+              type="file" 
+              className="form-control" 
+              accept=".csv" 
+              onChange={handleFileChange} 
+            />
+            <div className="d-flex gap-2">
+              <button 
+                className="btn btn-warning" 
+                onClick={handleExport}
+              >
+                Export
+              </button>
+            </div>
+        </div>
               <div className="card-body">
                 <div className="table-responsive">
                   <table className="table">

@@ -425,3 +425,5 @@ WHERE
 GROUP BY 
     m.id_mari_id, m.id_marie_id;
 
+select p.* , pc. from payement_cotisation pc
+    join personne_membre p on p.id=pc.id_personne_membre_id;
