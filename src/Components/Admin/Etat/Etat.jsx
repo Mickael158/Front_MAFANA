@@ -1,10 +1,18 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import * as XLSX from 'xlsx';
+import { Modal } from 'react-bootstrap'; 
 
 const Etat = () => {
     const [Membre, setMembre] = useState([]);
     const token = localStorage.getItem("token");
+    const [showModal, setShowModal] = useState(false);
+    const [selectId, setSelectId] = useState('');
+    const [selectNom, setSelectNom] = useState('');
+    const [Cotisation, setCotisation] = useState();
+    const [Annee, setAnnee] = useState([]);
+    const [Taona, setTaona] = useState([]);
+    const [CotisationAll, setCotisationAll] = useState();
 
     // Fonction pour récupérer les membres depuis l'API
     const ListeMembre = () => {
@@ -42,11 +50,52 @@ const Etat = () => {
         XLSX.writeFile(wb, 'etat_membres.xlsx');
     };
 
-    // Charger la liste des membres au montage du composant
     useEffect(() => {
         ListeMembre();
-    } ,[]);  // Le tableau vide [] assure que cette fonction est appelée une seule fois au chargement du composant
-
+    } ,[]);  
+    const Ans = (id) => {
+        axios.get(`https://localhost:8000/api/getAnneInscription/${id}`,{
+            headers:
+            {
+                'content-Type': 'application/json',
+              'Authorization' : `Bearer ${token}`
+            }
+          }).then(response => {
+            setAnnee(response.data);
+        });
+    };
+    const VoireDevis = (select) => {
+        setSelectId('');
+        setSelectNom('');
+        setCotisation([]);
+        setCotisationAll([]);
+        setAnnee([]);
+        axios.get(`https://localhost:8000/api/getAllRecueFamille/${select.personnMembre.id}`,{
+            headers:
+            {
+                'content-Type': 'application/json',
+              'Authorization' : `Bearer ${token}`
+            }
+          }).then(response => {
+            setCotisation(response.data);
+            Ans(select.personnMembre.id);
+            setSelectId(select.personnMembre.id);
+            setSelectNom(select.personnMembre.nomMembre+" "+ select.personnMembre.prenomMembre)
+            setShowModal(true);
+        });
+    };
+    const VoireDevisBy = (id , a) => {
+        axios.get(`https://localhost:8000/api/getAllRecueFamilleBy/${id}/${a}`,{
+            headers:
+            {
+                'content-Type': 'application/json',
+              'Authorization' : `Bearer ${token}`
+            }
+          }).then(response => {
+            setCotisationAll(response.data);
+        });
+    };
+    
     return (
         <>
             <div className="panel-header panel-header-sm"></div>
@@ -74,9 +123,10 @@ const Etat = () => {
                                     <thead className="text-dark text-center">
                                         <tr>
                                             <th className="text-left">Nom</th>
-                                            <th className="text-left">Tel</th>
+                                            <th className="text-left">Telephone</th>
                                             <th className="text-left">Village</th>
                                             <th className="text-left">Vallée</th>
+                                            <th className="text-center">Detail</th>
                                             <th className="text-right">Cotisation</th>
                                         </tr>
                                     </thead>
@@ -100,6 +150,15 @@ const Etat = () => {
                                                         <td  className="text-left">{member.personnMembre.Telephone}</td>
                                                         <td  className="text-left">{member.personnMembre.idVillage.Nom_Village}</td>
                                                         <td  className="text-left">{member.personnMembre.idVillage.Id_Vallee.Nom_Vallee}</td>
+                                                        <td className="text-center">
+                                                            <button
+                                                                className="btn btn-success btn-block"
+                                                                type="button"
+                                                                onClick={() => VoireDevis(member)}
+                                                            >
+                                                                Voire
+                                                            </button>
+                                                        </td>
                                                         <td className="text-right">
                                                             <button className="btn" style={{ backgroundColor: color }}>
                                                                 {member.pourcentage}%
@@ -118,6 +177,32 @@ const Etat = () => {
                     </div>
                 </div>
             </div>
+            <Modal show={showModal} onHide={() => setShowModal(false)} dialogClassName="modal-lg">
+                <Modal.Header closeButton>
+                    <Modal.Title>Totat cotisation de {selectNom} est de total de {Cotisation}Ar avec ses Charge </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>Total cotisation en 
+                    <select 
+                        className="form-control text-center w-25"
+                        value={Taona}
+                        onChange={(e) => setTaona(e.target.value) }
+                    >
+                        <option value=''>
+                            Choisir
+                        </option>
+                    {Annee.map((item, index) => (
+                        <option key={index} value={item}>
+                            {item}
+                        </option>
+                    ))}
+                </select> est de valeur de  {CotisationAll ? CotisationAll : 0}Ar avec ses charge</p>
+                <button className="btn btn-success" onClick={() =>VoireDevisBy(selectId , Taona)}>Voire</button>
+                </Modal.Body>
+                <Modal.Footer>
+                    <button className="btn btn-secondary" onClick={() => setShowModal(false) }>Fermer</button>
+                </Modal.Footer>
+            </Modal>
         </>
     );
 };

@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const ListeMembre = () => {
   const [Membre,setMembre] = useState('');
+  const [Fammille,setFamille] = useState([]);
   const token = localStorage.getItem("token");
   console.log(token);
   const [showModal, setShowModal] = useState(false);
@@ -18,6 +19,8 @@ const ListeMembre = () => {
   const [selectedIdProfession, setSelectedIdProfession] = useState('');
   const [selectedId, setSelectedId] = useState('');
   const [devisData, setDevisData] = useState([]);
+  const [SelectedChoix, setSelectedChoix] = useState('');
+  const [SelectedIdChoix, setSelectedIdChoix] = useState('');
   const ListeMembre = () => {
     axios.get('https://localhost:8000/api/PersonneIndep',{
       headers:
@@ -26,6 +29,17 @@ const ListeMembre = () => {
       }
     }).then(response => {
         setMembre(response.data)
+    });
+  };  
+  const ListeMembreFamille = (id) => {
+    axios.get(`https://localhost:8000/api/PersonneCharge_ByResposanble/${id}`,{
+      headers:
+      {
+        'Authorization' : `Bearer ${token}`
+      }
+    }).then(response => {
+        setFamille(response.data);
+        console.log(response.data);
     });
   };  
   const VoirePersonneCharge = (id) => {
@@ -44,8 +58,8 @@ const ListeMembre = () => {
     ListeMembre(); 
   } , []);
 
-  const VoireProffession = () => {
-    axios.get(`https://localhost:8000/api/Profession`,{
+  const VoireProffession = (id) => {
+    axios.get(`https://localhost:8000/api/getProfession_By_personne/${id}`,{
         headers:
         {
           'Authorization' : `Bearer ${token}`
@@ -69,9 +83,15 @@ const VoireProffessionByPersonne = (id) => {
 };
 const Decede = (event) => {
   event.preventDefault();
+  const today = new Date();
+  const selected = new Date(selectedDate);
+  if (selected > today) {
+    toast.error("La date ne peut pas dépasser aujourd'hui.");
+    return; 
+  }
   try{
       axios.post(`https://localhost:8000/api/Decede`,
-        {IdPersonneMembre : selectedId, date_dece :  selectedDate},
+        {IdPersonneMembre : SelectedIdChoix, date_dece :  selectedDate},
           {
               headers: 
               {
@@ -80,11 +100,11 @@ const Decede = (event) => {
               }
             });
             setShowModalDece(false);
+            ListeMembre(); 
             toast.success("Declaration decede inserer");
   }catch(error){
     toast.error('Erreur d\'insertion' , error);
   }
-  
 }
 const AjouterProfessionMembre = (event) => {
   event.preventDefault();
@@ -120,6 +140,7 @@ const QuitteMembre = (event) => {
               }
             });
             setShowModalQuitte(false);
+            ListeMembre(); 
             toast.success("Personne quitter inserer");
   }catch(error){
       toast.error('Erreur d\'insertion' , error);
@@ -130,18 +151,23 @@ const QuitteMembre = (event) => {
   const handleSelectMember = (member) => {
     setSelectedNom(member.nom_membre + ' ' + member.prenom_membre);
     setSelectedId(member.id);
-    VoireProffession();
+    VoireProffession(member.id);
     VoireProffessionByPersonne(member.id);
 };
 const handleSelectMemberDece = (member) => {
   setSelectedNom(member.nom_membre + ' ' + member.prenom_membre);
   setSelectedId(member.id);
+  ListeMembreFamille(member.id)
   setShowModalDece(true);
 };
 const handleSelectMemberQuitte = (member) => {
   setSelectedNom(member.nom_membre + ' ' + member.prenom_membre);
   setSelectedId(member.id);
   VoirePersonneCharge(member.id);
+};
+const handleChoix = (member) => {
+  setSelectedChoix(member.nomMembre + ' ' + member.prenomMembre);
+  setSelectedIdChoix(member.id);
 };
   return (
     <>
@@ -241,10 +267,11 @@ const handleSelectMemberQuitte = (member) => {
                 <Modal.Body>
                     <p>Ajouter plus de proffession</p>
                         <select className="form-control" onChange={(e) => setSelectedIdProfession(e.target.value)}>
+                        <option className="form-control text-center">Choisez le proffession a ajouter</option>
                             {Array.isArray(Proffesion) ? (
                               Proffesion.map(pro => (
                                 <option className="form-control text-center" key={pro.id} value={pro.id}>
-                                  {pro.nomProfession}
+                                  {pro.nom_profession}
                                 </option>
                               ))
                             ) : (
@@ -288,6 +315,63 @@ const handleSelectMemberQuitte = (member) => {
                 <Modal.Body>
                     <p>Date de dece</p>
                         <input type="date" className="form-control"  value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
+                        <div className="form-group">
+                              <label>Nom de la personne à payer</label>
+                              <input
+                                  type="text"
+                                  className="form-control"
+                                  placeholder="Nom de la Personne"
+                                  value={SelectedChoix}
+                                  readOnly
+                              />
+                          </div>
+                        <div className="card">
+                          <div className="card-header">
+                              <h4 className="card-title">Membre Responsable</h4>
+                          </div>
+                          <div className="card-body">
+                              <div className="table-responsive">
+                                  <table className="table">
+                                      <thead className="text-dark">
+                                          <tr>
+                                              <th>Nom du Membre</th>
+                                              <th>Prénom</th>
+                                              <th>Téléphone</th>
+                                              <th>Email</th>
+                                              <th>Choisir</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                                          {Array.isArray(Fammille) ? (
+                                              Fammille.map((famille, index) => {
+                                                console.log(`Index ${index}: `, famille);
+                                                
+                                                return (
+                                                    <tr key={index}>
+                                                        <td>{famille.nomMembre}</td>
+                                                        <td>{famille.prenomMembre}</td>
+                                                        <td>{famille.Telephone }</td>
+                                                        <td>{famille.Email}</td>
+                                                        <td>
+                                                            <button
+                                                                className="btn btn-danger"
+                                                                onClick={() => handleChoix(famille)}
+                                                            >
+                                                                <i className="now-ui-icons gestures_tap-01 fs-5"></i>
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })
+                                            
+                                          ) : (
+                                              <tr><td colSpan="6">Aucun membre trouvé</td></tr>
+                                          )}
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-success" onClick={Decede} >Declarer</button>

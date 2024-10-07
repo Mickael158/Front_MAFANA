@@ -290,6 +290,11 @@ CREATE TABLE enfant(
     idMariage INT REFERENCES mariage(id),
     idEnfant INT REFERENCES personne(id)
 );
+CREATE TABLE cotisation(
+    id SERIAL PRIMARY KEY,
+    id_personne INT REFERENCES personne(id),
+    montant double precision
+);
 
 WITH personne_marier AS (
         SELECT 
@@ -316,16 +321,107 @@ WITH personne_marier AS (
         WHERE q.id_personne_membre_id IS NULL
     GROUP BY personne_membre.id
     UNION
+    (WITH personne_celibataire AS(
+        SELECT 
+                p_m.*,
+                MAX(p_c.date_payer) AS dernier_payement,
+                'Celibataire' AS situation
+            FROM personne_membre p_m
+                LEFT JOIN mariage mari ON p_m.id = mari.id_mari_id OR p_m.id = mari.id_marie_id
+                LEFT JOIN payement_cotisation p_c ON p_c.id_personne_membre_id = p_m.id
+                LEFT JOIN quitte q  on p_m.id = q.id_personne_membre_id
+            WHERE q.id_personne_membre_id IS NULL 
+            AND EXTRACT(YEAR FROM AGE(date_de_naissance)) >= 21
+            AND mari.id_mari_id IS NULL 
+            OR  mari.id_marie_id IS NULL
+            GROUP BY p_m.id
+    )
+        select personne_celibataire.*
+            from personne_celibataire
+                LEFT JOIN  decede d ON personne_membre.id = d.id_personne_membre_id
+            WHERE d.id_personne_membre_id IS NULL
+    );
+    
+
+WITH personne_marier AS (
+    SELECT 
+        CASE 
+            WHEN d_mari.id_personne_membre_id IS NULL THEN p_mari.id
+            WHEN d_marie.id_personne_membre_id IS NULL THEN p_marie.id
+            ELSE NULL
+        END AS id_personne_marier_vivant
+    FROM mariage m 
+    LEFT JOIN personne_membre p_mari ON p_mari.id = m.id_mari_id
+    LEFT JOIN personne_membre p_marie ON p_marie.id = m.id_marie_id
+    LEFT JOIN decede d_mari ON p_mari.id = d_mari.id_personne_membre_id
+    LEFT JOIN decede d_marie ON p_marie.id = d_marie.id_personne_membre_id
+    WHERE d_mari.id_personne_membre_id IS NULL OR d_marie.id_personne_membre_id IS NULL
+),
+personne_celibataire AS (
     SELECT 
         p_m.*,
         MAX(p_c.date_payer) AS dernier_payement,
         'Celibataire' AS situation
     FROM personne_membre p_m
-        LEFT JOIN mariage mari ON p_m.id = mari.id_mari_id OR p_m.id = mari.id_marie_id
-        LEFT JOIN payement_cotisation p_c ON p_c.id_personne_membre_id = p_m.id
-        LEFT JOIN quitte q  on personne_membre.id = q.id_personne_membre_id
+    LEFT JOIN mariage mari ON p_m.id = mari.id_mari_id OR p_m.id = mari.id_marie_id
+    LEFT JOIN payement_cotisation p_c ON p_c.id_personne_membre_id = p_m.id
+    LEFT JOIN quitte q ON p_m.id = q.id_personne_membre_id
     WHERE q.id_personne_membre_id IS NULL 
-    AND EXTRACT(YEAR FROM AGE(date_de_naissance)) >= 21
-    AND mari.id_mari_id IS NULL 
-    OR  mari.id_marie_id IS NULL
-    GROUP BY p_m.id;
+      AND EXTRACT(YEAR FROM AGE(date_de_naissance)) >= 21
+      AND (mari.id_mari_id IS NULL AND mari.id_marie_id IS NULL)
+    GROUP BY p_m.id
+)
+SELECT 
+    personne_membre.*,
+    MAX(p_c.date_payer) AS dernier_payement,
+    'Marier' AS situation
+FROM personne_membre 
+JOIN personne_marier p_m ON p_m.id_personne_marier_vivant = personne_membre.id
+LEFT JOIN payement_cotisation p_c ON p_c.id_personne_membre_id = personne_membre.id
+LEFT JOIN quitte q ON personne_membre.id = q.id_personne_membre_id
+WHERE q.id_personne_membre_id IS NULL
+GROUP BY personne_membre.id
+
+UNION
+
+SELECT 
+    personne_celibataire.*
+FROM personne_celibataire
+LEFT JOIN decede d ON personne_celibataire.id = d.id_personne_membre_id
+WHERE d.id_personne_membre_id IS NULL;
+
+
+
+
+ select p.* from  profession p
+    left join  personne_membre_profession pmp on pmp.id_profession_id=p.id
+    where p.id IS NULL
+    AND pmp.id_personne_membre_id=1;
+
+
+
+
+        
+SELECT pm.*, COALESCE(SUM(pc.montant_cotisation_total_payer), 0) as total
+    FROM personne_membre pm
+    LEFT JOIN payement_cotisation pc ON pm.id = pc.id_personne_membre_id
+    WHERE pm.id = 1
+    GROUP BY pm.id;
+
+
+SELECT 
+    COALESCE(SUM(c.montant_cotisation_total_payer), 0) AS total_cotisation
+FROM 
+    mariage m
+LEFT JOIN 
+    enfant e ON m.id = e.id_mariage_parent_id
+LEFT JOIN 
+    personne_membre p_enfant ON e.id = p_enfant.id
+LEFT JOIN 
+    payement_cotisation c ON c.id_personne_membre_id = p_enfant.id
+WHERE 
+    (m.id_mari_id = 1 OR m.id_marie_id = 1)
+    AND AGE(p_enfant.date_de_naissance) < INTERVAL '21 years'
+GROUP BY 
+    m.id_mari_id, m.id_marie_id;
+
