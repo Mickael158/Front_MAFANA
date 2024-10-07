@@ -16,7 +16,8 @@ const ListeMembre = () => {
   const [selectedNom, setSelectedNom] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedIdProfession, setSelectedIdProfession] = useState('');
-    const [selectedId, setSelectedId] = useState('');
+  const [selectedId, setSelectedId] = useState('');
+  const [devisData, setDevisData] = useState([]);
   const ListeMembre = () => {
     axios.get('https://localhost:8000/api/getPersNotQuitte',{
       headers:
@@ -27,6 +28,19 @@ const ListeMembre = () => {
         setMembre(response.data)
     });
   };  
+  const VoirePersonneCharge = (id) => {
+    axios.get(`https://localhost:8000/api/PersonneCharge_ByResposanble/${id}`,{
+        headers:
+        {
+            'content-Type': 'application/json',
+          'Authorization' : `Bearer ${token}`
+        }
+      }).then(response => {
+        setDevisData(response.data);
+        console.log(response.data);
+        setShowModalQuitte(true);
+    });
+};
   useEffect(() => {
     ListeMembre(); 
   } , []);
@@ -97,7 +111,7 @@ const QuitteMembre = (event) => {
   event.preventDefault();
   try{
        axios.post(`https://127.0.0.1:8000/api/Quitte`,
-        {IdPersonneMembre : selectedId, date : new Date() },
+        {IdPersonneMembre : devisData, date : new Date() },
           {
               headers: 
               {
@@ -127,7 +141,7 @@ const handleSelectMemberDece = (member) => {
 const handleSelectMemberQuitte = (member) => {
   setSelectedNom(member.nom_membre + ' ' + member.prenom_membre);
   setSelectedId(member.id);
-  setShowModalQuitte(true);
+  VoirePersonneCharge(member.id);
 };
   return (
     <>
@@ -282,9 +296,35 @@ const handleSelectMemberQuitte = (member) => {
             </Modal>
             <Modal show={ShowModalQuitte} onHide={() => setShowModalQuitte(false)} dialogClassName="modal-lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>{selectedNom} va vraiment quitter le groupe </Modal.Title>
+                    <Modal.Title>{selectedNom} va vraiment quitter le groupe avec sa famille , Composer de : </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                  <div className="table-responsive">
+                    <table className="table">
+                      <thead className=" text-dark">
+                        <th>
+                          Nom
+                        </th>
+                        <th>
+                          Prenom
+                        </th>
+                      </thead>
+                      <tbody>
+                          {Array.isArray(devisData) ? (
+                              devisData.map(famille => (
+                                  <tr key={famille.id}>
+                                    <td>
+                                        {famille.nomMembre}
+                                    </td>
+                                    <td>
+                                        {famille.prenomMembre}
+                                    </td>
+                                  </tr>
+                              ) )
+                          ) : ( <tr><td>Null</td></tr>) }
+                      </tbody>
+                    </table>
+                  </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-success" onClick={QuitteMembre} >Quitter</button>

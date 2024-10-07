@@ -13,11 +13,11 @@ const Contact = () => {
 },[]);
   return (
     <>
-      <div className="container row pt-lg-6 m-auto" id="contact">
+      <div className="row pt-lg-6 w-75 m-auto" id="contact">
       <div className="col-lg-3">
-        <div className="position-sticky mt-lg-0 mt-5" style={{'top': '100px'}}>
+        <div className="position-sticky pb-lg-5 pb-3 mt-lg-0 mt-5 ps-2" style={{'top': '100px'}}>
           <h3 className="text-info"><i className="fas fa-mail-bulk align-items-center justity-content-center"> </i>  Nos contacter</h3>
-          <h6 className="text-secondary font-weight-normal">Vous pouvez nos contacter directement par ses information ou nos envoyer un par via a le site</h6>
+          <h6 className="text-secondary font-weight-normal pe-3">Vous pouvez nos contacter directement par ses information ou nos envoyer un par via a le site</h6>
         </div>
       </div>
       <div className="col-lg-9">
