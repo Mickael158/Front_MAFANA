@@ -19,7 +19,7 @@ const ListeMembre = () => {
   const [selectedId, setSelectedId] = useState('');
   const [devisData, setDevisData] = useState([]);
   const ListeMembre = () => {
-    axios.get('https://localhost:8000/api/getPersNotQuitte',{
+    axios.get('https://localhost:8000/api/PersonneIndep',{
       headers:
       {
         'Authorization' : `Bearer ${token}`
@@ -37,7 +37,6 @@ const ListeMembre = () => {
         }
       }).then(response => {
         setDevisData(response.data);
-        console.log(response.data);
         setShowModalQuitte(true);
     });
 };
@@ -109,9 +108,10 @@ const AjouterProfessionMembre = (event) => {
 }
 const QuitteMembre = (event) => {
   event.preventDefault();
+  console.log(devisData);
   try{
        axios.post(`https://127.0.0.1:8000/api/Quitte`,
-        {IdPersonneMembre : devisData, date : new Date() },
+        {famille : devisData },
           {
               headers: 
               {
