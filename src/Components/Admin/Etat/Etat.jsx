@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import * as XLSX from 'xlsx';
-import { Modal } from 'react-bootstrap'; 
+import { Button, Modal } from 'react-bootstrap'; 
 
 const Etat = () => {
     const [Membre, setMembre] = useState([]);
@@ -13,11 +13,30 @@ const Etat = () => {
     const [Annee, setAnnee] = useState([]);
     const [Taona, setTaona] = useState([]);
     const [CotisationAll, setCotisationAll] = useState();
+    const [Data, setData] = useState(null);
+    const [Idvillage,setIdvillage] = useState(null);
+  const [Village,setVillage] = useState('');
+  const ListeVillage = () => {
+    axios.get('https://localhost:8000/api/village',{
+    headers: 
+    {
+        'content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+    },
+    }).then(response => {
+        setVillage(response.data)
+    });
+  };  
 
     // Fonction pour récupérer les membres depuis l'API
     const ListeMembre = () => {
-        axios.get('https://localhost:8000/api/Etat', {
+        console.log(Data , Idvillage);
+        axios.post('https://localhost:8000/api/Etat',{
+            data: Data,
+            village: Idvillage
+        },{
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
         }).then(response => {
@@ -52,6 +71,7 @@ const Etat = () => {
 
     useEffect(() => {
         ListeMembre();
+        ListeVillage();
     } ,[]);  
     const Ans = (id) => {
         axios.get(`https://localhost:8000/api/getAnneInscription/${id}`,{
@@ -113,6 +133,26 @@ const Etat = () => {
                     </div>
                 </div>
                 <div className="card-body">
+                <form onSubmit={ListeMembre}>
+                    <div className="row">
+                        <div className="col-3">
+                            <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
+                        </div>
+                        <div className="col-3">
+                            <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
+                            <option>CHoisier un Village</option>
+                            {Array.isArray(Village) ? (
+                                Village.map(Village => (
+                                    <option key={Village.id} value={Village.id} className="form-control">
+                                    {Village.nomVillage}
+                                    </option>
+                                ) )
+                            ) : ( <option>Aucune Valeur</option> ) }
+                            </select>
+                        </div>
+                    </div>
+                    <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
+                </form>
                     <div className="card">
                         <div className="card-header">
                             <h4 className="card-title">Etat de tous les membres</h4>

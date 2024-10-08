@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -21,16 +21,39 @@ const ListeMembre = () => {
   const [SelectedChoix, setSelectedChoix] = useState('');
   const [SelectedIdChoix, setSelectedIdChoix] = useState('');
   const [fileName, setFileName] = useState("");
-  const ListeMembre = () => {
-    axios.get('https://localhost:8000/api/PersonneIndep',{
-      headers:
-      {
-        'Authorization' : `Bearer ${token}`
-      }
-    }).then(response => {
-        setMembre(response.data)
-    });
-  };  
+  const [Data, setData] = useState(null);
+  const [Idvillage,setIdvillage] = useState(null);
+  const [Village,setVillage] = useState('');
+  const recherche =  () => {
+    console.log(Data , Idvillage );
+    axios.post('https://localhost:8000/api/recherchePersonneIndep',{
+        data: Data,
+        village: Idvillage
+    },{
+        headers:
+        {
+          'Content-Type': 'application/json',
+          'Authorization' : `Bearer ${token}`
+        }
+      })
+       .then(response => {
+        setMembre(response.data.data);
+        })
+       .catch(error => {
+            console.error("Erreur lors de la récupération des données", error);
+        });
+} 
+const ListeVillage = () => {
+  axios.get('https://localhost:8000/api/village',{
+  headers: 
+  {
+      'content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+  },
+  }).then(response => {
+      setVillage(response.data)
+  });
+};  
   const ListeMembreFamille = (id) => {
     axios.get(`https://localhost:8000/api/PersonneCharge_ByResposanble/${id}`,{
       headers:
@@ -54,7 +77,8 @@ const ListeMembre = () => {
     });
 };
   useEffect(() => {
-    ListeMembre(); 
+    recherche(); 
+    ListeVillage(); 
   } , []);
 
   const VoireProffession = (id) => {
@@ -221,6 +245,26 @@ const handleExport = async (event) => {
             </div>
         </div>
               <div className="card-body">
+              <form onSubmit={recherche}>
+                    <div className="row">
+                        <div className="col-3">
+                            <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
+                        </div>
+                        <div className="col-3">
+                        <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
+                        <option>CHoisier un Village</option>
+                        {Array.isArray(Village) ? (
+                            Village.map(Village => (
+                                <option key={Village.id} value={Village.id} className="form-control">
+                                  {Village.nomVillage}
+                                </option>
+                            ) )
+                        ) : ( <option>Aucune Valeur</option> ) }
+                        </select>
+                        </div>
+                    </div>
+                    <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
+                </form>
                 <div className="table-responsive">
                   <table className="table">
                     <thead className=" text-dark">

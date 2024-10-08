@@ -1,38 +1,41 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import * as XLSX from 'xlsx';
 
 const RecuCotisation = () => {
     const [Recu, setRecu] = useState('');
+    const [Data, setData] = useState(null);
+    const [DateDebut, setDateDebut] = useState(null);
+    const [DateFin, setDateFin] = useState(null);
     const token = localStorage.getItem("token");
-    const listeAll_recu = () => {
-        axios.get('https://127.0.0.1:8000/api/PayementCotisation',{
-            headers:
-            {
-              'Authorization' : `Bearer ${token}`
-            }
-          })
-            .then(response => {
-                setRecu(response.data);
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error("Erreur lors de la récupération des données", error);
-            });
-    };
+    
+    const [Village,setVillage] = useState('');
+    const [IdVillage,setIdVillage] = useState(null);
+    const ListeVillage = () => {
+        axios.get('https://localhost:8000/api/village',{
+        headers: 
+        {
+            'content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        }).then(response => {
+            setVillage(response.data)
+        });
+    };  
     const exportToExcel = () => {
         // Aplatir les données des reçus pour l'exportation
         const dataToExport = Recu.map(recu => ({
-            'Nom du Membre': recu.idPersonneMembre.Nom_Membre,
-            'Prénom': recu.idPersonneMembre.Prenom_Membre,
-            'Téléphone': recu.idPersonneMembre.Telephone,
-            'Email': recu.idPersonneMembre.Email,
-            'Mois à payer': new Date(recu.datePayer).toLocaleDateString('fr-FR', {
+            'Nom du Membre': recu.nom_membre,
+            'Prénom': recu.prenom_membre,
+            'Téléphone': recu.telephone,
+            'Email': recu.email,
+            'Mois à payer': new Date(recu.date_payer).toLocaleDateString('fr-FR', {
                 year: 'numeric',
                 month: 'long'
             }),
-            'Date de paiement': new Date(recu.dateDePayement).toLocaleDateString('fr-FR', {
+            'Date de paiement': new Date(recu.date_de_payement).toLocaleDateString('fr-FR', {
                 year: 'numeric',
                 month: 'long'
             })
@@ -47,21 +50,72 @@ const RecuCotisation = () => {
         // Exporter le fichier Excel
         XLSX.writeFile(wb, 'recu_cotisation.xlsx');
     };
+
+    const recherche =  () => {
+        console.log(Data,IdVillage,DateFin,DateDebut);
+        axios.post('https://localhost:8000/api/rechercheCotisation',{
+            data: Data,
+            village: IdVillage,
+            dateDebut: DateDebut,
+            dateFin: DateFin
+        },{
+            headers:
+            {
+              'Content-Type': 'application/json',
+              'Authorization' : `Bearer ${token}`
+            }
+          })
+           .then(response => {
+                setRecu(response.data.data);
+                console.log(response.data.data);
+            })
+           .catch(error => {
+                console.error("Erreur lors de la récupération des données", error);
+            });
+    }
     useEffect(() => {
-        listeAll_recu();
+        recherche();
+        ListeVillage();
       } , []);
   return (
     <>
       <div className="card">
+        
                 <div className="card-header">
-                    <h4 className="card-title">Tous les payements</h4>
+                    <h4 className="card-title">Tous les payement</h4>
                     <div className="col-md-8 d-flex">
                             <button className="btn btn-warning btn-block" style={{ width: '50%' }} type="button" onClick={exportToExcel}>
                                 Exporter en Excel
                             </button>
-                        </div>
+                    </div>
                 </div>
                 <div className="card-body">
+                <form onSubmit={recherche}>
+                    <div className="row">
+                        <div className="col-3">
+                            <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
+                        </div>
+                        <div className="col-3">
+                        <select className="form-control" value={ IdVillage } onChange={(e) => setIdVillage(e.target.value)}>
+                        <option>CHoisier un Village</option>
+                        {Array.isArray(Village) ? (
+                            Village.map(Village => (
+                                <option key={Village.id} value={Village.id} className="form-control">
+                                  {Village.nomVillage}
+                                </option>
+                            ) )
+                        ) : ( <option>Aucune Valeur</option> ) }
+                        </select>
+                        </div>
+                        <div className="col-3">
+                            <input type="date" className="form-control" placeholder="rechercher..." value={DateDebut} onChange={(e) => setDateDebut(e.target.value)}></input>
+                        </div>
+                        <div className="col-3">
+                            <input type="date" className="form-control" placeholder="rechercher..." value={DateFin} onChange={(e) => setDateFin(e.target.value)}></input>
+                        </div>
+                    </div>
+                    <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
+                </form>
                     <div className="table-responsive">
                         <table className="table">
                             <thead className="text-dark">
@@ -79,26 +133,26 @@ const RecuCotisation = () => {
                             Recu.map(recu => (
                                 <tr key={recu.id}>
                                         <td className="text-left">
-                                            {recu.idPersonneMembre.Nom_Membre}
+                                            {recu.nom_membre}
                                         </td>
                                         <td className="text-left">
-                                            {recu.idPersonneMembre.Prenom_Membre}
+                                            {recu.prenom_membre}
                                         </td>
                                         <td className="text-left">
-                                            {recu.idPersonneMembre.Telephone}
+                                            {recu.telephone}
                                         </td>
                                         <td className="text-left">
-                                            {recu.idPersonneMembre.Email}
+                                            {recu.email}
                                         </td>
                                         <td className="text-left">
-                                        {new Date(recu.datePayer).toLocaleDateString('fr-FR', {
+                                        {new Date(recu.date_payer).toLocaleDateString('fr-FR', {
                                             year: 'numeric',
                                             month: 'long'
                                         })}
                                         </td>
                                         <td className="text-left">
                                         
-                                        {new Date(recu.dateDePayement).toLocaleDateString('fr-FR', {
+                                        {new Date(recu.date_de_payement).toLocaleDateString('fr-FR', {
                                             year: 'numeric',
                                             month: 'long'
                                         })} 

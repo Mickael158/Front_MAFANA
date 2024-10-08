@@ -1,24 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import * as XLSX from 'xlsx';
 
 const Reception = () => {
   const [Reception, setReception] = useState('');
     const token = localStorage.getItem("token");
-    const listeAll_Reception = () => {
-        axios.get('https://127.0.0.1:8000/api/SelectAllDonnationFinancier',{
-            headers:
-            {
-              'Authorization' : `Bearer ${token}`
-            }
-          })
-            .then(response => {
-                setReception(response.data);
-            })
-            .catch(error => {
-                console.error("Erreur lors de la récupération des données", error);
-            });
-    };
+    const [Data, setData] = useState(null);
+    const [DateDebut, setDateDebut] = useState(null);
+    const [DateFin, setDateFin] = useState(null);
+    
     const exportToExcel = () => {
         // Aplatir les données des reçus pour l'exportation
         const dataToExport = Reception.map(reception => ({
@@ -36,8 +27,28 @@ const Reception = () => {
         // Exporter le fichier Excel
         XLSX.writeFile(wb, 'recu_cotisation.xlsx');
     };
+    const recherche =  () => {
+        axios.post('https://localhost:8000/api/rechercheDonnation',{
+            data: Data,
+            dateDebut: DateDebut,
+            dateFin: DateFin
+        },{
+            headers:
+            {
+              'Content-Type': 'application/json',
+              'Authorization' : `Bearer ${token}`
+            }
+          })
+           .then(response => {
+                setReception(response.data.data);
+                console.log(response.data.data);
+            })
+           .catch(error => {
+                console.error("Erreur lors de la récupération des données", error);
+            });
+    }
     useEffect(() => {
-        listeAll_Reception();
+        recherche();
 
       } , []);
   return (
@@ -52,6 +63,20 @@ const Reception = () => {
                         </div>
                 </div>
                 <div className="card-body">
+                <form onSubmit={recherche}>
+                    <div className="row">
+                        <div className="col-4">
+                            <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
+                        </div>
+                        <div className="col-4">
+                            <input type="date" className="form-control" placeholder="rechercher..." value={DateDebut} onChange={(e) => setDateDebut(e.target.value)}></input>
+                        </div>
+                        <div className="col-4">
+                            <input type="date" className="form-control" placeholder="rechercher..." value={DateFin} onChange={(e) => setDateFin(e.target.value)}></input>
+                        </div>
+                    </div>
+                    <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
+                </form>
                     <div className="table-responsive">
                         <table className="table">
                             <thead className="text-dark">
@@ -66,14 +91,14 @@ const Reception = () => {
                             Reception.map(reception => (
                                 <tr key={reception.id}>
                                         <td className="text-left">
-                                            {reception.nomDonationFinancier}
+                                            {reception.nom_donation_financier}
                                         </td>
                                         <td className="text-left">
-                                        {new Date(reception.dateDonationFinancier).toISOString().split('T')[0]}
+                                        {new Date(reception.date_donation_financier).toISOString().split('T')[0]}
                                             
                                         </td>
                                         <td className="text-right">
-                                            {reception.Montant}
+                                            {reception.montant}
                                         </td>
                                         
                                 </tr>
