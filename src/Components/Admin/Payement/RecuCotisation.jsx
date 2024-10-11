@@ -67,7 +67,6 @@ const RecuCotisation = () => {
           })
            .then(response => {
                 setRecu(response.data.data);
-                console.log(response.data.data);
             })
            .catch(error => {
                 console.error("Erreur lors de la récupération des données", error);
@@ -97,7 +96,7 @@ const RecuCotisation = () => {
                         </div>
                         <div className="col-3">
                         <select className="form-control" value={ IdVillage } onChange={(e) => setIdVillage(e.target.value)}>
-                        <option>CHoisier un Village</option>
+                        <option>Choisir un Village</option>
                         {Array.isArray(Village) ? (
                             Village.map(Village => (
                                 <option key={Village.id} value={Village.id} className="form-control">
@@ -124,7 +123,7 @@ const RecuCotisation = () => {
                                     <th className="text-left">Prénom</th>
                                     <th className="text-left">Téléphone</th>
                                     <th className="text-left">Email</th>
-                                    <th className="text-left">Mois a payer</th>
+                                    <th className="text-left">Mois payer</th>
                                     <th className="text-left">Date de payement</th>
                                 </tr>
                             </thead>

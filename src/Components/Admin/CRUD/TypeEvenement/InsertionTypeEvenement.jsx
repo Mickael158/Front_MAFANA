@@ -35,14 +35,14 @@ const InsertionTypeEvenement = () => {
         <ToastContainer />
       <div className="card">
               <div className="card-header">
-                <h5 className="title">Nouveau Type Evenement</h5>
+                <h5 className="title">Nouveau Type d'évènement</h5>
               </div>
               <div className="card-body">
                 <form onSubmit={insertionTypeEvenement}>
                   <div className="row mb-5">
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
-                        <label>Nom du Type Evenement</label>
+                        <label>Nom du Type d'évènement</label>
                         <input type="text" className="form-control"  placeholder="Ecrivez ici" value={typeEvenemet} onChange={(e) => setTypeEvenemet(e.target.value)}/>
                       </div>
                     </div>

@@ -10,7 +10,7 @@ const Evenement = () => {
       <div className="card">
               <div className="card-header">
                 <div className="row">
-                    <div className="col-md-4"><h4 className="card-title"> Evenement</h4></div>
+                    <div className="col-md-4"><h4 className="card-title">Evènement</h4></div>
                 </div>
               </div>
               <div className="card-body">

@@ -36,8 +36,8 @@ const Membre = () => {
 
                 // Initialisez les labels des mois
                 const months = [
-                    "January", "February", "March", "April", "May", "June", "July",
-                    "August", "September", "October", "November", "December"
+                    "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet",
+                    "Août", "Septembre", "Octobre", "Novembre", "Décembre"
                 ];
 
                 // Créez un tableau pour les valeurs du graphique
@@ -53,7 +53,7 @@ const Membre = () => {
                 setData({
                     labels: months,
                     datasets: [{
-                        label: "Nombre de personnes inscrites",
+                        label: "Nombre de personnes inscrits",
                         backgroundColor: "#2CA8FF",
                         borderColor: "#2CA8FF",
                         pointBorderColor: "#FFF",

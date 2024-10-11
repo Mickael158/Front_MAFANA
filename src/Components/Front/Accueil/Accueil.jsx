@@ -47,7 +47,7 @@ const Accueil = () => {
           <div className="col-md-4 position-relative">
             <div className="p-3 text-center">
               <h1 className="text-gradient text-info"> <span id="state2" >0</span>+</h1>
-              <h5 className="mt-3">Evenement</h5>
+              <h5 className="mt-3">Evènement</h5>
               <p className="text-sm font-weight-normal">Fait depuis</p>
             </div>
             <hr className="vertical dark"/>
@@ -55,7 +55,7 @@ const Accueil = () => {
           <div className="col-md-4">
             <div className="p-3 text-center">
               <h1 className="text-gradient text-info" id="state3" >0</h1>
-              <h5 className="mt-3">Valle</h5>
+              <h5 className="mt-3">Vallée</h5>
               <p className="text-sm font-weight-normal">Au Sud de Madagascar</p>
             </div>
           </div>

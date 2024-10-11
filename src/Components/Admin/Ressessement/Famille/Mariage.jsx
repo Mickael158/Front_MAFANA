@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Mariage = () => {
     const [DateMariage,setDateMariage] = useState('');
@@ -35,6 +37,18 @@ const Mariage = () => {
 
     const submit = (event) => {
         event.preventDefault();
+        if (!IdMari || !IdFemme) {
+          toast.error("Les identifiants des mariés sont requis.");
+          return; 
+      }
+
+      const today = new Date(); 
+      const selectedDate = new Date(DateMariage); 
+
+      if (selectedDate > today) {
+          toast.error("La date de mariage ne peut pas être dans le futur.");
+          return; 
+      }
       try
       {
         console.log(DateMariage)
@@ -53,12 +67,13 @@ const Mariage = () => {
         },
         
       );
-      console.log("Mariage inserer");
+      toast.success("Félicitation Mariage inserer");
       setDateMariage('');
     }
     catch(error)
     {
-      console.error('Erreur d\'insertion' , error)
+      toast.error('Erreur d\'insertion' , error);
+
     }
     }
 
@@ -70,7 +85,7 @@ const Mariage = () => {
         <>
             <form onSubmit={submit}>
                   <div className="row mb-5">
-
+                  <ToastContainer/>
                     <div className="col-md-4 pr-1">
                       <div className="form-group">
                         <label>Date de Mariage</label>
@@ -85,7 +100,7 @@ const Mariage = () => {
                         <option>Choisisez le mari</option>
                         {Array.isArray(Mari) ? (
                             Mari.map(Mari => (
-                                <option key={Mari.id} value={Mari.id} clasName="form-control">
+                                <option key={Mari.id} value={Mari.id} className="form-control">
                                   {Mari.nomMembre}
                                 </option>
                             ) )

@@ -79,29 +79,29 @@ const Modification = () => {
              <div className="card">
                 <ToastContainer />
                 <div className="card-header">
-                    <h4 className="card-title">Choisisez le nouveax utilisateur</h4>
+                    <h4 className="card-title">Choisisez l' utilisateur a modifier</h4>
                 </div>
                 <div className="card-body">
                     <div className="table-responsive">
                         <table className="table">
                             <thead className="text-dark">
                                 <tr>
-                                    <th>Nom du Membre</th>
-                                    <th>Prénom</th>
-                                    <th>compte</th>
-                                    <th>roles</th>
-                                    <th>Cliquer pour choisir</th>
+                                    <th className="text-left">Nom du Membre</th>
+                                    <th className="text-left">Prénom</th>
+                                    <th className="text-left">compte</th>
+                                    <th className="text-left">roles</th>
+                                    <th className="text-center">Cliquer pour choisir</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {Array.isArray(Alluser) ? (
                                     Alluser.map(Alluser => (
                                         <tr key={Alluser.id}>
-                                            <td>{Alluser.idPersonne.Nom_Membre}</td>
-                                            <td>{Alluser.idPersonne.Prenom_Membre}</td>
-                                            <td>{Alluser.username}</td>
-                                            <td>{Alluser.roles}</td>
-                                            <td>
+                                            <td  className="text-left">{Alluser.idPersonne.Nom_Membre}</td>
+                                            <td  className="text-left">{Alluser.idPersonne.Prenom_Membre}</td>
+                                            <td  className="text-left">{Alluser.username}</td>
+                                            <td  className="text-left">{Alluser.roles}</td>
+                                            <td  className="text-center">
                                                 <button
                                                     className="btn btn-danger"
                                                     onClick={() => handleSelectMember(Alluser)}
@@ -122,14 +122,14 @@ const Modification = () => {
 
             <Modal show={showModal} onHide={() => setShowModal(false)} dialogClassName="modal-lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Ajout utilisateur</Modal.Title>
+                    <Modal.Title>Attribution de role a un utilisateur</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Ajouter {selectedNom} parmi les utilisateurs.</p>
+                    <p>Attribuer des roles spécifique a {selectedNom} </p>
                     <div className="card-body">
                         <form onSubmit={attribution}>
                             <div className="row">
-                                <h2>Information pour se connecter</h2>
+                                <h2>L'information de l'utilisateur</h2>
                                 <br /><br /><br />
                                 <div className="col-md-6 px-1">
                                     <div className="form-group">
@@ -142,7 +142,7 @@ const Modification = () => {
                             <div className="row mt-4">
                                 <div className="col-md-12 pr-1">
                                     <div className="form-group texte-center"style={{  "marginLeft":"40%"}} >
-                                        <label style={{  "marginLeft":"10%"}} >Ses rôles</label>
+                                        <label style={{  "marginLeft":"10%"}} >Les rôles a attribués</label>
                                         <div >
                                             {Array.isArray(rolee) && rolee.length > 0 ? (
                                                 rolee.map(role => (
@@ -166,7 +166,7 @@ const Modification = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" className='btn btn-success'>Valider</button>
+                            <button type="submit" className='btn btn-success'>Attribuer</button>
                         </form>
                     </div>
                 </Modal.Body>

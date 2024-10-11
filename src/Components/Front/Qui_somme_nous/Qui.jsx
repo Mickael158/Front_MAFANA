@@ -1,19 +1,19 @@
 const Qui = () => {
   return (
     <>
-      <section className="pb-5 position-relative bg-gradient-dark  w-100" id="qui">
-      <div className="container">
+      <section className="pb-5 position-relative bg-gradient-dark  w-100 " id="qui">
+      <div className="w-80 ms-auto me-auto">
         <div className="row">
           <div className="col-md-8 text-start mb-5 mt-5">
-            <h3 className="text-white z-index-1 position-relative">Qui somme nous</h3>
-            <p className="text-white opacity-8 mb-0">Structure de l association</p>
+            <h3 className="text-white z-index-1 position-relative ps-3">Qui sommes-nous</h3>
+            <p className="text-white opacity-8 mb-0 ps-3">Structure de l'association</p>
           </div>
         </div>
         <div className="row">
           <div className="col-lg-6 col-12">
             <div className="card card-profile mt-4">
               <div className="row">
-                <div className="col-lg-4 col-md-6 col-12 mt-n5">
+                <div className="col-lg-4 col-md-6 col-12 mt-n5 ">
                   <a href="javascript:;">
                     <div className="p-3 pe-md-0">
                       <img className="w-100 border-radius-md shadow-lg" src="assets/front/img/team-5.jpg" alt="image"/>
@@ -22,9 +22,9 @@ const Qui = () => {
                 </div>
                 <div className="col-lg-8 col-md-6 col-12 my-auto">
                   <div className="card-body ps-lg-0">
-                    <h5 className="mb-0">Emma Roberts</h5>
-                    <h6 className="text-info">UI Designer</h6>
-                    <p className="mb-0">Artist is a term applied to a person who engages in an activity deemed to be an art.</p>
+                    <h5 className="mb-0">RAKOTO</h5>
+                    <h6 className="text-info">Professeur</h6>
+                    <p className="mb-0">Responsable de </p>
                   </div>
                 </div>
               </div>
@@ -42,9 +42,9 @@ const Qui = () => {
                 </div>
                 <div className="col-lg-8 col-md-6 col-12 my-auto">
                   <div className="card-body ps-lg-0">
-                    <h5 className="mb-0">William Pearce</h5>
-                    <h6 className="text-info">Boss</h6>
-                    <p className="mb-0">Artist is a term applied to a person who engages in an activity deemed to be an art.</p>
+                    <h5 className="mb-0">RABE</h5>
+                    <h6 className="text-info">Caiisier</h6>
+                    <p className="mb-0">Responsable de</p>
                   </div>
                 </div>
               </div>
@@ -64,9 +64,9 @@ const Qui = () => {
                 </div>
                 <div className="col-lg-8 col-md-6 col-12 my-auto">
                   <div className="card-body ps-lg-0">
-                    <h5 className="mb-0">Ivana Flow</h5>
-                    <h6 className="text-info">Athlete</h6>
-                    <p className="mb-0">Artist is a term applied to a person who engages in an activity deemed to be an art.</p>
+                    <h5 className="mb-0">SOA</h5>
+                    <h6 className="text-info">Tresorerie</h6>
+                    <p className="mb-0">Responsable de</p>
                   </div>
                 </div>
               </div>
@@ -84,9 +84,9 @@ const Qui = () => {
                 </div>
                 <div className="col-lg-8 col-md-6 col-12 my-auto">
                   <div className="card-body ps-lg-0">
-                    <h5 className="mb-0">Marquez Garcia</h5>
-                    <h6 className="text-info">JS Developer</h6>
-                    <p className="mb-0">Artist is a term applied to a person who engages in an activity deemed to be an art.</p>
+                    <h5 className="mb-0">Paul</h5>
+                    <h6 className="text-info">Communication</h6>
+                    <p className="mb-0">Responsable de</p>
                   </div>
                 </div>
               </div>

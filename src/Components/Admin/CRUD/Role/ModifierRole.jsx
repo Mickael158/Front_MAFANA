@@ -45,15 +45,16 @@ const ModifierRole = () => {
         <ToastContainer />
       <div className="card">
         <div className="card-header">
-          <h5 className="title">Modifier la Role</h5>
+          <h5 className="title">Modifier la Rôle</h5>
         </div>
         <div className="card-body">
           <form onSubmit={ModificationVallee}>
             <div className="row mb-5">
               <div className="col-md-5 pr-1">
                 <div className="form-group">
-                  <label>Role à modifier</label>
+                  <label>Rôle à modifier</label>
                   <select className="form-control" onChange={(e) => setIdValle(e.target.value)}>
+                  <option className="form-control text-center">Chosir un rôle</option>
                     {Array.isArray(roles) ? (
                       roles.map(vallee => (
                         <option className="form-control text-center" key={vallee.id} value={vallee.id}>
@@ -68,11 +69,11 @@ const ModifierRole = () => {
               </div>
               <div className="col-md-5 pr-1">
                 <div className="form-group">
-                  <label>Nom de la Role</label>
+                  <label>Nom de la rôle</label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Nom de la Role"
+                    placeholder="Nom de la rôle"
                     value={roleModif}
                     onChange={(e) => setRoleModif(e.target.value)}
                   />

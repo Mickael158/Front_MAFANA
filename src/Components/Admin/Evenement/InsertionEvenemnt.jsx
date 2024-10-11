@@ -26,6 +26,28 @@ const InsertionEvenemnt = () => {
 
 const Insertion = async (e) => {
     e.preventDefault();
+    const today = new Date(); // Date actuelle
+    const startDate = new Date(dateDebut); // Date de début sélectionnée
+    const endDate = new Date(dateFin); // Date de fin sélectionnée
+
+    // Vérification que la date de début est supérieure ou égale à aujourd'hui
+    if (startDate < today) {
+        toast.error("La date de début ne peut pas être dans le passé.");
+        return;
+    }
+
+    // Vérification que la date de fin est supérieure ou égale à la date de début
+    if (endDate < startDate) {
+        toast.error("La date de fin doit être supérieure ou égale à la date de début.");
+        return;
+    }
+
+    // Vérification que l'ID du type d'événement est défini
+    if (!IdTypeEvenement) {
+        toast.error("Le type d'événement est requis.");
+        return;
+    }
+
     try {
         await axios.post('https://localhost:8000/api/evenement',
             {description:Description, date_debut:dateDebut,date_fin:dateFin,lieu:Lieu,typeEvenement_id:IdTypeEvenement,association_id:1,user_id:token,nom:nom,publier:isToggled},
@@ -59,15 +81,15 @@ const Insertion = async (e) => {
             <div className="card">
               <div className="card">
               <div className="card-header">
-                <h5 className="title">Insertion evenement</h5>
+                <h5 className="title">Insertion évènement</h5>
               </div>
               <div className="card-body">
                 <form onSubmit={Insertion}>
                   <div className="row">
                     <div className="col-md-6 px-1">
                       <div className="form-group">
-                        <label>Nom de Evenement</label>
-                        <input type="text" className="form-control"  value={nom} onChange={(e) => setNom(e.target.value)}/>
+                        <label>Nom de l'évènement</label>
+                        <input type="text" className="form-control" placeholder="Nom de l'évènement" value={nom} onChange={(e) => setNom(e.target.value)}/>
                       </div>
                     </div>
                     <div className="col-md-6 px-1 text-center">
@@ -86,13 +108,13 @@ const Insertion = async (e) => {
                     </div>
                     <div className="col-md-6 px-1">
                       <div className="form-group">
-                        <label>Date debut de l evenement</label>
+                        <label>Date de début de l'évènement</label>
                         <input type="date" className="form-control"  value={dateDebut} onChange={(e) => setDateDebut(e.target.value)}/>
                       </div>
                     </div>
                     <div className="col-md-6 pl-1">
                       <div className="form-group">
-                        <label >Date fin de l evenement</label>
+                        <label >Date fin de l'évènement</label>
                         <input type="date" className="form-control" value={dateFin} onChange={(e) => setDateFin(e.target.value)}/>
                       </div>
                     </div>
@@ -100,13 +122,13 @@ const Insertion = async (e) => {
                   <div className="row mt-4">
                     <div className="col-md-6 pr-1">
                         <div className="form-group">
-                            <label>Lieu de l evenement</label>
-                            <input type="text" className="form-control" placeholder="Lieu de l'evenement" value={Lieu} onChange={(e) => setLieu(e.target.value)}/>
+                            <label>Lieu de l'évènement</label>
+                            <input type="text" className="form-control" placeholder="Lieu de l'évènement" value={Lieu} onChange={(e) => setLieu(e.target.value)}/>
                         </div>
                     </div>
                     <div className="col-md-6">
                       <div className="form-group">
-                        <label>Type de l evenement</label>
+                        <label>Type de l'évènement</label>
                         <select className="form-control" value={ IdTypeEvenement } onChange={(e) => setIdTypeEvenement(e.target.value)}>
                           <option value="">Selectionner un Type</option>  
                         {Array.isArray(TypeEvenement) ? (
@@ -123,12 +145,12 @@ const Insertion = async (e) => {
                   <div className="row mt-4">
                     <div className="col-md-12">
                       <div className="form-group">
-                        <label>Description Evenement</label>
-                        <textarea rows="4" cols="80" className="form-control" placeholder="Description de l'evenement" value={Description} onChange={(e) => setDescription(e.target.value)}>Lamborghini Mercy, Your chick she so thirsty, I m in that two seat Lambo.</textarea>
+                        <label>Déscription Evènement</label>
+                        <textarea rows="4" cols="80" className="form-control" placeholder="Déscription de l'évènement" value={Description} onChange={(e) => setDescription(e.target.value)}>Lamborghini Mercy, Your chick she so thirsty, I m in that two seat Lambo.</textarea>
                       </div>
                     </div>
                   </div>
-                  <button type='submit' className='btn btn-success'>Valider</button>
+                  <button type='submit' className='btn btn-success'>Enregistrer l'évènement</button>
                 </form>
               </div>
             </div>    

@@ -44,7 +44,7 @@ const ChoixListePayement = () => {
                   >
                     <div className="font-icon-detail">
                       <i className="now-ui-icons shopping_cart-simple fs-2"></i>
-                      <p className="fs-6">Materiel</p>
+                      <p className="fs-6">Matériel</p>
                     </div>
                   </div>
                 </div>

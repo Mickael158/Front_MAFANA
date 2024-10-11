@@ -41,6 +41,20 @@ const handleSelectMember = (member) => {
 };
 const DemandeMateriel = (event) => {
   event.preventDefault();
+  if (!selectedId) {
+    toast.error("L'ID de la personne est requis.");
+    return; 
+    }
+
+    if (!IdMateriel) {
+        toast.error("L'ID du matériel est requis.");
+        return; 
+    }
+
+    if (nbr <= 0) {
+        toast.error("Le nombre de matériel doit être supérieur à 0.");
+        return; 
+    }
   try{
       
       axios.post('https://localhost:8000/api/DemandeMateriel',
@@ -74,14 +88,14 @@ const DemandeMateriel = (event) => {
       <div>
           <div className="card">
               <div className="card-header">
-                  <h5 className="title">Demande Materiel</h5>
+                  <h5 className="title">Demande Matériel</h5>
               </div>
               <div className="card-body">
                   <form onSubmit={DemandeMateriel} >
                       <div className="row mb-5">
                           <div className="col-md-4 pr-1">
                                     <div className="form-group">
-                                        <label>Nom de la personne à payer</label>
+                                        <label>Nom de la personne qui demande</label>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -93,12 +107,13 @@ const DemandeMateriel = (event) => {
                             </div>
                           <div className="col-md-4 pr-1">
                               <div className="form-group">
-                                  <label>Nom de la personne </label>
+                                  <label>Le matériel a demande</label>
                                   <select 
                                       className="form-control" 
                                       value={IdMateriel} 
                                       onChange={(e) => setIdMateriel(e.target.value)}
                                       >
+                                     <option className="form-control">Choisir un matériel</option>
                                       {Array.isArray(Materiel) ? (
                                           Materiel.map((m) => (
                                           <option className="form-control" key={m.id} value={m.id}>
@@ -114,7 +129,7 @@ const DemandeMateriel = (event) => {
                           <div className="col-md-4 pr-1">
                               <div className="form-group">
                                   <label>Nombre</label>
-                                  <input type="text" className="form-control" placeholder="Nombre de mois" value={nbr} onChange={(e) => setNbr(e.target.value)}/>
+                                  <input type="number" className="form-control" placeholder="Nombre" value={nbr} onChange={(e) => setNbr(e.target.value)}/>
                               </div>
                           </div>
                           <div className="col-md-12 pr-1">
@@ -128,8 +143,9 @@ const DemandeMateriel = (event) => {
                               <button
                                   className="btn btn-success btn-block"
                                   type="submit"
+                                  disabled={!selectedNom}
                               >
-                                  Valider
+                                  Envoyer le demande
                               </button>
                           </div>
                       </div>
@@ -150,7 +166,7 @@ const DemandeMateriel = (event) => {
                                     <th>Prénom</th>
                                     <th>Téléphone</th>
                                     <th>Email</th>
-                                    <th>Dernière Cotisation Payée</th>
+                                    <th>Dérnière Cotisation Payée</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

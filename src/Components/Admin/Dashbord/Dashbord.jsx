@@ -214,7 +214,7 @@ const Dashbord = () => {
           </nav>
 
           {/* Affichage de la page en fonction de l'état */}
-          <div className="content">
+          
             {page === 0 && <Statistic />}
             {page === 1 && <CRUD />}
             {page === 2 && <Evenement />}
@@ -224,7 +224,7 @@ const Dashbord = () => {
             {page === 6 && <ChoixDemande />}
             {page === 7 && <Etat />}
             {page === 8 && <ChoixUtilisateur />}
-          </div>
+          
         </div>
       </div>
     </div>

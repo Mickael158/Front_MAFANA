@@ -35,7 +35,7 @@ const InsertionMateriel = () =>
 
   const ListeCategorie = async () => {
     try {
-      const response = await axios.get('https://localhost:8000/api/Categorie',{
+      const response = await axios.get('https://localhost:8000/api/Categories',{
         headers:
         {
           'Authorization' : `Bearer ${token}`
@@ -56,25 +56,26 @@ const InsertionMateriel = () =>
     <ToastContainer />  
       <div className="card">
               <div className="card-header">
-                <h5 className="title">Insertion Materiel</h5>
+                <h5 className="title">Insertion Matériel</h5>
               </div>
               <div className="card-body">
                 <form onSubmit={insertionMateriel}>
                   <div className="row mb-5">
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
-                        <label>Nom du Materiele</label>
-                        <input type="text" className="form-control"  placeholder="Nom du Materiel" value={nomMateriel} onChange={(e) => setNomMateriel(e.target.value)}/>
+                        <label>Nom du Matériel</label>
+                        <input type="text" className="form-control"  placeholder="Nom du Matériel" value={nomMateriel} onChange={(e) => setNomMateriel(e.target.value)}/>
                       </div>
                     </div>
                     <div className="col-md-5 pr-1">
                   <div className="form-group">
-                    <label>Nom du Categorie correspondant</label>
+                    <label>Nom de la Catégorie correspondant</label>
                     <select 
                       className="form-control" 
                       value={IdCategorie} 
                       onChange={(e) => setIdCategorie(e.target.value)}
                     >
+                      <option className="form-control text-center">choisir une catégorie correspondant</option>
                       {Array.isArray(Categorie) ? (
                         Categorie.map((Categories) => (
                           <option className="form-control text-center" key={Categories.id} value={Categories.id}>

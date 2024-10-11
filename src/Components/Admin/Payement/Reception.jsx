@@ -55,7 +55,7 @@ const Reception = () => {
     <>
       <div className="card">
                 <div className="card-header">
-                    <h4 className="card-title">Tous les don financier</h4>
+                    <h4 className="card-title">Tous les dons financiés</h4>
                     <div className="col-md-8 d-flex">
                             <button className="btn btn-warning btn-block" style={{ width: '50%' }} type="button" onClick={exportToExcel}>
                                 Exporter en Excel
@@ -81,7 +81,7 @@ const Reception = () => {
                         <table className="table">
                             <thead className="text-dark">
                                 <tr>
-                                    <th className="text-left">Nom Donnateur</th>
+                                    <th className="text-left">Nom du Donateur</th>
                                     <th className="text-left">Date de payement</th>
                                     <th className="text-right">Montant</th>
                                 </tr>
@@ -98,7 +98,7 @@ const Reception = () => {
                                             
                                         </td>
                                         <td className="text-right">
-                                            {reception.montant}
+                                            {reception.montant}Ar
                                         </td>
                                         
                                 </tr>

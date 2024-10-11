@@ -10,7 +10,7 @@ const ModifierCategorie = () => {
   const token = localStorage.getItem("token");
 
   const ListeCategorie = () => {
-    axios.get('https://localhost:8000/api/Categorie',{
+    axios.get('https://localhost:8000/api/Categories',{
       headers:
       {
         'Authorization' : `Bearer ${token}`
@@ -46,7 +46,7 @@ const ModifierCategorie = () => {
         <ToastContainer />
       <div className="card">
         <div className="card-header">
-          <h5 className="title">Modifier la Categorie</h5>
+          <h5 className="title">Modifier une Catégorie</h5>
         </div>
         <div className="card-body">
           <form onSubmit={ModificationCategorie}>
@@ -55,6 +55,7 @@ const ModifierCategorie = () => {
                 <div className="form-group">
                   <label>Categorie à modifier</label>
                   <select className="form-control" onChange={(e) => setIdCategorie(e.target.value)}>
+                  <option className="form-control text-center">Choisir un categorie</option>
                     {Array.isArray(Categories) ? (
                       Categories.map(Categorie => (
                         <option className="form-control text-center" key={Categorie.id} value={Categorie.id}>

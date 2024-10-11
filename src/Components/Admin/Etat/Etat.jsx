@@ -28,7 +28,6 @@ const Etat = () => {
     });
   };  
 
-    // Fonction pour récupérer les membres depuis l'API
     const ListeMembre = () => {
         console.log(Data , Idvillage);
         axios.post('https://localhost:8000/api/Etat',{
@@ -140,7 +139,7 @@ const Etat = () => {
                         </div>
                         <div className="col-3">
                             <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
-                            <option>CHoisier un Village</option>
+                            <option>Choisir un Village</option>
                             {Array.isArray(Village) ? (
                                 Village.map(Village => (
                                     <option key={Village.id} value={Village.id} className="form-control">
@@ -163,10 +162,10 @@ const Etat = () => {
                                     <thead className="text-dark text-center">
                                         <tr>
                                             <th className="text-left">Nom</th>
-                                            <th className="text-left">Telephone</th>
+                                            <th className="text-left">Téléphone</th>
                                             <th className="text-left">Village</th>
                                             <th className="text-left">Vallée</th>
-                                            <th className="text-center">Detail</th>
+                                            <th className="text-center">Détail</th>
                                             <th className="text-right">Cotisation</th>
                                         </tr>
                                     </thead>
@@ -219,24 +218,27 @@ const Etat = () => {
             </div>
             <Modal show={showModal} onHide={() => setShowModal(false)} dialogClassName="modal-lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Totat cotisation de {selectNom} est de total de {Cotisation}Ar avec ses Charge </Modal.Title>
+                    <Modal.Title>Totat cotisation de la famille {selectNom} est de {Cotisation}Ar </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Total cotisation en 
+                    <div className="d-flex  w-100 justify-content-center align-items-center gap-3 align-content-center ">
+                        <p className="w-25">Total cotisation en </p>
                     <select 
                         className="form-control text-center w-25"
                         value={Taona}
                         onChange={(e) => setTaona(e.target.value) }
                     >
                         <option value=''>
-                            Choisir
+                            Choisir une année
                         </option>
                     {Annee.map((item, index) => (
                         <option key={index} value={item}>
                             {item}
                         </option>
                     ))}
-                </select> est de valeur de  {CotisationAll ? CotisationAll : 0}Ar avec ses charge</p>
+                </select> <p> est de valeur de  {CotisationAll ? CotisationAll : 0}Ar avec ces charges</p>
+                    </div>
+                    
                 <button className="btn btn-success" onClick={() =>VoireDevisBy(selectId , Taona)}>Voire</button>
                 </Modal.Body>
                 <Modal.Footer>

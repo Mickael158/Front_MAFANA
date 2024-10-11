@@ -32,7 +32,7 @@ const Footer = () => {
 
       <div className="col-md-2 col-sm-6 col-6 mb-4">
         <div>
-          <h6 className="text-sm">Contenue</h6>
+          <h6 className="text-sm">Contenus</h6>
           <ul className="flex-column ms-n3 nav">
             <li className="nav-item">
               <a className="nav-link" href="#accueil" >
@@ -68,7 +68,7 @@ const Footer = () => {
 
       <div className="col-md-2 col-sm-6 col-6 mb-4">
         <div>
-          <h6 className="text-sm">Techonlogie</h6>
+          <h6 className="text-sm">Téchnologie</h6>
           <ul className="flex-column ms-n3 nav">
             <li className="nav-item">
               <a className="nav-link" href="#" >
@@ -151,7 +151,7 @@ const Footer = () => {
       <div className="col-12">
         <div className="text-center">
           <p className="text-dark my-4 text-sm font-weight-normal">
-            All rights reserved. Copyright © <script>document.write(new Date().getFullYear())</script> MA.FA.NA
+            Copyright © <script>document.write(new Date().getFullYear())</script> MA.FA.NA
           </p>
         </div>
       </div>

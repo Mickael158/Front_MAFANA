@@ -48,16 +48,16 @@ const ListeTypeRevenu = () => {
       <div className="card">
         <ToastContainer />
               <div className="card-header">
-                <h4 className="card-title">Tous les type de revenu</h4>
+                <h4 className="card-title">Tous les type de revenus</h4>
               </div>
               <div className="card-body">
                 <div className="table-responsive">
                   <table className="table">
                     <thead className=" text-dark text-center">
-                      <th>
-                        Nom du typeRevenue
+                      <th className="text-left">
+                        Nom du type de revenu
                       </th>
-                      <th>
+                      <th className="text-center">
                         Supprimer
                       </th>
                     </thead>
@@ -65,11 +65,11 @@ const ListeTypeRevenu = () => {
                         {Array.isArray(typeRevenu) ? (
                             typeRevenu.map(typeRevenue => (
                                 <tr key={typeRevenue.id} className="text-center">
-                                        <td>
+                                        <td className="text-left">
                                             {typeRevenue.motifRevenu}
                                         </td>
                                         <td className="d-flex justify-content-center align-items-center">
-                                            <button className="btn btn-danger btn-block " style={{'width': '50%'}} onClick={(e) => SuppressiontypeRevenu(e, typeRevenue.id)} ><i className="now-ui-icons shopping_basket"></i></button>
+                                            <button className="btn btn-danger btn-block " style={{'width': '25%'}} onClick={(e) => SuppressiontypeRevenu(e, typeRevenue.id)} ><i className="now-ui-icons shopping_basket"></i></button>
                                         </td>
                                 </tr>
                             ) )

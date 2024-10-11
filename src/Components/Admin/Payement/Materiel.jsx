@@ -15,7 +15,23 @@ const Materiel = () => {
 
     const insertionDonnationMateriel = async (event) => {
         event.preventDefault();
-        console.log("TOKEN ", token, "MATERIEL ", IdMateriel, "NOM ", selectedNom, "NBR ", nombre, "IMAGE ", image);
+        if (!IdMateriel) {
+            toast.error("Le matériel est requis.");
+            return; // Arrêter l'exécution si l'ID matériel est null
+        }
+    
+        // Vérification que selectedNom ne contient que des lettres
+        const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
+        if (!regex.test(selectedNom)) {
+            toast.error("Le nom ne doit contenir que des lettres.");
+            return; // Arrêter l'exécution si le nom contient des caractères invalides
+        }
+    
+        // Vérification que le nombre est supérieur à 0
+        if (nombre <= 0) {
+            toast.error("Le nombre doit être supérieur à 0.");
+            return; // Arrêter l'exécution si le nombre est invalide
+        }
         try {
             await axios.post('https://127.0.0.1:8000/api/DonnationMateriel', {
                 utilisateur: token,
@@ -95,14 +111,14 @@ const Materiel = () => {
                 <ToastContainer />
                 <div className="card">
                     <div className="card-header">
-                        <h5 className="title">Cotisation</h5>
+                        <h5 className="title">Donation matériel</h5>
                     </div>
                     <div className="card-body">
                         <form onSubmit={insertionDonnationMateriel}>
                             <div className="row mb-5">
                                 <div className="col-md-3 pr-1">
                                     <div className="form-group position-relative">
-                                        <label>Nom de la personne</label>
+                                        <label>Nom du donateur</label>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -126,12 +142,13 @@ const Materiel = () => {
                                 </div>
                                 <div className="col-md-3 pr-1">
                                     <div className="form-group">
-                                        <label>Materiel</label>
+                                        <label>Matériel</label>
                                         <select
                                             className="form-control text-center"
                                             value={IdMateriel}
                                             onChange={(e) => setIdMateriel(e.target.value)}
                                         >
+                                            <option className="form-control">Choisir un matériel</option>
                                             {Array.isArray(Materiel) ? (
                                                 Materiel.map((m) => (
                                                     <option key={m.id} value={m.id}>
@@ -150,7 +167,7 @@ const Materiel = () => {
                                         <input
                                             type="text"
                                             className="form-control"
-                                            placeholder="Nombre de mois"
+                                            placeholder="Nombre"
                                             value={nombre}
                                             onChange={(e) => setNombre(e.target.value)}
                                         />
@@ -168,7 +185,7 @@ const Materiel = () => {
                                 </div>
                                 <div className="col-md-3 pr-1 mt-3">
                                     <button className="btn btn-success btn-block" type="submit">
-                                        Valider
+                                        Donner
                                     </button>
                                 </div>
                             </div>

@@ -22,7 +22,17 @@ const Don = () => {
 
   const PayementDonation = (event) => {
     event.preventDefault();
+    const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
+    if (!regex.test(selectedNom)) {
+        toast.error("Le nom ne doit contenir que des lettres.");
+        return; // Arrêter l'exécution si le nom contient des caractères invalides
+    }
 
+    // Vérification que le montant est supérieur à 0
+    if (Montant <= 0) {
+        toast.error("Le montant doit être supérieur à 0.");
+        return; // Arrêter l'exécution si le montant est invalide
+    }
     try {
       axios.post(`https://localhost:8000/api/DonationFinancier`, {
           utilisateur: token,
@@ -73,14 +83,14 @@ const Don = () => {
         <ToastContainer />
         <div className="card">
           <div className="card-header">
-            <h5 className="title">Donnation</h5>
+            <h5 className="title">Donation Fiancié</h5>
           </div>
           <div className="card-body">
             <form onSubmit={PayementDonation}>
               <div className="row mb-5">
                 <div className="col-md-5 pr-1">
                   <div className="form-group position-relative">
-                    <label>Nom de la personne</label>
+                    <label>Nom du donateur</label>
                     <input
                       type="text"
                       className="form-control"
@@ -119,7 +129,7 @@ const Don = () => {
                     className="btn btn-success btn-block"
                     type="submit"
                   >
-                    Valider
+                    Donner
                   </button>
                 </div>
               </div>

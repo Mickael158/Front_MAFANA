@@ -12,7 +12,7 @@ const ChoixListeDemande = () => {
             <div className="card">
               <div className="card-header">
                 <h5 className="title">VOUS CHOISISSEZ</h5>
-                <p className="category">Les operations de payement Chez<a href="#"> MA.FA.NA</a></p>
+                <p className="category">Les opérations de demande Chez<a href="#"> MA.FA.NA</a></p>
               </div>
               <div className="card-body all-icons">
                 <div className="row">
@@ -33,7 +33,7 @@ const ChoixListeDemande = () => {
                   >
                     <div className="font-icon-detail">
                       <i className="now-ui-icons shopping_cart-simple fs-2"></i>
-                      <p className="fs-6">Materiel</p>
+                      <p className="fs-6">Matériel</p>
                     </div>
                   </div>
                 </div>

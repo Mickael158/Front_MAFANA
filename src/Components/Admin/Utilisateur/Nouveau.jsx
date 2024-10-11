@@ -50,6 +50,10 @@ const Nouveau = () => {
 
     const Insertion = async (e) => {
         e.preventDefault();
+        if (selectedPwd.length < 6) {
+            toast.error("Le mot de passe est trop court, il doit contenir au moins 6 caractères.");
+            return; 
+        }
         try {
             await axios.post('https://localhost:8000/api/Utilisateur',
                 {Role:selectedRoles, idPersonne:selectedId,username:selectedEmail,Password:selectedPwd},
@@ -87,18 +91,18 @@ const Nouveau = () => {
             
             <div className="card">
                 <div className="card-header">
-                    <h4 className="card-title">Choisisez le nouveax utilisateur</h4>
+                    <h4 className="card-title">Choisissez les nouveaux utilisateurs</h4>
                 </div>
                 <div className="card-body">
                     <div className="table-responsive">
                         <table className="table">
                             <thead className="text-dark">
                                 <tr>
-                                    <th className="text-left">Nom du Membre</th>
+                                    <th className="text-left">Nom du ,embre</th>
                                     <th className="text-left">Prénom</th>
                                     <th className="text-left">Téléphone</th>
                                     <th className="text-left">Email</th>
-                                    <th className="text-left">Dernière Cotisation Payée</th>
+                                    <th className="text-left">Situqtion</th>
                                     <th className="text-center">Cliquer pour choisir</th>
                                 </tr>
                             </thead>
@@ -132,7 +136,7 @@ const Nouveau = () => {
 
             <Modal show={showModal} onHide={() => setShowModal(false)} dialogClassName="modal-lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Ajout utilisateur</Modal.Title>
+                    <Modal.Title>Ajouter un utilisateur</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>Ajouter {selectedNom} parmi les utilisateurs.</p>
@@ -149,8 +153,8 @@ const Nouveau = () => {
                                 </div>
                                 <div className="col-md-6 pl-1">
                                     <div className="form-group">
-                                        <label>Password</label>
-                                        <input type="password" className="form-control" placeholder="À mémoriser" value={selectedPwd}  onChange={(e) => setSelectedPwd(e.target.value)} />
+                                        <label>mot de passe</label>
+                                        <input type="password" className="form-control" placeholder="mot de passe a mémoriser" value={selectedPwd}  onChange={(e) => setSelectedPwd(e.target.value)} />
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +162,7 @@ const Nouveau = () => {
                             <div className="row mt-4">
                                 <div className="col-md-12 pr-1">
                                     <div className="form-group texte-center"style={{  "marginLeft":"40%"}} >
-                                        <label style={{  "marginLeft":"10%"}} >Ses rôles</label>
+                                        <label style={{  "marginLeft":"10%"}} >Les rôles disponibles</label>
                                         <div>
                                             {Array.isArray(rolee) && rolee.length > 0 ? (
                                                 rolee.map(role => (
@@ -185,12 +189,11 @@ const Nouveau = () => {
 
 
 
-                            <button type='submit' className='btn btn-success'>Valider</button>
+                            <button type='submit' className='btn btn-success'>Confirmer le nouveau utilisateur</button>
                         </form>
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className="btn btn-success" >Payer</button>
                     <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Fermer</button>
                 </Modal.Footer>
             </Modal>

@@ -47,16 +47,16 @@ const ListeTypeDepense = () => {
       <div className="card">
         <ToastContainer />
               <div className="card-header">
-                <h4 className="card-title">Tous les Type Depense</h4>
+                <h4 className="card-title">Tous les Types de dépenses</h4>
               </div>
               <div className="card-body">
                 <div className="table-responsive">
                   <table className="table">
                     <thead className=" text-dark text-center">
-                      <th>
-                        Nom du TypeDepense
+                      <th className="text-left">
+                        Nom de la Type de dépense
                       </th>
-                      <th>
+                      <th className="text-center">
                         Supprimer
                       </th>
                     </thead>
@@ -64,11 +64,11 @@ const ListeTypeDepense = () => {
                         {Array.isArray(TypeDepense) ? (
                             TypeDepense.map(TypeDepense => (
                                 <tr key={TypeDepense.id} className="text-center">
-                                        <td>
+                                        <td className="text-left">
                                             {TypeDepense.motifDepense}
                                         </td>
                                         <td className="d-flex justify-content-center align-items-center">
-                                            <button className="btn btn-danger btn-block" style={{'width': '50%'}} onClick={(e) => SuppressionTypeDepense(e, TypeDepense.id)} ><i className="now-ui-icons shopping_basket"></i></button>
+                                            <button className="btn btn-danger btn-block" style={{'width': '25%'}} onClick={(e) => SuppressionTypeDepense(e, TypeDepense.id)} ><i className="now-ui-icons shopping_basket"></i></button>
                                         </td>
                                 </tr>
                             ) )

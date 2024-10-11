@@ -51,16 +51,16 @@ const ListeValle = () => {
         <ToastContainer />
       <div className="card">
               <div className="card-header">
-                <h4 className="card-title">Tous les Vallees</h4>
+                <h4 className="card-title">Tous les Vallées</h4>
               </div>
               <div className="card-body">
                 <div className="table-responsive">
                   <table className="table">
                     <thead className=" text-dark text-center">
-                      <th>
-                        Nom du Vallee
+                      <th className="text-left">
+                        Nom du Vallée
                       </th>
-                      <th>
+                      <th className="text-center">
                         Supprimer
                       </th>
                     </thead>
@@ -68,11 +68,11 @@ const ListeValle = () => {
                         {Array.isArray(valle) ? (
                             valle.map(vallee => (
                                 <tr key={vallee.id} className="text-center">
-                                        <td>
+                                        <td className="text-left">
                                             {vallee.nomVallee}
                                         </td>
                                         <td className="d-flex justify-content-center align-items-center">
-                                            <button className="btn btn-danger btn-block " style={{'width': '50%'}} onClick={(e) => SuppressionValle(e, vallee.id)} ><i className="now-ui-icons shopping_basket"></i></button>
+                                            <button className="btn btn-danger btn-block " style={{'width': '25%'}} onClick={(e) => SuppressionValle(e, vallee.id)} ><i className="now-ui-icons shopping_basket"></i></button>
                                         </td>
                                 </tr>
                             ) )

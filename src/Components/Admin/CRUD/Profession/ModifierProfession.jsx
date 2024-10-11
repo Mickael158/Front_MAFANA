@@ -45,7 +45,7 @@ const ModifierProfession = () => {
       <ToastContainer />
       <div className="card">
         <div className="card-header">
-          <h5 className="title">Modifier la Profession</h5>
+          <h5 className="title">Modifier une Profession</h5>
         </div>
         <div className="card-body">
           <form onSubmit={ModificationProfession}>
@@ -54,6 +54,7 @@ const ModifierProfession = () => {
                 <div className="form-group">
                   <label>Profession à modifier</label>
                   <select className="form-control" onChange={(e) => setIdProfession(e.target.value)}>
+                  <option className="form-control text-center">Choisir une profession</option>
                     {Array.isArray(Professions) ? (
                       Professions.map(Profession => (
                         <option className="form-control text-center" key={Profession.id} value={Profession.id}>

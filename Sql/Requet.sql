@@ -500,3 +500,16 @@ WITH personne_marier AS (
         OR personne_celibataire.telephone = 'RAZAFINDRAKOTO'
         OR personne_celibataire.telephone = 'RAZAFINDRAKOTO')
     AND personne_celibataire.id_village_id =1;
+
+
+
+select pm.* from personne_membre pm
+    JOIN Village v on v.id = pm.id_village_id
+    JOIN Genre g on g.id = pm.id_genre_id
+    JOIN personne_membre_profession pmp on pmp.id_personne_membre_id = pm.id
+    WHERE 1=1
+        AND (pm.nom_membre = 'RAZAFINDRAKOTO' OR pm.prenom_membre = 'Mickael' OR pm.telephone = '0343562462' OR pm.email='razafindrakoto77@gmail.com')
+        AND (v.id = 1)
+        AND (g.id = 1)
+        AND (pmp.id_profession_id = 1)
+        LIMIT 10;

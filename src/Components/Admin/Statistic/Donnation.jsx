@@ -25,7 +25,7 @@ const Donnation = () => {
     const [data, setData] = useState({
         labels: [],
         datasets: [{
-            label: "Email Stats",
+            label: "Donnation financier ",
             borderColor: "#18ce0f",
             pointBorderColor: "#FFF",
             pointBackgroundColor: "#18ce0f",

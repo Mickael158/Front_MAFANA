@@ -25,7 +25,6 @@ const ListeMembre = () => {
   const [Idvillage,setIdvillage] = useState(null);
   const [Village,setVillage] = useState('');
   const recherche =  () => {
-    console.log(Data , Idvillage );
     axios.post('https://localhost:8000/api/recherchePersonneIndep',{
         data: Data,
         village: Idvillage
@@ -228,7 +227,7 @@ const handleExport = async (event) => {
     <ToastContainer/>
       <div className="card">
           <div className="card-header">
-            <h4 className="card-title">Membre responsable</h4>
+            <h4 className="card-title">Membre résponsable</h4>
             <input 
               type="file" 
               className="form-control" 
@@ -240,7 +239,7 @@ const handleExport = async (event) => {
                 className="btn btn-warning" 
                 onClick={handleExport}
               >
-                Export
+                Exporter le fichier CSV ci-dessus
               </button>
             </div>
         </div>
@@ -252,7 +251,7 @@ const handleExport = async (event) => {
                         </div>
                         <div className="col-3">
                         <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
-                        <option>CHoisier un Village</option>
+                        <option>Choisir un Village</option>
                         {Array.isArray(Village) ? (
                             Village.map(Village => (
                                 <option key={Village.id} value={Village.id} className="form-control">
@@ -272,7 +271,7 @@ const handleExport = async (event) => {
                         Nom
                       </th>
                       <th className="text-left">
-                        Prenom
+                        Prénom
                       </th>
                       <th className="text-left">
                         Adresse
@@ -350,12 +349,12 @@ const handleExport = async (event) => {
             {/* Modal */}
             <Modal show={showModal} onHide={() => setShowModal(false)} dialogClassName="modal-lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Proffession de {selectedNom} {selectedIdProfession}</Modal.Title>
+                    <Modal.Title>Profession de {selectedNom} {selectedIdProfession}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Ajouter plus de proffession</p>
+                    <p>Ajouter plus de profession</p>
                         <select className="form-control" onChange={(e) => setSelectedIdProfession(e.target.value)}>
-                        <option className="form-control text-center">Choisez le proffession a ajouter</option>
+                        <option className="form-control text-center">Choisez la profession à ajouter</option>
                             {Array.isArray(Proffesion) ? (
                               Proffesion.map(pro => (
                                 <option className="form-control text-center" key={pro.id} value={pro.id}>
@@ -372,7 +371,7 @@ const handleExport = async (event) => {
                   <table className="table">
                     <thead className=" text-dark">
                       <th>
-                        Profession de {selectedNom}
+                        Les Professions de {selectedNom}
                       </th>
                     </thead>
                     <tbody>
@@ -398,13 +397,13 @@ const handleExport = async (event) => {
 
             <Modal show={showModaldece} onHide={() => setShowModalDece(false)} dialogClassName="modal-lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Personne decede {selectedNom} </Modal.Title>
+                    <Modal.Title>Personne décédé {selectedNom} </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Date de dece</p>
+                    <p>Date de décé</p>
                         <input type="date" className="form-control"  value={selectedDate} onChange={(e) => setSelectedDate(e.target.value)} />
                         <div className="form-group">
-                              <label>Nom de la personne à payer</label>
+                              <label>Nom de la personne décédé</label>
                               <input
                                   type="text"
                                   className="form-control"
@@ -415,18 +414,16 @@ const handleExport = async (event) => {
                           </div>
                         <div className="card">
                           <div className="card-header">
-                              <h4 className="card-title">Membre Responsable</h4>
+                              <h4 className="card-title">Membre de la famille</h4>
                           </div>
                           <div className="card-body">
                               <div className="table-responsive">
                                   <table className="table">
                                       <thead className="text-dark">
                                           <tr>
-                                              <th>Nom du Membre</th>
-                                              <th>Prénom</th>
-                                              <th>Téléphone</th>
-                                              <th>Email</th>
-                                              <th>Choisir</th>
+                                              <th className="text-left">Nom du Membre</th>
+                                              <th className="text-left">Prénom</th>
+                                              <th className="text-center">Choisir</th>
                                           </tr>
                                       </thead>
                                       <tbody>
@@ -436,11 +433,9 @@ const handleExport = async (event) => {
                                                 
                                                 return (
                                                     <tr key={index}>
-                                                        <td>{famille.nomMembre}</td>
-                                                        <td>{famille.prenomMembre}</td>
-                                                        <td>{famille.Telephone }</td>
-                                                        <td>{famille.Email}</td>
-                                                        <td>
+                                                        <td className="text-left">{famille.nomMembre}</td>
+                                                        <td className="text-left">{famille.prenomMembre}</td>
+                                                        <td className="text-center">
                                                             <button
                                                                 className="btn btn-danger"
                                                                 onClick={() => handleChoix(famille)}
@@ -462,33 +457,33 @@ const handleExport = async (event) => {
                       </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className="btn btn-success" onClick={Decede} >Declarer</button>
+                    <button className="btn btn-success" onClick={Decede} >Déclarer</button>
                     <button className="btn btn-secondary" onClick={() => setShowModalDece(false)}>Fermer</button>
                 </Modal.Footer>
             </Modal>
             <Modal show={ShowModalQuitte} onHide={() => setShowModalQuitte(false)} dialogClassName="modal-lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>{selectedNom} va vraiment quitter le groupe avec sa famille , Composer de : </Modal.Title>
+                    <Modal.Title>{selectedNom} vas vraiment quitter le groupe avec sa famille </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   <div className="table-responsive">
                     <table className="table">
                       <thead className=" text-dark">
-                        <th>
+                        <th className="text-left">
                           Nom
                         </th>
-                        <th>
-                          Prenom
+                        <th className="text-left">
+                          Prénom
                         </th>
                       </thead>
                       <tbody>
                           {Array.isArray(devisData) ? (
                               devisData.map(famille => (
                                   <tr key={famille.id}>
-                                    <td>
+                                    <td className="text-left">
                                         {famille.nomMembre}
                                     </td>
-                                    <td>
+                                    <td className="text-left">
                                         {famille.prenomMembre}
                                     </td>
                                   </tr>

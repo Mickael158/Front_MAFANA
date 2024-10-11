@@ -42,7 +42,7 @@ const InsertionTypeRevenu = () => {
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
                         <label>Nom du type de revenu</label>
-                        <input type="text" className="form-control"  placeholder="Nom du valle" value={nomTypeRevenu} onChange={(e) => setNomTypeRevenu(e.target.value)}/>
+                        <input type="text" className="form-control"  placeholder="Nom du type de revenus" value={nomTypeRevenu} onChange={(e) => setNomTypeRevenu(e.target.value)}/>
                       </div>
                     </div>
                     <div className="col-md-3 pr-1 mt-3">

@@ -47,15 +47,16 @@ const ModificationtypeEvenement = () => {
         <ToastContainer />
       <div className="card">
         <div className="card-header">
-          <h5 className="title">Modifier le type d Evenement</h5>
+          <h5 className="title">Modifier un type d'évènement</h5>
         </div>
         <div className="card-body">
           <form onSubmit={ModificationTypeEvenement}>
             <div className="row mb-5">
               <div className="col-md-5 pr-1">
                 <div className="form-group">
-                  <label>Vallée à modifier</label>
+                  <label>Type d'évènement à modifier</label>
                   <select className="form-control" onChange={(e) => setIdTypeEvenement(e.target.value)}>
+                    <option className="form-control text-center">Choir le Type d'évènement </option>
                     {Array.isArray(typeEvenement) ? (
                       typeEvenement.map(typeEvenements => (
                         <option className="form-control text-center" key={typeEvenements.id} value={typeEvenements.id}>
@@ -70,11 +71,11 @@ const ModificationtypeEvenement = () => {
               </div>
               <div className="col-md-5 pr-1">
                 <div className="form-group">
-                  <label>Nouveau Nom de lu type Evenement </label>
+                  <label>Nouveau Nom du Type d'évènement </label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Nom de la vallée"
+                    placeholder="Nouveau Nom du Type d'évènement"
                     value={typeEvenementModif}
                     onChange={(e) => setTypeEvenementModif(e.target.value)}
                   />

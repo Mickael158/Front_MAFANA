@@ -19,13 +19,13 @@ const Ressenssement = () => {
                     <div className="col-md-8 d-flex">
                     <button className="btn btn-warning btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
                   setPage(0);
-                }}>Liste</button>
+                }}>Liste Responsable</button>
+                <button className="btn btn-primary btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
+                setPage(1);
+              }}>Liste des membres</button>
                       <button className="btn btn-success btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
                   setPage(2);
                 }}>Nouveau</button>
-                        <button className="btn btn-primary btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
-                setPage(1);
-              }}>Modification</button>
               <button className="btn btn-info btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
                 setPage(3);
               }}>Famille</button>

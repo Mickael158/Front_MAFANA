@@ -35,15 +35,15 @@ const InsertionValle = () =>
       <ToastContainer />
       <div className="card">
               <div className="card-header">
-                <h5 className="title">Insertion Vallee</h5>
+                <h5 className="title">Insertion d'un Vallée</h5>
               </div>
               <div className="card-body">
                 <form onSubmit={insertionValle}>
                   <div className="row mb-5">
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
-                        <label>Nom du vallee</label>
-                        <input type="text" className="form-control"  placeholder="Nom du valle" value={nomValle} onChange={(e) => setNomValle(e.target.value)}/>
+                        <label>Nom de la vallée</label>
+                        <input type="text" className="form-control"  placeholder="Nom de la vallée" value={nomValle} onChange={(e) => setNomValle(e.target.value)}/>
                       </div>
                     </div>
                     <div className="col-md-3 pr-1 mt-3">

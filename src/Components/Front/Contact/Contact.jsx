@@ -13,11 +13,11 @@ const Contact = () => {
 },[]);
   return (
     <>
-      <div className="row pt-lg-6 w-75 m-auto" id="contact">
+      <div className="row pt-lg-6 w-80 m-auto" id="contact">
       <div className="col-lg-3">
-        <div className="position-sticky pb-lg-5 pb-3 mt-lg-0 mt-5 ps-2" style={{'top': '100px'}}>
-          <h3 className="text-info"><i className="fas fa-mail-bulk align-items-center justity-content-center"> </i>  Nos contacter</h3>
-          <h6 className="text-secondary font-weight-normal pe-3">Vous pouvez nos contacter directement par ses information ou nos envoyer un par via a le site</h6>
+        <div className="position-sticky pb-lg-5 pb-3 mt-lg-0 mt-5 ps-1" style={{'top': '100px'}}>
+          <h3 className="text-info"><i className="fas fa-mail-bulk align-items-center justity-content-center"> </i>  Nos contacte</h3>
+          <h6 className="text-secondary font-weight-normal pe-3">Vous pouvez nous contactez dirèctement par ses informations </h6>
         </div>
       </div>
       <div className="col-lg-9">
@@ -32,14 +32,14 @@ const Contact = () => {
               <ul className="nav nav-pills nav-fill flex-row p-1" role="tablist">
                 <li className="nav-item">
                   <a className="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#preview-features-1" role="tab" aria-controls="preview" aria-selected="true">
-                  <i className="fas fa-info-circle text-sm me-2"></i> Contacter directement
+                  <i className="fas fa-info-circle text-sm me-2"></i> Contactez-nous dirèctement
                   </a>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <a className="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#code-features-1" role="tab" aria-controls="code" aria-selected="false">
                     <i className="fas fa-desktop text-sm me-2"></i> Contacter via le site
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
@@ -50,9 +50,9 @@ const Contact = () => {
           <div className="container">
             <div className="row ">
               <div className="col-lg-12 m-auto text-center">
-                <h3 className="pt-4 mt-lg-0">Boite de reception de l association</h3>
+                <h3 className="pt-4 mt-lg-0">Boite de récéption de l'association</h3>
                 <p className="pe-5">La reponse de vos message peu prendre du temps</p>
-                <p  className="text-primary icon-move-right ">voici les contactes
+                <p  className="text-primary icon-move-right ">voici nos contactes
                   <i className="fas fa-arrow-right text-sm ms-1"></i>
                 </p>
               </div>
@@ -94,7 +94,7 @@ const Contact = () => {
             </div>
           </div>
         </div>
-        <div className="tab-pane" id="code-features-1">
+        {/* <div className="tab-pane" id="code-features-1">
           <div className="container py-4">
             <div className="row">
               <div className="col-lg-7 mx-auto d-flex justify-content-center flex-column">
@@ -141,7 +141,7 @@ const Contact = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   </div>

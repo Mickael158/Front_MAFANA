@@ -56,12 +56,13 @@ const InsertionPrixCharge = () => {
                   <div className="row mb-5">
                     <div className="col-md-4 pr-1">
                       <div className="form-group">
-                        <label>Nom Charge</label>
+                        <label>Nom du Charge</label>
                         <select 
                       className="form-control" 
                       value={idCharge} 
                       onChange={(e) => setIdCharge(e.target.value)}
                     >
+                      <option className="form-control text-center">choisir la charge</option>
                       {Array.isArray(Charge) ? (
                         Charge.map((charges) => (
                           <option className="form-control" key={charges.id} value={charges.id}>

@@ -57,7 +57,7 @@ const InsertionVillage = () => {
       <div>
         <div className="card">
           <div className="card-header">
-            <h5 className="title">Inserer nouveau Village</h5>
+            <h5 className="title">Inserer un nouveau Village</h5>
           </div>
           <div className="card-body">
             <form onSubmit={InsertionVillage}>
@@ -76,12 +76,13 @@ const InsertionVillage = () => {
                 </div>
                 <div className="col-md-5 pr-1">
                   <div className="form-group">
-                    <label>Nom du vallee correspondant</label>
+                    <label>Nom du vallée correspondant</label>
                     <select 
                       className="form-control" 
                       value={idValle} 
                       onChange={(e) => setIdValle(e.target.value)}
                     >
+                      <option className="text-center">Choisir un vallée</option>
                       {Array.isArray(vallees) ? (
                         vallees.map((vallee) => (
                           <option className="form-control text-center" key={vallee.id} value={vallee.id}>

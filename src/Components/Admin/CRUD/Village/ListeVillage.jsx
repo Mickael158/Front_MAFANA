@@ -57,13 +57,13 @@ const ListeVillage = () => {
                 <div className="table-responsive">
                   <table className="table">
                     <thead className=" text-dark text-center">
-                      <th>
-                        Nom du Villagee
+                      <th className="text-left">
+                        Nom du Village
                       </th>
-                      <th>
+                      <th className="text-left">
                         Nom du Valle
                       </th>
-                      <th>
+                      <th className="text-center">
                         Supprimer
                       </th>
                     </thead>
@@ -71,14 +71,14 @@ const ListeVillage = () => {
                         {Array.isArray(village) ? (
                             village.map(villagee => (
                                 <tr key={villagee.id} className="text-center">
-                                        <td>
+                                        <td  className="text-left">
                                             {villagee.nomVillage}
                                         </td>
-                                        <td>
+                                        <td  className="text-left">
                                             {villagee.idVallee.Nom_Vallee}
                                         </td>
                                         <td className="d-flex justify-content-center align-items-center">
-                                            <button className="btn btn-danger btn-block" style={{'width': '50%'}} onClick={(e) => SuppressionVillage(e, villagee.id)} ><i className="now-ui-icons shopping_basket"></i></button>
+                                            <button className="btn btn-danger btn-block" style={{'width': '25%'}} onClick={(e) => SuppressionVillage(e, villagee.id)} ><i className="now-ui-icons shopping_basket"></i></button>
                                         </td>
                                 </tr>
                             ) )

@@ -48,19 +48,19 @@ const ListeMateriel = () => {
       <div className="card">
         <ToastContainer />
               <div className="card-header">
-                <h4 className="card-title">Tous les Materiel</h4>
+                <h4 className="card-title">Tous les Matériels</h4>
               </div>
               <div className="card-body">
                 <div className="table-responsive">
                   <table className="table">
                     <thead className=" text-dark text-center">
-                      <th>
-                        Nom du Materiel
+                      <th className="text-left">
+                        Nom du Matériel
                       </th>
-                      <th>
-                        Categorie
+                      <th className="text-left">
+                        Catégorie
                       </th>
-                      <th>
+                      <th className="text-center">
                         Supprimer
                       </th>
                     </thead>
@@ -68,14 +68,14 @@ const ListeMateriel = () => {
                         {Array.isArray(Materiel) ? (
                             Materiel.map(Materiels => (
                                 <tr key={Materiels.id} className="text-center">
-                                        <td>
+                                        <td className="text-left">
                                             {Materiels.NomMateriel}
                                         </td>
-                                        <td>
+                                        <td className="text-left">
                                             {Materiels.idCategorieMateriel.Nom_Categorie}
                                         </td>
                                         <td className="d-flex justify-content-center align-items-center">
-                                            <button className="btn btn-danger btn-block" style={{'width': '50%'}} onClick={(e) => SuppressionMateriel(e, Materiels.id)} ><i className="now-ui-icons shopping_basket"></i></button>
+                                            <button className="btn btn-danger btn-block" style={{'width': '25%'}} onClick={(e) => SuppressionMateriel(e, Materiels.id)} ><i className="now-ui-icons shopping_basket"></i></button>
                                         </td>
                                 </tr>
                             ) )

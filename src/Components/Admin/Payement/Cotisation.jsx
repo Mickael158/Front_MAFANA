@@ -23,6 +23,10 @@ const Cotisation = () => {
         });
     };
     const VoireDevis = () => {
+        if (mois <= 0) {
+            toast.error("Le mois doit être supérieur à 0.");
+            return; // Arrêter l'exécution si le mois est invalide
+        }
         axios.get(`https://localhost:8000/api/Devis/${selectedId}/${mois}`,{
             headers:
             {
@@ -122,24 +126,24 @@ const Cotisation = () => {
                         <table className="table">
                             <thead className="text-dark">
                                 <tr>
-                                    <th>Nom du Membre</th>
-                                    <th>Prénom</th>
-                                    <th>Téléphone</th>
-                                    <th>Email</th>
-                                    <th>Dernière Cotisation Payée</th>
-                                    <th>Cliquer pour choisir</th>
+                                    <th className="text-left">Nom du Membre</th>
+                                    <th className="text-left">Prénom</th>
+                                    <th className="text-left">Téléphone</th>
+                                    <th className="text-left">Email</th>
+                                    <th className="text-left">Situation</th>
+                                    <th className="text-center">Cliquer pour choisir</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {Array.isArray(Membre) ? (
                                     Membre.map(member => (
                                         <tr key={member.id}>
-                                            <td>{member.nom_membre}</td>
-                                            <td>{member.prenom_membre}</td>
-                                            <td>{member.telephone}</td>
-                                            <td>{member.email}</td>
-                                            <td>{member.situation}</td>
-                                            <td>
+                                            <td className="text-left">{member.nom_membre}</td>
+                                            <td className="text-left">{member.prenom_membre}</td>
+                                            <td className="text-left">{member.telephone}</td>
+                                            <td className="text-left">{member.email}</td>
+                                            <td className="text-left">{member.situation}</td>
+                                            <td className="text-center">
                                                 <button
                                                     className="btn btn-danger"
                                                     

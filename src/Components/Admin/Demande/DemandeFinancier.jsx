@@ -26,6 +26,15 @@ const DemandeFinancier = () => {
     };
     const DemandeFinancier = (event) => {
         event.preventDefault();
+        if (!selectedId) {
+            toast.error("La personne de la personne est requis.");
+            return; 
+        }
+    
+        if (montant <= 0) {
+            toast.error("Le montant doit être infierieur ou égale à 0.");
+            return; 
+        }
         try{
             
              axios.post(` https://localhost:8000/api/DemandeFinancier`,{id_personne_membre_id : selectedId, montant : montant, motif: motif },
@@ -52,14 +61,14 @@ const DemandeFinancier = () => {
         <ToastContainer />
                 <div className="card">
                     <div className="card-header">
-                        <h5 className="title">Faire des demandes financier</h5>
+                        <h5 className="title">Faire un demande financié</h5>
                     </div>
                     <div className="card-body">
                         <form onSubmit={DemandeFinancier}>
                             <div className="row mb-5">
                                 <div className="col-md-6 pr-1">
                                     <div className="form-group">
-                                        <label>Nom de la personne à payer</label>
+                                        <label>Nom de la personne qui demande</label>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -87,7 +96,7 @@ const DemandeFinancier = () => {
                                         type="submit"
                                         disabled={!selectedNom}
                                     >
-                                        Voire devis
+                                        Envoyer le demande
                                     </button>
                                 </div>
                             </div>
@@ -109,7 +118,7 @@ const DemandeFinancier = () => {
                                     <th>Prénom</th>
                                     <th>Téléphone</th>
                                     <th>Email</th>
-                                    <th>Dernière Cotisation Payée</th>
+                                    <th>Dérnière Cotisation Payée</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -128,7 +137,7 @@ const DemandeFinancier = () => {
                                                     style={{ width: '50%' }}
                                                     onClick={() => handleSelectMember(member)}
                                                 >
-                                                    Choisir
+                                                    <i className="now-ui-icons gestures_tap-01 fs-5"></i>
                                                 </button>
                                             </td>
                                         </tr>

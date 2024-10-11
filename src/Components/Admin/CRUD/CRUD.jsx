@@ -27,14 +27,14 @@ const CRUD = () => {
               </div>
               <div className="card-body all-icons">
                 <div className="row">
-                  <div className="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6"
+                <div className="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6"
                   onClick={() => {
                     setPage(0);
                   }}
                   >
                     <div className="font-icon-detail">
-                      <i className="now-ui-icons location_pin fs-2"></i>
-                      <p className="fs-6">Village</p>
+                      <i className="now-ui-icons media-1_album fs-2"></i>
+                      <p className="fs-6">Vallée</p>
                     </div>
                   </div>
                   <div className="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6"
@@ -43,10 +43,11 @@ const CRUD = () => {
                   }}
                   >
                     <div className="font-icon-detail">
-                      <i className="now-ui-icons media-1_album fs-2"></i>
-                      <p className="fs-6">Valler</p>
+                      <i className="now-ui-icons location_pin fs-2"></i>
+                      <p className="fs-6">Village</p>
                     </div>
                   </div>
+                  
                   <div className="font-icon-list col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xs-6"
                   onClick={() => {
                     setPage(2);
@@ -142,8 +143,8 @@ const CRUD = () => {
                 </div>
               </div>
             </div>
-            {page === 0 && <Village />}
-            {page === 1 && <Vallee />}
+            {page === 0 && <Vallee />}
+            {page === 1 && <Village />}           
             {page === 2 && <TypeEvenement />}
             {page === 4 && <TypeRevenu />}
             {page === 6 && <Role />}

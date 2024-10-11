@@ -42,8 +42,8 @@ const InsertionProfession = () =>
                   <div className="row mb-5">
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
-                        <label>Nom du Professione</label>
-                        <input type="text" className="form-control"  placeholder="Nom du Profession" value={nomProfession} onChange={(e) => setNomProfession(e.target.value)}/>
+                        <label>Nom de la Profession</label>
+                        <input type="text" className="form-control"  placeholder="Nom de la Profession" value={nomProfession} onChange={(e) => setNomProfession(e.target.value)}/>
                       </div>
                     </div>
                     <div className="col-md-3 pr-1 mt-3">

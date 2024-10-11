@@ -94,13 +94,13 @@ const Association = () => {
                   <div className="row">
                     <div className="col-md-6 px-1">
                       <div className="form-group">
-                        <label>Nom</label>
+                        <label>Nom de l'association</label>
                         <input type="text" className="form-control" placeholder="Date debut" value={Nom} onChange={(e) => setNom(e.target.value)}/>
                       </div>
                     </div>
                     <div className="col-md-6 px-1">
                       <div className="form-group">
-                        <label>Siege</label>
+                        <label>Siège</label>
                         <input type="text" className="form-control" placeholder="Date debut" value={Siege} onChange={(e) => setSiege(e.target.value)}/>
                       </div>
                     </div>
@@ -112,13 +112,13 @@ const Association = () => {
                     </div>
                     <div className="col-md-6 px-1">
                       <div className="form-group">
-                        <label>Secteur d activite</label>
+                        <label>Secteur d'activité</label>
                         <input type="text" className="form-control" placeholder="Date debut" value={Secteur_activite} onChange={(e) => setSecteur_activite(e.target.value)}/>
                       </div>
                     </div>
                     <div className="col-md-6 px-1">
                       <div className="form-group">
-                        <label>Telephone</label>
+                        <label>Téléphone</label>
                         <input type="text" className="form-control" placeholder="Date debut" value={Telephone} onChange={(e) => setTelephone(e.target.value)}/>
                       </div>
                     </div>
@@ -130,7 +130,7 @@ const Association = () => {
                     </div>
                     <div className="col-md-6 px-1">
                       <div className="form-group">
-                        <label>Slogna</label>
+                        <label>Slogan</label>
                         <input type="text" className="form-control" placeholder="Date debut" value={Slogan} onChange={(e) => setSlogan(e.target.value)}/>
                       </div>
                     </div>
@@ -142,7 +142,7 @@ const Association = () => {
                     </div>
                     <div className="col-md-12 px-1">
                       <div className="form-group">
-                        <label>Description</label>
+                        <label>Déscription</label>
                         <textarea type="text" className="form-control" placeholder="Date debut" value={Description} onChange={(e) => setDescription(e.target.value)}></textarea>
                       </div>
                     </div> 

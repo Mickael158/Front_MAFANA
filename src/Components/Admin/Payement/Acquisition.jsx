@@ -67,7 +67,7 @@ const Acquisition = () => {
     <>
       <div className="card">
                 <div className="card-header">
-                    <h4 className="card-title">Tous les don materiel</h4>
+                    <h4 className="card-title">Tous les dons matériels</h4>
                     <div className="col-md-8 d-flex">
                             <button className="btn btn-warning btn-block" style={{ width: '50%' }} type="button" onClick={exportToExcel}>
                                 Exporter en Excel
@@ -82,7 +82,7 @@ const Acquisition = () => {
                         </div>
                         <div className="col-3">
                         <select className="form-control" value={ IdMateriel } onChange={(e) => setIdMateriel(e.target.value)}>
-                        <option>CHoisier un Village</option>
+                        <option>Choisir un village</option>
                         {Array.isArray(Materiel) ? (
                             Materiel.map(materiel => (
                                 <option key={materiel.id} value={materiel.id} className="form-control">
@@ -105,10 +105,11 @@ const Acquisition = () => {
                         <table className="table">
                             <thead className="text-dark">
                                 <tr>
-                                    <th className="text-left">Nom Donnateur</th>
-                                    <th className="text-left">Materiel</th>
-                                    <th className="text-left">Nombre</th>
-                                    <th className="text-left">Date de payement</th>
+                                    <th className="text-left">Nom du Donateur</th>
+                                    <th className="text-left">Matériel</th>
+                                    <th className="text-left">Date de donation</th>
+                                    <th className="text-center">Nombres</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -122,12 +123,12 @@ const Acquisition = () => {
                                             {acquisition.nom_materiel}
                                         </td>
                                         <td className="text-left">
+                                        {new Date(acquisition.date_acquisition).toISOString().split('T')[0]}
+                                        </td>
+                                        <td className="text-center">
                                             {acquisition.nombre}
                                         </td>
-                                        <td className="text-left">
-                                        {new Date(acquisition.date_acquisition).toISOString().split('T')[0]}
-                                            
-                                        </td>
+                                        
                                 </tr>
                             ) )
                         ) : ( <tr><td>Null</td></tr>) }

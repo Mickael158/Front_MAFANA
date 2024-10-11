@@ -11,7 +11,7 @@ const Materiel = () => {
       <div className="card">
               <div className="card-header">
                 <div className="row">
-                    <div className="col-md-4"><h4 className="card-title"> Materiel</h4></div>
+                    <div className="col-md-4"><h4 className="card-title"> Matériel</h4></div>
                     <div className="col-md-8 d-flex">
                         <button className="btn btn-info btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
                 setPage(0);

@@ -37,14 +37,14 @@ const InsertionCategorie = () =>
       <ToastContainer />
       <div className="card">
               <div className="card-header">
-                <h5 className="title">Insertion Categorie</h5>
+                <h5 className="title">Insertion Catégorie</h5>
               </div>
               <div className="card-body">
                 <form onSubmit={insertionCategorie}>
                   <div className="row mb-5">
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
-                        <label>Nom du Categoriee</label>
+                        <label>Nom de la Catégorie</label>
                         <input type="text" className="form-control"  placeholder="Nom du Categorie" value={nomCategorie} onChange={(e) => setNomCategorie(e.target.value)}/>
                       </div>
                     </div>

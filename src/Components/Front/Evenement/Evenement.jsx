@@ -100,7 +100,7 @@ const Evenement = () => {
               </div>
             ))
           ) : (
-            <h1>Aucun evenement à venir</h1>
+            <h1>Aucun évènement à venir</h1>
           )}
         
       </div>

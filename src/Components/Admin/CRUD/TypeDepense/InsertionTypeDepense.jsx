@@ -35,15 +35,15 @@ const InsertionTypeDepense = () =>
       <ToastContainer />
       <div className="card">
               <div className="card-header">
-                <h5 className="title">Insertion Type Depense</h5>
+                <h5 className="title">Insertion Type de dépense</h5>
               </div>
               <div className="card-body">
                 <form onSubmit={insertionTypeDInsertionTypeDepense}>
                   <div className="row mb-5">
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
-                        <label>Nom du TypeDepensee</label>
-                        <input type="text" className="form-control"  placeholder="Nom du TypeDepense" value={TypeDepense} onChange={(e) => setTypeDepense(e.target.value)}/>
+                        <label>Nom de la type de dépensee</label>
+                        <input type="text" className="form-control"  placeholder="Nom de la Type de dépense" value={TypeDepense} onChange={(e) => setTypeDepense(e.target.value)}/>
                       </div>
                     </div>
                     <div className="col-md-3 pr-1 mt-3">

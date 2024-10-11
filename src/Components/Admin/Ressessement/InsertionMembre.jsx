@@ -133,14 +133,14 @@ const InsertionMembre = () =>
                   <div className="row mb-5">
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
-                        <label>Nom Membre</label>
+                        <label>Nom du Membre</label>
                         <input type="text" className="form-control"  placeholder="Nom" value={ PersonneMembre.Nom } onChange={(e) => setPersonneMembre({...PersonneMembre,Nom : e.target.value,})}/>
                       </div>
                     </div>
 
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
-                        <label>Prenom Membre</label>
+                        <label>Prénom du Membre</label>
                         <input type="text" className="form-control"  placeholder="Prenom" value={ PersonneMembre.Prenom } onChange={(e) => setPersonneMembre({...PersonneMembre,Prenom : e.target.value,})}/>
                       </div>
                     </div>
@@ -168,7 +168,7 @@ const InsertionMembre = () =>
 
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
-                        <label>Telephone</label>
+                        <label>Téléphone</label>
                         <input className="form-control"  placeholder="Numero de telephone" value={ PersonneMembre.Telephone } onChange={(e) => setPersonneMembre({...PersonneMembre,Telephone : e.target.value,})}/>
                       </div>
                     </div>
@@ -177,7 +177,7 @@ const InsertionMembre = () =>
                       <div className="form-group">
                       <label>Genre</label>
                         <select className="form-control" value={ PersonneMembre.IdGenre } onChange={(e) => setPersonneMembre({...PersonneMembre,IdGenre : e.target.value,})}>
-                        <option>CHoisier Genre</option>
+                        <option>Choisir le Genre</option>
                         {Array.isArray(Genre) ? (
                             Genre.map(Genre => (
                                 <option key={Genre.id} value={Genre.id} clasName="form-control">
@@ -193,7 +193,7 @@ const InsertionMembre = () =>
                       <div className="form-group">
                       <label>Village</label>
                         <select className="form-control" value={ PersonneMembre.IdVillage } onChange={(e) => setPersonneMembre({...PersonneMembre,IdVillage : e.target.value,})}>
-                        <option>CHoisier un Village</option>
+                        <option>Choisir un village</option>
                         {Array.isArray(Village) ? (
                             Village.map(Village => (
                                 <option key={Village.id} value={Village.id} className="form-control">

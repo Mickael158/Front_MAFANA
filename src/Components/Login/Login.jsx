@@ -78,7 +78,7 @@ const Login = () => {
           <div className="card z-index-0 fadeIn3 fadeInBottom">
             <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div className="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
-                <h4 className="text-white font-weight-bolder text-center mb-0">S identifiez</h4>
+                <h4 className="text-white font-weight-bolder text-center mb-0">S'identifiez</h4>
                 <div className="row mt-3">
                   <div className="col-2 text-center ms-auto">
                     <a className="btn btn-link px-3" href="javascript:;">

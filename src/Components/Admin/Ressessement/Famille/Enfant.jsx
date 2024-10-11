@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const Enfant = () => {
     const [Pere,setPere] = useState('');
@@ -51,11 +53,11 @@ const Enfant = () => {
         },
         
       );
-      console.log("Enfant inserer");
+      toast.success("Félicitation Enfant inserer");
     }
     catch(error)
     {
-      console.error('Erreur d\'insertion' , error)
+      toast.error('Erreur d\'insertion' , error);
     }
     }
 
@@ -67,10 +69,11 @@ const Enfant = () => {
         <>  
         <form onSubmit={submit}>
         <div className="col-md-5 pr-1">
+        <ToastContainer/>
             <div className="form-group">
-                <label>Pere et Mere</label>
+                <label>Père et Mère</label>
                 <select className="form-control" value={ Pere } onChange={(e) => setPere(e.target.value)}>
-                <option>Choisisez le parant</option> 
+                <option>Choisisez les parents</option> 
                     {Array.isArray(PereEnfant) ? (
                         PereEnfant.map(PereEnfant => (
                             <option key={PereEnfant['id']} value={PereEnfant['id']} >
@@ -85,7 +88,7 @@ const Enfant = () => {
             <div className="form-group">
                 <label>Enfant</label>
                 <select className="form-control" value={ PersonneEnfant } onChange={(e) => setPersonneEnfant(e.target.value)}>
-                <option>Choisisez le l enfant</option> 
+                <option>Choisisez l'enfant</option> 
                     {Array.isArray(Enfant) ? (
                         Enfant.map(Enfant => (
                             <option key={Enfant.id} value={Enfant.id} >
@@ -96,7 +99,7 @@ const Enfant = () => {
                 </select>
             </div>
         </div>  
-        <button class="btn btn-outline-success" type="submit">Valider</button> 
+        <button className="btn btn-outline-success" type="submit">Valider</button> 
         </form>     
         </>
     )

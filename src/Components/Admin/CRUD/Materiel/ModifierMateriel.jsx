@@ -45,7 +45,7 @@ const ModifierMateriel = () => {
       <ToastContainer />
       <div className="card">
         <div className="card-header">
-          <h5 className="title">Modifier la Materiel</h5>
+          <h5 className="title">Modifier une Matériel</h5>
         </div>
         <div className="card-body">
           <form onSubmit={ModificationMateriel}>
@@ -53,7 +53,9 @@ const ModifierMateriel = () => {
               <div className="col-md-5 pr-1">
                 <div className="form-group">
                   <label>Materiel à modifier</label>
+                  
                   <select className="form-control" onChange={(e) => setIdMateriel(e.target.value)}>
+                  <option className="form-control text-center">Choisir un matériel</option>
                     {Array.isArray(Materiel) ? (
                       Materiel.map(Materiel => (
                         <option className="form-control text-center" key={Materiel.id} value={Materiel.id}>
@@ -68,11 +70,11 @@ const ModifierMateriel = () => {
               </div>
               <div className="col-md-5 pr-1">
                 <div className="form-group">
-                  <label>Nom de la Materiel</label>
+                  <label>Nom de la Matériel</label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Nom de la Materiel"
+                    placeholder="Nom de la Matériel"
                     value={MaterielModif}
                     onChange={(e) => setMaterielModif(e.target.value)}
                   />

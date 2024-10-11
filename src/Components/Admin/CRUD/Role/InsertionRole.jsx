@@ -35,15 +35,15 @@ const InsertionRole = () => {
       <ToastContainer />
       <div className="card">
               <div className="card-header">
-                <h5 className="title">Insertion Role</h5>
+                <h5 className="title">Insertion rôle</h5>
               </div>
               <div className="card-body">
                 <form onSubmit={insertionRole}>
                   <div className="row mb-5">
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
-                        <label>Nom du role</label>
-                        <input type="text" className="form-control"  placeholder="Nom du Role" value={nomRole} onChange={(e) => setNomRole(e.target.value)}/>
+                        <label>Nom du rôle</label>
+                        <input type="text" className="form-control"  placeholder="Nom du rôle" value={nomRole} onChange={(e) => setNomRole(e.target.value)}/>
                       </div>
                     </div>
                     <div className="col-md-3 pr-1 mt-3">

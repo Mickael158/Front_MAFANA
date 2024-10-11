@@ -45,15 +45,16 @@ const ModificationTyeDepense = () => {
       <ToastContainer />
       <div className="card">
         <div className="card-header">
-          <h5 className="title">Modifier la TypeDepense</h5>
+          <h5 className="title">Modifier une type de dépense</h5>
         </div>
         <div className="card-body">
           <form onSubmit={ModificationTypeDepense}>
             <div className="row mb-5">
               <div className="col-md-5 pr-1">
                 <div className="form-group">
-                  <label>TypeDepense à modifier</label>
+                  <label>Type de dépense à modifier</label>
                   <select className="form-control" onChange={(e) => setIdTypeDepense(e.target.value)}>
+                  <option className="form-control text-center">Choisir une type de dépense</option>
                     {Array.isArray(TypeDepenses) ? (
                       TypeDepenses.map(TypeDepense => (
                         <option className="form-control text-center" key={TypeDepense.id} value={TypeDepense.id}>
@@ -68,7 +69,7 @@ const ModificationTyeDepense = () => {
               </div>
               <div className="col-md-5 pr-1">
                 <div className="form-group">
-                  <label>Nom de la TypeDepense</label>
+                  <label>Nom de la Type de dépense</label>
                   <input
                     type="text"
                     className="form-control"

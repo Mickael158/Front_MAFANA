@@ -49,16 +49,16 @@ const ListeRole = () => {
     <ToastContainer />
       <div className="card">
               <div className="card-header">
-                <h4 className="card-title"> Simple Table</h4>
+                <h4 className="card-title"> Liste de tous les rôles</h4>
               </div>
               <div className="card-body">
                 <div className="table-responsive">
                   <table className="table">
                     <thead className=" text-dark text-center">
-                      <th>
-                        Nom du rolee
+                      <th className="text-left">
+                        Nom du rôle
                       </th>
-                      <th>
+                      <th className="text-center">
                         Supprimer
                       </th>
                     </thead>
@@ -66,11 +66,11 @@ const ListeRole = () => {
                         {Array.isArray(rolee) ? (
                             rolee.map(rolees => (
                                 <tr key={rolees.id} className="text-center">
-                                        <td>
+                                        <td className="text-left">
                                             {rolees.nomRole}
                                         </td>
                                         <td className="d-flex justify-content-center align-items-center">
-                                            <button className="btn btn-danger btn-block " style={{'width': '50%'}} onClick={(e) => SuppressionRole(e, rolees.id)} ><i className="now-ui-icons shopping_basket"></i></button>
+                                            <button className="btn btn-danger btn-block " style={{'width': '25%'}} onClick={(e) => SuppressionRole(e, rolees.id)} ><i className="now-ui-icons shopping_basket"></i></button>
                                         </td>
                                 </tr>
                             ) )

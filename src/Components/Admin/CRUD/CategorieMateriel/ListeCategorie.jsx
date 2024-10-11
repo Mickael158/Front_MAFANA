@@ -7,7 +7,7 @@ const ListeCategorie = () => {
   const [Categorie,setCategorie] = useState('');
   const token = localStorage.getItem("token");
   const ListeCategorie = () => {
-    axios.get('https://localhost:8000/api/Categorie',{
+    axios.get('https://localhost:8000/api/Categories',{
       headers:
       {
         'Authorization' : `Bearer ${token}`
@@ -49,16 +49,16 @@ const ListeCategorie = () => {
         <ToastContainer />
       <div className="card">
               <div className="card-header">
-                <h4 className="card-title">Tous les  Categorie</h4>
+                <h4 className="card-title">Tous les  Catégories Matériels</h4>
               </div>
               <div className="card-body">
                 <div className="table-responsive">
                   <table className="table">
                     <thead className=" text-dark text-center">
-                      <th>
+                      <th className="text-left">
                         Nom du Categorie
                       </th>
-                      <th>
+                      <th className="text-center">
                         Supprimer
                       </th>
                     </thead>
@@ -66,11 +66,11 @@ const ListeCategorie = () => {
                         {Array.isArray(Categorie) ? (
                             Categorie.map(Categorie => (
                                 <tr key={Categorie.id} className="text-center">
-                                        <td>
+                                        <td className="text-left">
                                             {Categorie.nomCategorie}
                                         </td>
                                         <td className="d-flex justify-content-center align-items-center">
-                                            <button className="btn btn-danger btn-block" style={{'width': '50%'}} onClick={(e) => SuppressionCategorie(e, Categorie.id)} ><i className="now-ui-icons shopping_basket"></i></button>
+                                            <button className="btn btn-danger btn-block" style={{'width': '25%'}} onClick={(e) => SuppressionCategorie(e, Categorie.id)} ><i className="now-ui-icons shopping_basket"></i></button>
                                         </td>
                                 </tr>
                             ) )

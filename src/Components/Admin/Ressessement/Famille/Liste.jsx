@@ -23,27 +23,27 @@ const Liste = () => {
             <div className="table-responsive">
                   <table className="table">
                     <thead className=" text-dark">
-                      <th>
-                        Mari
+                      <th className="text-left">
+                        Le Mari
                       </th>
-                      <th>
-                        Femme
+                      <th className="text-left">
+                        La Femme
                       </th>
-                      <th>
-                        Nombre d enfant
+                      <th className="text-right">
+                        Nombre d'enfant
                       </th>
                     </thead>
                     <tbody>
                     {Mariage.length > 0 ? (
                         Mariage.map((item, index) => (
                             <tr key={index}>
-                                <td>
+                                <td className="text-left">
                                     {item.mariage.idMari.Nom_Membre} {item.mariage.idMari.Prenom_Membre}
                                 </td>
-                                <td>
+                                <td className="text-left">
                                     {item.mariage.idMarie.Nom_Membre} {item.mariage.idMarie.Prenom_Membre}
                                 </td>
-                                <td>{item.enfant}</td>
+                                <td className="text-right">{item.enfant}</td>
                             </tr>
                         ))
                     ) : (
