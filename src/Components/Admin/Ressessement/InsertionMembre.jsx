@@ -42,7 +42,8 @@ const InsertionMembre = () =>
     Telephone : '',
     IdVillage : '',
     IdGenre : '',
-    DateNaissance : ''
+    DateNaissance : '',
+    DateInscription : ''
   });
   const insertionMembre = (event) => 
     {
@@ -54,6 +55,9 @@ const InsertionMembre = () =>
       // Regex pour valider le téléphone (10 chiffres)
       const phoneRegex = /^\d{10}$/;
 
+      const today = new Date();
+
+      
       // Vérification des champs
       if (!PersonneMembre.Nom || !nameRegex.test(PersonneMembre.Nom)) {
           toast.error("Le nom doit contenir uniquement des lettres");
@@ -76,6 +80,18 @@ const InsertionMembre = () =>
           toast.error("Tous les champs doivent être remplis");
           return;
       }
+      const dateNaissance = new Date(PersonneMembre.DateNaissance);
+      const dateInscription = new Date(PersonneMembre.DateInscription);
+    
+      if (dateNaissance > today) {
+          toast.error("La date de naissance ne peut pas être dans le futur");
+          return;
+      }
+    
+      if (dateInscription > today) {
+          toast.error("La date d'inscription ne peut pas être dans le futur");
+          return;
+      }
       try
       {
         axios.post('https://127.0.0.1:8000/api/Personne',
@@ -87,7 +103,8 @@ const InsertionMembre = () =>
           Telephone : PersonneMembre.Telephone,
           DateNaissance : PersonneMembre.DateNaissance,
           IdGenre : PersonneMembre.IdGenre,
-          IdVillage : PersonneMembre.IdVillage 
+          IdVillage : PersonneMembre.IdVillage, 
+          DateInscription: PersonneMembre.DateInscription
         },
         {
           headers: 
@@ -107,7 +124,8 @@ const InsertionMembre = () =>
         Telephone: '',
         IdVillage: '',
         IdGenre: '',
-        DateNaissance: ''
+        DateNaissance: '',
+        DateInscription: '',
       });
     }
     catch(error)
@@ -161,6 +179,13 @@ const InsertionMembre = () =>
 
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
+                        <label>Date d' Inscription</label>
+                        <input type="date" className="form-control"  placeholder="Date d'Inscription" value={ PersonneMembre.DateInscription } onChange={(e) => setPersonneMembre({...PersonneMembre,DateInscription : e.target.value})}/>
+                      </div>
+                    </div>
+
+                    <div className="col-md-5 pr-1">
+                      <div className="form-group">
                         <label>Email</label>
                         <input type="email" className="form-control"  placeholder="Email" value={ PersonneMembre.Email } onChange={(e) => setPersonneMembre({...PersonneMembre,Email : e.target.value,})}/>
                       </div>
@@ -180,11 +205,11 @@ const InsertionMembre = () =>
                         <option>Choisir le Genre</option>
                         {Array.isArray(Genre) ? (
                             Genre.map(Genre => (
-                                <option key={Genre.id} value={Genre.id} clasName="form-control">
+                                <option key={Genre.id} value={Genre.id} className="form-control">
                                   {Genre.nomGenre}
                                 </option>
                             ) )
-                        ) : ( <option>Aucune Valeur</option> ) }
+                        ) : ( <option>Aucune Valeur</option> ) } 
                         </select>
                       </div>
                     </div>

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Vallee from "../Valle/Vallee";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -35,19 +34,17 @@ const ModifierVillage = () => {
       useEffect(() => {
         VillageById(); 
       });
-      console.log(Vallee);
     const [villageModif, setVillageModif] = useState('');
     const [idValle, setIdValle] = useState('');
     const ModificationVillage = async (event) => {
         event.preventDefault();
         try {
-          const response = await axios.post(`https://127.0.0.1:8000/api/village/${idVillage}`, { Nom_village: villageModif , Id_vallee : idValle}, {
+          await axios.post(`https://127.0.0.1:8000/api/village/${idVillage}`, { Nom_village: villageModif , Id_vallee : idValle}, {
             headers: {
               'content-Type': 'application/json',
               'Authorization' : `Bearer ${token}`
             },
           });
-          console.log('Vallee modifiée', response.data);
           toast.success("Village modifier !");
         } catch (error) {
           console.error('Erreur de modification', error);

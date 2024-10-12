@@ -51,8 +51,10 @@ const RecuCotisation = () => {
         XLSX.writeFile(wb, 'recu_cotisation.xlsx');
     };
 
-    const recherche =  () => {
-        console.log(Data,IdVillage,DateFin,DateDebut);
+    const recherche =  (event) => {
+        if(event){
+            event.preventDefault();
+        }
         axios.post('https://localhost:8000/api/rechercheCotisation',{
             data: Data,
             village: IdVillage,
@@ -125,6 +127,7 @@ const RecuCotisation = () => {
                                     <th className="text-left">Email</th>
                                     <th className="text-left">Mois payer</th>
                                     <th className="text-left">Date de payement</th>
+                                    <th className="text-right">Montant Payer</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -155,6 +158,9 @@ const RecuCotisation = () => {
                                             year: 'numeric',
                                             month: 'long'
                                         })} 
+                                        </td>
+                                        <td className="text-right">
+                                            {recu.montant_cotisation_total_payer} Ar
                                         </td>
                                 </tr>
                             ) )

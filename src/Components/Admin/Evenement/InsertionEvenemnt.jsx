@@ -61,7 +61,7 @@ const Insertion = async (e) => {
         toast.success("Inserer");
 
     } catch (error) {
-        console.log(error);
+        console.error(error);
         toast.error("Erreur d'insertion");
     }
 }

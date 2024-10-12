@@ -23,13 +23,11 @@ const Login = () => {
         },
       });
       localStorage.setItem('decode',response.data);
-      console.log(response.data);
     }catch(error){
-    console.log(error)
+    console.error(error)
     }
   }
   const Authentification = async (e) => {
-    console.log(Email,Password);
     e.preventDefault();
     try {
       const response = await axios.post(`https://127.0.0.1:8000/api/login`, { username: Email , password : Password }, {

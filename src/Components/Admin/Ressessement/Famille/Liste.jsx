@@ -12,7 +12,6 @@ const Liste = () => {
         }
       }).then(response => {
           setMariage(response.data)
-          console.log(Mariage);
       });
     };  
     useEffect(() => {

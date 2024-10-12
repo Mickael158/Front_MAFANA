@@ -21,9 +21,8 @@ const Modification = () => {
                 }
             });
             setAllUser(response.data);
-            console.log(response.data);
         }catch(error){
-            console.log(error)
+            console.error(error)
         }
     }
     const Listerole = () => {
@@ -54,7 +53,6 @@ const Modification = () => {
 
     const attribution =  async (e) => {
         e.preventDefault();
-        console.log(selectedId,selectedRoles);
         try{
             await axios.post(`https://localhost:8000/api/AttributionRole/${selectedId}`,{roles:selectedRoles,token:token},
                 {
@@ -68,7 +66,7 @@ const Modification = () => {
             setSelectedRoles([]);
             setShowModal(false);
         }catch(error){
-            console.log(error);
+            console.error(error);
         }
     }
     useEffect(()=>{

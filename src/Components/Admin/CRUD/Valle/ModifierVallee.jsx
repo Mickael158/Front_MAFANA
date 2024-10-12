@@ -27,14 +27,13 @@ const ModifierVallee = () => {
   const ModificationVallee = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`https://127.0.0.1:8000/api/valle/${idValle}`, { Nom_valle: valleModif }, {
+      await axios.post(`https://127.0.0.1:8000/api/valle/${idValle}`, { Nom_valle: valleModif }, {
         headers: {
           'content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
       });
     toast.success("Modification effectuer!");
-      console.log('Vallee modifiée', response.data);
     } catch (error) {
         toast.error("Erreur de modification du valle");
       console.error('Erreur de modification', error);

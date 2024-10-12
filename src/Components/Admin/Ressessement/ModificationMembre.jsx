@@ -5,17 +5,24 @@ import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const ModificationMembre = () => {
+  const [PersonneMembre, setPersonneMembre] = useState({
+    Nom : '',
+    Prenom : '',
+    Adresse : '',
+    Email : '',
+    Telephone : '',
+    IdVillage : '',
+    IdGenre : '',
+    DateNaissance : ''
+  });
   const [Membre,setMembre] = useState('');
   const [Fammille,setFamille] = useState([]);
   const token = localStorage.getItem("token");
   const [showModal, setShowModal] = useState(false);
   const [showModaldece, setShowModalDece] = useState(false);
   const [ShowModalQuitte, setShowModalQuitte] = useState(false);
-  const [Proffesion, setProffesion] = useState([]);
-  const [ProffesionPerso, setProffesionPerso] = useState([]);
   const [selectedNom, setSelectedNom] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
-  const [selectedIdProfession, setSelectedIdProfession] = useState('');
   const [selectedId, setSelectedId] = useState('');
   const [devisData, setDevisData] = useState([]);
   const [SelectedChoix, setSelectedChoix] = useState('');
@@ -23,11 +30,151 @@ const ModificationMembre = () => {
   const [fileName, setFileName] = useState("");
   const [Data, setData] = useState(null);
   const [Idvillage,setIdvillage] = useState(null);
+  const [Idgenre,setIdgenre] = useState(null);
+  const [Idprofession,setIdprofession] = useState(null);
   const [Village,setVillage] = useState('');
-  const recherche =  () => {
-    axios.post('https://localhost:8000/api/recherchePersonneIndep',{
+  const [Genre,setGenre] = useState('');
+  const [Profession,setProfession] = useState('');
+  const [ShowModalCorbeil,setShowModalCorbeil] = useState(false);
+  const [MembreQuitte,setMembreQuitte] = useState('');
+
+  const SelectMembreQuitte = async () => {
+    try {
+      const response = await axios.get('https://localhost:8000/api/personneQuitter',{
+        headers:
+        {
+          'Content-Type':'application/json',
+          'Authorization':`Bearer ${token}`
+        }
+      });
+      setMembreQuitte(response.data.reponse);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const restaurationMembre = async (id) => {
+    try {
+      await axios.post(`https://localhost:8000/api/personneRestaurer/${id}`, {}, { 
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      toast.success('Membre Restauré');
+      setShowModalCorbeil(false);
+    } catch (error) {
+      console.error(error);
+      toast('Erreur lors de la restauration');
+    }
+  };
+
+  const ModificationMembre = async (event) => 
+    {
+      event.preventDefault();
+       // Regex pour valider le nom et prénom (seulement lettres)
+      const nameRegex = /^[a-zA-ZÀ-ÿ\s'-]+$/;
+      // Regex pour valider l'email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      // Regex pour valider le téléphone (10 chiffres)
+      const phoneRegex = /^\d{10}$/;
+
+      // Vérification des champs
+      if (!PersonneMembre.Nom || !nameRegex.test(PersonneMembre.Nom)) {
+          toast.error("Le nom doit contenir uniquement des lettres");
+          return;
+      }
+      if (!PersonneMembre.Prenom || !nameRegex.test(PersonneMembre.Prenom)) {
+          toast.error("Le prénom doit contenir uniquement des lettres");
+          return;
+      }
+      if (!PersonneMembre.Email || !emailRegex.test(PersonneMembre.Email)) {
+          toast.error("Veuillez entrer un email valide");
+          return;
+      }
+      if (!PersonneMembre.Telephone || !phoneRegex.test(PersonneMembre.Telephone)) {
+          toast.error("Le numéro de téléphone doit contenir 10 chiffres");
+          return;
+      }
+      if (!PersonneMembre.Adresse || !PersonneMembre.DateNaissance || 
+          !PersonneMembre.IdGenre || !PersonneMembre.IdVillage) {
+          toast.error("Tous les champs doivent être remplis");
+          return;
+      }
+      try
+      {
+        const response = await axios.post(`https://localhost:8000/api/Personne/update/${selectedId}`,
+        { 
+          Nom : PersonneMembre.Nom,
+          Prenom : PersonneMembre.Prenom,
+          Adresse : PersonneMembre.Adresse,
+          Email : PersonneMembre.Email,
+          Telephone : PersonneMembre.Telephone,
+          DateNaissance : PersonneMembre.DateNaissance,
+          genre_id : PersonneMembre.IdGenre,
+          village_id : PersonneMembre.IdVillage 
+        },
+        {
+          headers: 
+          {
+            'content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+        },
+        
+      );
+      toast.success(response.data.message);
+      setPersonneMembre({...PersonneMembre,
+        Nom: '',
+        Prenom: '',
+        Adresse: '',
+        Email: '',
+        Telephone: '',
+        IdVillage: '',
+        IdGenre: '',
+        DateNaissance: ''
+      });
+      setShowModal(false);
+    }
+    catch(error)
+    {
+      console.error('Erreur d\'insertion' , error)
+      toast.error("Error de ressesement");
+    }
+  }
+
+  const ListeGenre = () => {
+    axios.get('https://localhost:8000/api/Genre',{
+      headers: 
+      {
+        'content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    }).then(response => {
+        setGenre(response.data)
+    });
+  };  
+  const ListeProfession = () => {
+    axios.get('https://localhost:8000/api/Profession',{
+      headers: 
+      {
+        'content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    }).then(response => {
+        setProfession(response.data)
+        
+    });
+  };  
+  const recherche =  (event) => {
+    if(event){
+      event.preventDefault();
+  }
+    axios.post('https://localhost:8000/api/recherchePersonne',{
         data: Data,
-        village: Idvillage
+        village: Idvillage,
+        genre: Idgenre,
+        profession: Idprofession
     },{
         headers:
         {
@@ -78,30 +225,12 @@ const ListeVillage = () => {
   useEffect(() => {
     recherche(); 
     ListeVillage(); 
+    ListeGenre();
+    ListeProfession();
+    SelectMembreQuitte();
   } , []);
 
-  const VoireProffession = (id) => {
-    axios.get(`https://localhost:8000/api/getProfession_By_personne/${id}`,{
-        headers:
-        {
-          'Authorization' : `Bearer ${token}`
-        }
-      }).then(response => {
-        setProffesion(response.data);
-    });
-    setShowModal(true);
-};
-const VoireProffessionByPersonne = (id) => {
-  axios.get(`https://localhost:8000/api/PersonneMembreProfessions/${id}`,{
-      headers:
-      {
-        'Authorization' : `Bearer ${token}`
-      }
-    }).then(response => {
-      setProffesionPerso(response.data);
-  });
-  setShowModal(true);
-};
+
 const Decede = (event) => {
   event.preventDefault();
   const today = new Date();
@@ -121,32 +250,38 @@ const Decede = (event) => {
               }
             });
             setShowModalDece(false);
-            ListeMembre(); 
             toast.success("Declaration decede inserer");
   }catch(error){
     toast.error('Erreur d\'insertion' , error);
   }
 }
-const AjouterProfessionMembre = (event) => {
-  event.preventDefault();
-  try{
-       axios.post(`https://localhost:8000/api/PersonneMembreProfession`,
-        {IdPersonneMembre : selectedId, IdProfession : selectedIdProfession },
-          {
-              headers: 
-              {
-                'content-Type': 'application/json',
-                'Authorization' : `Bearer ${token}`
-              }
-            });
-          VoireProffessionByPersonne(selectedId);
-          setShowModal(false);
-            toast.success("Ajouter Profession inserer");
-  }catch(error){
-      toast.error('Erreur d\'insertion' , error);
+
+const PersonneById = async (id) => {
+
+  try {
+    const response = await axios.get(`https://localhost:8000/api/PersonneAllById/${id}`,{
+      headers: 
+      {
+        'content-Type': 'application/json',
+        'Authorization' : `Bearer ${token}`
+      }
+    })
+    // const DateNaissance = response.data.DateNaissance.split("T")[0]
+    
+    setPersonneMembre({...PersonneMembre,
+      Nom: response.data.nomMembre,
+      Prenom: response.data.prenomMembre,
+      Adresse: response.data.Address,
+      Email: response.data.Email,
+      Telephone: response.data.Telephone,
+      DateNaissance: response.data.DateNaissance
+    });
+    setShowModal(true);
+  } catch (error) {
+    console.error(error)
   }
-  
-}
+} 
+
 const QuitteMembre = (event) => {
   event.preventDefault();
   try{
@@ -160,7 +295,6 @@ const QuitteMembre = (event) => {
               }
             });
             setShowModalQuitte(false);
-            ListeMembre(); 
             toast.success("Personne quitter inserer");
   }catch(error){
       toast.error('Erreur d\'insertion' , error);
@@ -171,8 +305,7 @@ const QuitteMembre = (event) => {
   const handleSelectMember = (member) => {
     setSelectedNom(member.nom_membre + ' ' + member.prenom_membre);
     setSelectedId(member.id);
-    VoireProffession(member.id);
-    VoireProffessionByPersonne(member.id);
+    PersonneById(member.id);
 };
 const handleSelectMemberDece = (member) => {
   setSelectedNom(member.nom_membre + ' ' + member.prenom_membre);
@@ -190,9 +323,9 @@ const handleChoix = (member) => {
   setSelectedIdChoix(member.id);
 };
 const handleFileChange = (e) => {
-  const file = e.target.files[0]; // Récupère le premier fichier sélectionné
+  const file = e.target.files[0]; 
   if (file) {
-    setFileName(file.name); // Met à jour l'état avec le nom du fichier
+    setFileName(file.name); 
   }
 };
 const handleExport = async (event) => {
@@ -227,7 +360,12 @@ const handleExport = async (event) => {
     <ToastContainer/>
       <div className="card">
           <div className="card-header">
-            <h4 className="card-title">Membre résponsable</h4>
+            <div className="d-flex justify-content-between">
+              <h4 className="card-title">Liste de tous les membres</h4>
+              <div>
+                  <small>Corbeille </small><button className="btn btn-secondary btn-sm" onClick={() => setShowModalCorbeil(true)}><i className="now-ui-icons shopping_basket"></i></button>
+              </div>
+            </div>
             <input 
               type="file" 
               className="form-control" 
@@ -261,6 +399,30 @@ const handleExport = async (event) => {
                         ) : ( <option>Aucune Valeur</option> ) }
                         </select>
                         </div>
+                        <div className="col-3">
+                        <select className="form-control" value={ Idgenre } onChange={(e) => setIdgenre(e.target.value)}>
+                        <option>Choisir le Genre</option>
+                        {Array.isArray(Genre) ? (
+                            Genre.map(Genre => (
+                                <option key={Genre.id} value={Genre.id} className="form-control">
+                                  {Genre.nomGenre}
+                                </option>
+                            ) )
+                        ) : ( <option>Aucune Valeur</option> ) }
+                        </select>
+                        </div>
+                        <div className="col-3">
+                        <select className="form-control" value={ Idprofession } onChange={(e) => setIdprofession(e.target.value)}>
+                        <option>Choisir un Professeur</option>
+                        {Array.isArray(Profession) ? (
+                            Profession.map(Profession => (
+                                <option key={Profession.id} value={Profession.id} className="form-control">
+                                  {Profession.nomProfession}
+                                </option>
+                            ) )
+                        ) : ( <option>Aucune Valeur</option> ) }
+                        </select>
+                        </div>
                     </div>
                     <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
                 </form>
@@ -289,7 +451,7 @@ const handleExport = async (event) => {
                         Supprimer
                       </th>
                       <th className="text-center">
-                        Profession
+                        Detail
                       </th>
                       <th className="text-center">
                         Décédé
@@ -318,7 +480,7 @@ const handleExport = async (event) => {
                                             {Membre.email}
                                         </td>
                                         <td className="text-center">
-                                            <button className="btn btn-danger" style={{'width': '50%' , 'fontSize':'15px'}} onClick={() => handleSelectMemberQuitte(Membre)} ><i className="now-ui-icons shopping_basket"></i></button>
+                                            <button className="btn btn-danger"  onClick={() => handleSelectMemberQuitte(Membre)} ><i className="now-ui-icons shopping_basket"></i></button>
                                         </td>
                                         <td className="text-center">
                                         <button
@@ -326,11 +488,11 @@ const handleExport = async (event) => {
                                         type="button"
                                         onClick={() => handleSelectMember(Membre)}
                                     >
-                                        Voire
+                                        voir
                                     </button>
                                         </td>
                                         <td>
-                                        <button
+                                        <button   
                                         className="btn btn-success btn-block"
                                         type="button"
                                         onClick={() => handleSelectMemberDece(Membre)}
@@ -349,48 +511,98 @@ const handleExport = async (event) => {
             {/* Modal */}
             <Modal show={showModal} onHide={() => setShowModal(false)} dialogClassName="modal-lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Profession de {selectedNom} {selectedIdProfession}</Modal.Title>
+                    <Modal.Title>{selectedNom}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Ajouter plus de profession</p>
-                        <select className="form-control" onChange={(e) => setSelectedIdProfession(e.target.value)}>
-                        <option className="form-control text-center">Choisez la profession à ajouter</option>
-                            {Array.isArray(Proffesion) ? (
-                              Proffesion.map(pro => (
-                                <option className="form-control text-center" key={pro.id} value={pro.id}>
-                                  {pro.nom_profession}
-                                </option>
-                              ))
-                            ) : (
-                              <option className="form-control">Null</option>
-                            )}
-                        </select>
+                    <p>Voici les informations de cette personne</p>
+                        
                       <hr/>
                       <div className="card-body">
-                <div className="table-responsive">
-                  <table className="table">
-                    <thead className=" text-dark">
-                      <th>
-                        Les Professions de {selectedNom}
-                      </th>
-                    </thead>
-                    <tbody>
-                        {Array.isArray(Proffesion) ? (
-                            ProffesionPerso.map(professionpers => (
-                                <tr key={professionpers.id}>
-                                  <td>
-                                      {professionpers.nom_profession}
-                                  </td>
-                                </tr>
+                      <form onSubmit={ModificationMembre}>
+                  <div className="row mb-5">
+                    <div className="col-md-5 pr-1">
+                      <div className="form-group">
+                        <label>Nom du Membre</label>
+                        <input type="text" className="form-control"  placeholder="Nom" value={ PersonneMembre.Nom } onChange={(e) => setPersonneMembre({...PersonneMembre,Nom : e.target.value,})}/>
+                      </div>
+                    </div>
+
+                    <div className="col-md-5 pr-1">
+                      <div className="form-group">
+                        <label>Prénom du Membre</label>
+                        <input type="text" className="form-control"  placeholder="Prenom" value={ PersonneMembre.Prenom } onChange={(e) => setPersonneMembre({...PersonneMembre,Prenom : e.target.value,})}/>
+                      </div>
+                    </div>
+
+                    <div className="col-md-5 pr-1">
+                      <div className="form-group">
+                        <label>Adresse</label>
+                        <input type="text" className="form-control"  placeholder="Adresse" value={ PersonneMembre.Adresse } onChange={(e) => setPersonneMembre({...PersonneMembre,Adresse : e.target.value,})}/>
+                      </div>
+                    </div>
+
+                    <div className="col-md-5 pr-1">
+                      <div className="form-group">
+                        <label>Date de Naissance</label>
+                        <input type="date" className="form-control"  placeholder="Date de Naissance" value={ PersonneMembre.DateNaissance } onChange={(e) => setPersonneMembre({...PersonneMembre,DateNaissance : e.target.value})}/>
+                      </div>
+                    </div>
+
+                    <div className="col-md-5 pr-1">
+                      <div className="form-group">
+                        <label>Email</label>
+                        <input type="email" className="form-control"  placeholder="Email" value={ PersonneMembre.Email } onChange={(e) => setPersonneMembre({...PersonneMembre,Email : e.target.value,})}/>
+                      </div>
+                    </div>
+
+                    <div className="col-md-5 pr-1">
+                      <div className="form-group">
+                        <label>Téléphone</label>
+                        <input className="form-control"  placeholder="Numero de telephone" value={ PersonneMembre.Telephone } onChange={(e) => setPersonneMembre({...PersonneMembre,Telephone : e.target.value,})}/>
+                      </div>
+                    </div>
+
+                    <div className="col-md-5 pr-1">
+                      <div className="form-group">
+                      <label>Genre</label>
+                        <select className="form-control" value={ PersonneMembre.IdGenre } onChange={(e) => setPersonneMembre({...PersonneMembre,IdGenre : e.target.value,})}>
+                        <option>Choisir le Genre</option>
+                        {Array.isArray(Genre) ? (
+                            Genre.map(Genre => (
+                                <option key={Genre.id} value={Genre.id} className="form-control">
+                                  {Genre.nomGenre}
+                                </option>
                             ) )
-                        ) : ( <tr><td>Null</td></tr>) }
-                    </tbody>
-                  </table>
-                </div>
+                        ) : ( <option>Aucune Valeur</option> ) } 
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="col-md-5 pr-1">
+                      <div className="form-group">
+                      <label>Village</label>
+                        <select className="form-control" value={ PersonneMembre.IdVillage } onChange={(e) => setPersonneMembre({...PersonneMembre,IdVillage : e.target.value,})}>
+                        <option>Choisir un village</option>
+                        {Array.isArray(Village) ? (
+                            Village.map(Village => (
+                                <option key={Village.id} value={Village.id} className="form-control">
+                                  {Village.nomVillage}
+                                </option>
+                            ) )
+                        ) : ( <option>Aucune Valeur</option> ) }
+                        </select>
+                      </div>
+                    </div>
+
+                    <div className="col-md-3 pr-1 mt-3">
+                      <button className="btn btn-success btn-block" style={{'fontSize' : '18px'}} type="submit">Valider</button>
+                    </div>
+                  </div> 
+                </form>
               </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <button className="btn btn-success" onClick={AjouterProfessionMembre} >Ajouter</button>
+                    
                     <button className="btn btn-secondary" onClick={() => setShowModal(false)}>Fermer</button>
                 </Modal.Footer>
             </Modal>
@@ -429,7 +641,6 @@ const handleExport = async (event) => {
                                       <tbody>
                                           {Array.isArray(Fammille) ? (
                                               Fammille.map((famille, index) => {
-                                                console.log(`Index ${index}: `, famille);
                                                 
                                                 return (
                                                     <tr key={index}>
@@ -496,6 +707,81 @@ const handleExport = async (event) => {
                 <Modal.Footer>
                     <button className="btn btn-success" onClick={QuitteMembre} >Quitter</button>
                     <button className="btn btn-secondary" onClick={() => setShowModalQuitte(false)}>Fermer</button>
+                </Modal.Footer>
+            </Modal>
+
+
+
+            <Modal show={ShowModalCorbeil} onHide={() => setShowModalCorbeil(false)} dialogClassName="modal-lg">
+                <Modal.Header closeButton>
+                    <Modal.Title> Vous pouvez voir ici les membres qui ont quitté le groupe </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <div className="table-responsive">
+                  <table className="table">
+                    <thead className=" text-dark">
+                      <th className="text-left">
+                        Nom
+                      </th>
+                      <th className="text-left">
+                        Prénom
+                      </th>
+                      <th className="text-left">
+                        Adresse
+                      </th>
+                      <th className="text-left">
+                        Téléphone
+                      </th >
+                      <th className="text-left">
+                        Date de naissance
+                      </th>
+                      <th className="text-left">
+                        Email
+                      </th>
+                      <th className="text-center">
+                        restaurer
+                      </th>
+                    </thead>
+                    <tbody>
+                        {Array.isArray(MembreQuitte) ? (
+                            MembreQuitte.map(Membre => (
+                                <tr key={Membre.id}>
+                                        <td className="text-left">
+                                            {Membre.nom_membre}
+                                        </td>
+                                        <td className="text-left">
+                                            {Membre.prenom_membre}
+                                        </td>
+                                        <td className="text-left">
+                                            {Membre.address}
+                                        </td>
+                                        <td className="text-left">
+                                            {Membre.telephone}
+                                        </td>
+                                        <td className="text-left">
+                                        {new Date(Membre.date_de_naissance).toISOString().split('T')[0]}
+                                        </td>
+                                        <td className="text-left">
+                                            {Membre.email}
+                                        </td>
+                                        <td>
+                                        <button   
+                                        className="btn btn-success btn-block"
+                                        type="button"
+                                        onClick={() => restaurationMembre(Membre.id)}
+                                    >
+                                        restaurer
+                                    </button>
+                                        </td>
+                                </tr>
+                            ) )
+                        ) : ( <tr><td>Null</td></tr>) }
+                    </tbody>
+                  </table>
+                </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <button className="btn btn-secondary" onClick={() => setShowModalCorbeil(false)}>Fermer</button>
                 </Modal.Footer>
             </Modal>
     </>

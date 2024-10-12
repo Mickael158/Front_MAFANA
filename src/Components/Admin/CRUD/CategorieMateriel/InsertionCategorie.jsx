@@ -22,8 +22,6 @@ const InsertionCategorie = () =>
         }
       );
         toast.success("Inserer avec success!");
-      console.log(nomCategorie);
-      console.log('Categorie inserer');
       setNomCategorie('');
     }
     catch(error)

@@ -8,9 +8,8 @@ const Evenement = () => {
     try {
       const response = await axios.get('https://localhost:8000/api/Evenement/proche_evenement');
       setEvenements(response.data); 
-      console.log(evenements);
     } catch (error) {
-      console.log(error); 
+      console.error(error); 
     }
   };
 

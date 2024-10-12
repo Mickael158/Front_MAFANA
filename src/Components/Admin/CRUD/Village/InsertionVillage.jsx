@@ -12,12 +12,10 @@ const InsertionVillage = () => {
   const InsertionVillage = async (event) => {
     event.preventDefault();
     try {
-      console.log(nomVillage, idValle);
       await axios.post('https://localhost:8000/api/village', 
         { Nom_village: nomVillage, Id_vallee: idValle }, 
         { headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` } }
       );
-      console.log('Village inseré');
       setNomVillage('');
       setIdValle(vallees.length > 0 ? vallees[0].id : '');
       toast.success("Village inserer !");

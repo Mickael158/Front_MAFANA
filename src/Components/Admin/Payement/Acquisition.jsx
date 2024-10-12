@@ -38,8 +38,10 @@ const Acquisition = () => {
         XLSX.utils.book_append_sheet(wb, ws, 'Recu');
         XLSX.writeFile(wb, 'acquisition_materiel.xlsx');
     };
-    const recherche =  () => {
-        console.log(Data , IdMateriel , DateDebut , DateFin);
+    const recherche =  (event) => {
+        if(event){
+            event.preventDefault();
+        }
         axios.post('https://localhost:8000/api/rechercheMateriel',{
             data: Data,
             materiel: IdMateriel,

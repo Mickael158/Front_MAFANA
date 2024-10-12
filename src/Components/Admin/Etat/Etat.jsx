@@ -28,8 +28,10 @@ const Etat = () => {
     });
   };  
 
-    const ListeMembre = () => {
-        console.log(Data , Idvillage);
+    const ListeMembre = (event) => {
+        if(event){
+            event.preventDefault();
+        }
         axios.post('https://localhost:8000/api/Etat',{
             data: Data,
             village: Idvillage

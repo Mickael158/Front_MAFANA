@@ -29,7 +29,6 @@ const ListeEvenement = () => {
 }
 const EvenenemntById = async (e,id) => {
   e.preventDefault();
-  console.log(id);
   const response = await axios.get(`https://localhost:8000/api/Evenement/${id}`,{
     headers:{
       'Authorization':`Bearer ${token}`
@@ -68,7 +67,7 @@ const modification = async (e) => {
     getEvenements();
     setShowModal(false);
   } catch (error) {
-    console.log(error);
+    console.error(error);
     toast.error("Modification echouer!");
   }
 
@@ -105,7 +104,6 @@ const modification = async (e) => {
       );
       getEvenements();
       toast.success(response.data.message);
-      console.log("Événement supprimé");
     } catch (error) {
       toast.error("Erreur de suppression !");
       console.error("Erreur de suppression", error);
@@ -114,7 +112,6 @@ const modification = async (e) => {
 
   const handleToggle = async (id, currentValue) => {
     const newValue = currentValue === false ? true : false; 
-    console.log(id,newValue);
     try {
       await axios.post(`https://127.0.0.1:8000/api/Evenement/affichable/${id}/${newValue}`,{},
         {

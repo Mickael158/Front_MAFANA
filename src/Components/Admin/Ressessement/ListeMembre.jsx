@@ -24,7 +24,10 @@ const ListeMembre = () => {
   const [Data, setData] = useState(null);
   const [Idvillage,setIdvillage] = useState(null);
   const [Village,setVillage] = useState('');
-  const recherche =  () => {
+  const recherche =  (event) => {
+    if(event){
+      event.preventDefault();
+  }
     axios.post('https://localhost:8000/api/recherchePersonneIndep',{
         data: Data,
         village: Idvillage
@@ -429,7 +432,6 @@ const handleExport = async (event) => {
                                       <tbody>
                                           {Array.isArray(Fammille) ? (
                                               Fammille.map((famille, index) => {
-                                                console.log(`Index ${index}: `, famille);
                                                 
                                                 return (
                                                     <tr key={index}>

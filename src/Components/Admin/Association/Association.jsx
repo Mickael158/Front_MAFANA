@@ -15,7 +15,6 @@ const Association = () => {
   const [Logo,setLogo] = useState('');
   const [Nom,setNom] = useState('');
   const token = localStorage.getItem('token');
-  console.log(token);
 
   const ListeAssociation = async () => {
       const response = await axios.get('https://localhost:8000/api/Associations/1');
@@ -64,7 +63,6 @@ const Association = () => {
         },
       });
         toast.success("modification effectuer!");
-      console.log('Association modifiée', response.data);
     } catch (error) {
         toast.error("erreur lors de la modification");
       console.error('Erreur de modification', error);

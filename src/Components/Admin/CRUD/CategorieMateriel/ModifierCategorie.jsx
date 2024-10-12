@@ -27,14 +27,13 @@ const ModifierCategorie = () => {
   const ModificationCategorie = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`https://127.0.0.1:8000/api/Categorie/${idCategorie}`, { Nom_Categorie: CategorieModif }, {
+      await axios.post(`https://127.0.0.1:8000/api/Categorie/${idCategorie}`, { Nom_Categorie: CategorieModif }, {
         headers: {
           'content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
       });
         toast.success("modification effectuer!");
-      console.log('Categorie modifiée', response.data);
     } catch (error) {
         toast.error("erreur lors de la modification");
       console.error('Erreur de modification', error);

@@ -27,7 +27,10 @@ const Reception = () => {
         // Exporter le fichier Excel
         XLSX.writeFile(wb, 'recu_cotisation.xlsx');
     };
-    const recherche =  () => {
+    const recherche =  (event) => {
+        if(event){
+            event.preventDefault();
+        }
         axios.post('https://localhost:8000/api/rechercheDonnation',{
             data: Data,
             dateDebut: DateDebut,
@@ -41,7 +44,6 @@ const Reception = () => {
           })
            .then(response => {
                 setReception(response.data.data);
-                console.log(response.data.data);
             })
            .catch(error => {
                 console.error("Erreur lors de la récupération des données", error);

@@ -34,7 +34,6 @@ const InsertionPrixCharge = () => {
                 headers: { 'Content-Type': 'application/json','Authorization': `Bearer ${token}` } 
             }
           );
-          console.log('PrixCharge inseré');
           setMontant(''); 
           setDateMofid(''); 
           toast.success("Prix Charge inserer!");

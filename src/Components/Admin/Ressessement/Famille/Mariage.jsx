@@ -51,7 +51,6 @@ const Mariage = () => {
       }
       try
       {
-        console.log(DateMariage)
         axios.post('https://127.0.0.1:8000/api/Mariage',
         { 
           Id_Mari : IdMari,

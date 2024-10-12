@@ -1,6 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Modal } from 'react-bootstrap'; 
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const ListeDemandeMateriel = () => {
     const [listeDemande, setListeDemande] = useState([]);
@@ -67,8 +69,8 @@ const ListeDemandeMateriel = () => {
                     },
                 }
             );
-            console.log('DEMANDE VALIDÉE');
-            setShowModal(false); // Fermer le modal après validation
+            setShowModal(false); 
+            toast.success("Demande validé");
         } catch (error) {
             console.error('Erreur d\'insertion', error);
         }
@@ -88,7 +90,7 @@ const ListeDemandeMateriel = () => {
                     },
                 }
             );
-            console.log('Demande refusée');
+            toast.success("Demande refuser");
         } catch (error) {
             console.error('Erreur de suppression', error);
         }
@@ -117,6 +119,7 @@ const ListeDemandeMateriel = () => {
     return (
         <>
             <div className="card">
+                <ToastContainer />
                 <div className="card-header">
                     <h4 className="card-title">Liste des Demandes Materiel</h4>
                 </div>
