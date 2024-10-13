@@ -45,7 +45,7 @@ const InsertionMembre = () =>
     DateNaissance : '',
     DateInscription : ''
   });
-  const insertionMembre = (event) => 
+  const insertionMembre = async (event) => 
     {
       event.preventDefault();
        // Regex pour valider le nom et prénom (seulement lettres)
@@ -94,7 +94,7 @@ const InsertionMembre = () =>
       }
       try
       {
-        axios.post('https://127.0.0.1:8000/api/Personne',
+        const response =await axios.post('https://127.0.0.1:8000/api/Personne',
         { 
           Nom : PersonneMembre.Nom,
           Prenom : PersonneMembre.Prenom,
@@ -115,23 +115,27 @@ const InsertionMembre = () =>
         },
         
       );
-      toast.success("Personne inserrer");
-      setPersonneMembre({...PersonneMembre,
-        Nom: '',
-        Prenom: '',
-        Adresse: '',
-        Email: '',
-        Telephone: '',
-        IdVillage: '',
-        IdGenre: '',
-        DateNaissance: '',
-        DateInscription: '',
-      });
+      if (response.data.message) {
+        toast.success(response.data.message);
+        setPersonneMembre({
+          Nom: '',
+          Prenom: '',
+          Adresse: '',
+          Email: '',
+          Telephone: '',
+          IdVillage: '',
+          IdGenre: '',
+          DateNaissance: '',
+          DateInscription: '',
+        });
+      } else if (response.data.error) {
+        toast.error(response.data.error);
+      }
     }
     catch(error)
     {
       console.error('Erreur d\'insertion' , error)
-      toast.error("Error de ressesement");
+      toast.error("Error de ressensement");
     }
   }
   useEffect(() => {
