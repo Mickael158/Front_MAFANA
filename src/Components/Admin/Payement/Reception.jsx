@@ -84,6 +84,7 @@ const Reception = () => {
                             <thead className="text-dark">
                                 <tr>
                                     <th className="text-left">Nom du Donateur</th>
+                                    <th className="text-left">Membre ou pas</th>
                                     <th className="text-left">Date de payement</th>
                                     <th className="text-right">Montant</th>
                                 </tr>
@@ -93,16 +94,18 @@ const Reception = () => {
                             Reception.map(reception => (
                                 <tr key={reception.id}>
                                         <td className="text-left">
-                                            {reception.nom_donation_financier}
+                                            {reception.nomDonationFinancier}
                                         </td>
                                         <td className="text-left">
-                                        {new Date(reception.date_donation_financier).toISOString().split('T')[0]}
+                                            {reception.status ? 'Vrai' : 'Faux'}
+                                        </td>
+                                        <td className="text-left">
+                                        {new Date(reception.dateDonationFinancier).toISOString().split('T')[0]}
                                             
                                         </td>
                                         <td className="text-right">
                                             {reception.montant}Ar
                                         </td>
-                                        
                                 </tr>
                             ) )
                         ) : ( <tr><td>Null</td></tr>) }

@@ -108,6 +108,7 @@ const Acquisition = () => {
                             <thead className="text-dark">
                                 <tr>
                                     <th className="text-left">Nom du Donateur</th>
+                                    <th className="text-left">Membre ou pas</th>
                                     <th className="text-left">Matériel</th>
                                     <th className="text-left">Date de donation</th>
                                     <th className="text-center">Nombres</th>
@@ -119,13 +120,16 @@ const Acquisition = () => {
                             Acquisition.map(acquisition => (
                                 <tr key={acquisition.id}>
                                         <td className="text-left">
-                                            {acquisition.nom_donnateur_materiel}
+                                            {acquisition.nomDonnateurMateriel}
                                         </td >
                                         <td className="text-left">
-                                            {acquisition.nom_materiel}
+                                            {acquisition.status ? 'Vrai' : 'Faux'}
                                         </td>
                                         <td className="text-left">
-                                        {new Date(acquisition.date_acquisition).toISOString().split('T')[0]}
+                                            {acquisition.nomMateriel}
+                                        </td>
+                                        <td className="text-left">
+                                        {new Date(acquisition.dateAcquisition).toISOString().split('T')[0]}
                                         </td>
                                         <td className="text-center">
                                             {acquisition.nombre}
