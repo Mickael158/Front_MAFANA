@@ -266,15 +266,13 @@ const PersonneById = async (id) => {
         'Authorization' : `Bearer ${token}`
       }
     })
-    // const DateNaissance = response.data.DateNaissance.split("T")[0]
-    
     setPersonneMembre({...PersonneMembre,
       Nom: response.data.nomMembre,
       Prenom: response.data.prenomMembre,
       Adresse: response.data.Address,
       Email: response.data.Email,
       Telephone: response.data.Telephone,
-      DateNaissance: response.data.DateNaissance
+      DateNaissance: response.data.dateDeNaissance
     });
     setShowModal(true);
   } catch (error) {
@@ -544,7 +542,7 @@ const handleExport = async (event) => {
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
                         <label>Date de Naissance</label>
-                        <input type="date" className="form-control"  placeholder="Date de Naissance" value={ PersonneMembre.DateNaissance } onChange={(e) => setPersonneMembre({...PersonneMembre,DateNaissance : e.target.value})}/>
+                        <input type="date" className="form-control"  placeholder="Date de Naissance" value={ PersonneMembre.DateNaissance ? new Date(PersonneMembre.DateNaissance).toISOString().split('T')[0] : '' }  onChange={(e) => setPersonneMembre({...PersonneMembre,DateNaissance : e.target.value})}/>
                       </div>
                     </div>
 

@@ -1,4 +1,19 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 const Apropos = () => {
+    const [mot,setMot]=useState('');
+    const BaseApropos = async () => {
+        try {
+            const response = await axios.get('https://localhost:8000/api/Aproposs/1');
+            setMot(response.data.Mots);
+        } catch (error) {
+            console.error(error);
+        }     
+    }
+    useEffect(()=>{
+        BaseApropos();
+    },[])
     return (
         <>
 <section className="my-5 py-5">
@@ -74,12 +89,7 @@ const Apropos = () => {
                                             <ul className="nav nav-pills nav-fill flex-row p-1" role="tablist">
                                                 <li className="nav-item">
                                                     <a className="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#preview-btn-color" role="tab" aria-controls="preview" aria-selected="true">
-                                                    Page 1
-                                                    </a>
-                                                </li>
-                                                <li className="nav-item">
-                                                    <a className="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#code-btn-color" role="tab" aria-controls="code" aria-selected="false">
-                                                    Page 2
+                                                    Mot du professeur
                                                     </a>
                                                 </li>
                                             </ul>
@@ -88,51 +98,8 @@ const Apropos = () => {
                                 </div>
                             </div>
                             <div className="tab-content tab-space">
-                                <div className="tab-pane active" id="preview-btn-color">
-                                    Description 1
-                                </div>
-                                <div className="tab-pane" id="code-btn-color">
-                                    Description 2
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div className="row mt-3">
-                        <div className="col-12">
-                            <div className="position-relative border-radius-xl overflow-hidden shadow-lg mb-7">
-                                <div className="container border-bottom">
-                                    <div className="row justify-space-between py-2">
-                                        <div className="col-lg-3 me-auto">
-                                            <p className="lead text-dark pt-1 mb-0">Partie 2</p>
-                                        </div>
-                                        <div className="col-lg-3">
-                                            <div className="nav-wrapper position-relative end-0">
-                                                <ul className="nav nav-pills nav-fill flex-row p-1" role="tablist">
-                                                    <li className="nav-item">
-                                                        <a className="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#preview-typo" role="tab" aria-controls="preview" aria-selected="true">
-                                                        Page 2
-                                                        </a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a className="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#code-typo" role="tab" aria-controls="code" aria-selected="false">
-                                                        Page 1
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="tab-content tab-space">
-                                    <div className="tab-pane active" id="preview-typo">
-                                    Description 2
-                                    </div>
-                                    <div className="tab-pane" id="code-typo">
-                                        Description 1
-                                    </div>
+                                <div className="tab-pane active mt-3 mb-3" id="preview-btn-color" style={{'paddingLeft':'10px'}}>
+                                    {mot}
                                 </div>
                             </div>
                         </div>

@@ -9,6 +9,8 @@ import ChoixPayement from "../Payement/ChoixPayement";
 import ChoixDemande from "../Demande/ChoixDemande";
 import Etat from "../Etat/Etat";
 import ChoixUtilisateur from "../Utilisateur/ChoixUtilisateur";
+import Apropos from "../Apropos/Apropos";
+import Qui from "../Qui/Qui";
 
 const Dashbord = () => {
   const [page, setPage] = useState(0);
@@ -71,6 +73,18 @@ const Dashbord = () => {
                     <a href="#">
                       <i className="now-ui-icons education_atom"></i>
                       <p>Association</p>
+                    </a>
+                  </li>
+                  <li className={page === 9 ? "active" : ""} onClick={() => setPage(9)}>
+                    <a href="#">
+                      <i className="now-ui-icons education_atom"></i>
+                      <p>A propos</p>
+                    </a>
+                  </li>
+                  <li className={page === 10 ? "active" : ""} onClick={() => setPage(10)}>
+                    <a href="#">
+                      <i className="now-ui-icons education_atom"></i>
+                      <p>Dirigeant</p>
                     </a>
                   </li>
                   <li className={page === 3 ? "active" : ""} onClick={() => setPage(3)}>
@@ -212,8 +226,6 @@ const Dashbord = () => {
               </div>
             </div>
           </nav>
-
-          {/* Affichage de la page en fonction de l'état */}
           
             {page === 0 && <Statistic />}
             {page === 1 && <CRUD />}
@@ -224,6 +236,8 @@ const Dashbord = () => {
             {page === 6 && <ChoixDemande />}
             {page === 7 && <Etat />}
             {page === 8 && <ChoixUtilisateur />}
+            {page === 9 && <Apropos />}
+            {page === 10 && <Qui />}
           
         </div>
       </div>
