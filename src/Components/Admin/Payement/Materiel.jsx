@@ -179,7 +179,7 @@ const Materiel = () => {
                                         <input
                                             type="file"
                                             className="form-control"
-                                            onChange={(e) => setImage(e.target.files[0])} // Store the file object
+                                            onChange={(e) => setImage(e.target.files[0])}
                                         />
                                     </div>
                                 </div>

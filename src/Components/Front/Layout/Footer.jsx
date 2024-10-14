@@ -13,8 +13,8 @@ const Footer = () => {
 },[]);
     return (
         <>
-            <footer className="footer pt-5 mt-5 ">
-  <div className="container-fluid">
+            <footer className="footer pt-5 border ">
+  <div style={{'width':'83%','margin':'auto'}}>
     <div className=" row">
       <div className="col-md-3 mb-4 ms-auto">
         <div>
@@ -22,9 +22,6 @@ const Footer = () => {
             <img src="/affichage/logo.png" className="mb-3 footer-logo " alt="main_logo"/>
           </a>
           <h6 className="font-weight-bolder mb-4">{Asoociation.Nom}</h6>
-        </div>
-        <div>
-          
         </div>
       </div>
 

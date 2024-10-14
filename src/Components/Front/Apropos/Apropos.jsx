@@ -81,15 +81,12 @@ const Apropos = () => {
                         <div className="position-relative border-radius-xl overflow-hidden shadow-lg mb-7">
                             <div className="container border-bottom">
                                 <div className="row justify-space-between py-2">
-                                    <div className="col-lg-3 me-auto">
-                                        <p className="lead text-dark pt-1 mb-0">Partie 1</p>
-                                    </div>
                                     <div className="col-lg-3">
                                         <div className="nav-wrapper position-relative end-0">
                                             <ul className="nav nav-pills nav-fill flex-row p-1" role="tablist">
                                                 <li className="nav-item">
                                                     <a className="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#preview-btn-color" role="tab" aria-controls="preview" aria-selected="true">
-                                                    Mot du professeur
+                                                    Déscription de MA.FA.NA
                                                     </a>
                                                 </li>
                                             </ul>
@@ -98,7 +95,7 @@ const Apropos = () => {
                                 </div>
                             </div>
                             <div className="tab-content tab-space">
-                                <div className="tab-pane active mt-3 mb-3" id="preview-btn-color" style={{'paddingLeft':'10px'}}>
+                                <div className="tab-pane active mt-3 mb-3" id="preview-btn-color" style={{'paddingLeft':'35px'}}>
                                     {mot}
                                 </div>
                             </div>
