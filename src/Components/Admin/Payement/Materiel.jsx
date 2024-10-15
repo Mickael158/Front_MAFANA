@@ -17,20 +17,18 @@ const Materiel = () => {
         event.preventDefault();
         if (!IdMateriel) {
             toast.error("Le matériel est requis.");
-            return; // Arrêter l'exécution si l'ID matériel est null
+            return; 
         }
     
-        // Vérification que selectedNom ne contient que des lettres
         const regex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/;
         if (!regex.test(selectedNom)) {
             toast.error("Le nom ne doit contenir que des lettres.");
-            return; // Arrêter l'exécution si le nom contient des caractères invalides
+            return;
         }
     
-        // Vérification que le nombre est supérieur à 0
         if (nombre <= 0) {
             toast.error("Le nombre doit être supérieur à 0.");
-            return; // Arrêter l'exécution si le nombre est invalide
+            return; 
         }
         try {
             await axios.post('https://127.0.0.1:8000/api/DonnationMateriel', {
@@ -41,7 +39,7 @@ const Materiel = () => {
                 image: image
             }, {
                 headers: {
-                    'content-Type': 'application/json',
+                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
             });
@@ -49,7 +47,7 @@ const Materiel = () => {
             setSelectedNom('');
             setNombre('');
             setImage('');
-            setFilteredMembers([]); // Clear suggestions on successful submission
+            setFilteredMembers([]);
         } catch (error) {
             console.error('Erreur d\'insertion', error);
             toast.error("Erreur");

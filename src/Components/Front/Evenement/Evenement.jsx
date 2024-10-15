@@ -6,7 +6,7 @@ const Evenement = () => {
 
   const ListeEvenement = async () => {
     try {
-      const response = await axios.get('https://localhost:8000/api/Evenement/proche_evenement');
+      const response = await axios.get('https://localhost:8000/api/TestaB');
       setEvenements(response.data); 
     } catch (error) {
       console.error(error); 

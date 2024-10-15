@@ -77,20 +77,10 @@ const Login = () => {
             <div className="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div className="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
                 <h4 className="text-white font-weight-bolder text-center mb-0">S'identifiez</h4>
-                <div className="row mt-3">
-                  <div className="col-2 text-center ms-auto">
-                    <a className="btn btn-link px-3" href="javascript:;">
-                      <i className="fa fa-facebook text-white text-lg"></i>
-                    </a>
-                  </div>
-                  <div className="col-2 text-center px-1">
-                    <a className="btn btn-link px-3" href="javascript:;">
-                      <i className="fa fa-github text-white text-lg"></i>
-                    </a>
-                  </div>
-                  <div className="col-2 text-center me-auto">
-                    <a className="btn btn-link px-3" href="javascript:;">
-                      <i className="fa fa-google text-white text-lg"></i>
+                <div className="row mt-3 d-flex align-items-center justify-content-center">
+                  <div className="col-6 w-100 d-flex align-items-center justify-content-center">
+                    <a className="btn btn-link px-3 border text-lg" href="javascript:;">
+                    <i className="ni ni-single-02 text-lg text-light"></i>
                     </a>
                   </div>
                 </div>
