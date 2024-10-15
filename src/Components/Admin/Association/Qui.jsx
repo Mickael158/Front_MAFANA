@@ -78,6 +78,7 @@ const Qui = () => {
                 }
             });
             await upload();
+            await LastDirigeant();
             toast.success('Inséré avec succès');
         } catch (error) {
             console.error(error);
@@ -107,8 +108,6 @@ const Qui = () => {
     return (
         <>
             <ToastContainer />
-            <div className="panel-header panel-header-sm">
-            </div>
             <div className="card">
             </div>
             <div className="content">
@@ -182,7 +181,7 @@ const Qui = () => {
                                         <div className="col-md-12 col-xs-12 px-1">
                                             <div className="form-group">
                                                 <label>Photo de la personne</label>
-                                                <input type="file" multiple className="border" style={{ height: '20px', border: '1px solid black' }} onChange={handleImageChange} />
+                                                <input type="file" multiple className="form-control" style={{ height: '20px', border: '1px solid black !important' }} onChange={handleImageChange} />
                                             </div>
                                         </div>
                                     </div>

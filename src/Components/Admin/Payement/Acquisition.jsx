@@ -123,7 +123,11 @@ const Acquisition = () => {
                                             {acquisition.nomDonnateurMateriel}
                                         </td >
                                         <td className="text-left">
-                                            {acquisition.status ? 'Vrai' : 'Faux'}
+                                            {acquisition.status ? (
+                                                <i className="now-ui-icons ui-1_check" style={{ color: 'green' }} ></i>
+                                            ) : (
+                                                <i className="now-ui-icons ui-1_simple-remove" style={{ color: 'red' }} ></i>
+                                            )}
                                         </td>
                                         <td className="text-left">
                                             {acquisition.nomMateriel}

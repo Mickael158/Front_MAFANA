@@ -76,8 +76,7 @@ const Association = () => {
   return (
     <>
       <ToastContainer />
-      <div className="panel-header panel-header-sm">
-      </div>
+      
       <div className="card">
       </div>
       <div className="content">

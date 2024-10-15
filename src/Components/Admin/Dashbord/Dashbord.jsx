@@ -2,15 +2,13 @@ import { useState, useEffect } from "react";
 import CRUD from "../CRUD/CRUD";
 import Statistic from "../Statistic/Statistic";
 import Evenement from "../Evenement/Evenement";
-import Association from "../Association/Association";
 import Ressenssement from "../Ressessement/RessessementMembre";
 import { useNavigate } from "react-router-dom";
 import ChoixPayement from "../Payement/ChoixPayement";
 import ChoixDemande from "../Demande/ChoixDemande";
 import Etat from "../Etat/Etat";
 import ChoixUtilisateur from "../Utilisateur/ChoixUtilisateur";
-import Apropos from "../Apropos/Apropos";
-import Qui from "../Qui/Qui";
+import ChoixAssociation from "../Association/ChoixAssociation";
 
 const Dashbord = () => {
   const [page, setPage] = useState(0);
@@ -75,18 +73,7 @@ const Dashbord = () => {
                       <p>Association</p>
                     </a>
                   </li>
-                  <li className={page === 9 ? "active" : ""} onClick={() => setPage(9)}>
-                    <a href="#">
-                      <i className="now-ui-icons education_atom"></i>
-                      <p>A propos</p>
-                    </a>
-                  </li>
-                  <li className={page === 10 ? "active" : ""} onClick={() => setPage(10)}>
-                    <a href="#">
-                      <i className="now-ui-icons education_atom"></i>
-                      <p>Dirigeant</p>
-                    </a>
-                  </li>
+                  
                   <li className={page === 3 ? "active" : ""} onClick={() => setPage(3)}>
                     <a href="#">
                       <i className="now-ui-icons business_badge"></i>
@@ -101,7 +88,7 @@ const Dashbord = () => {
                   </li>
                   <li className={page === 7 ? "active" : ""} onClick={() => setPage(7)}>
                     <a href="#">
-                      <i className="now-ui-icons users_single-02"></i>
+                      <i className="now-ui-icons travel_info"></i>
                       <p>Etat Membre</p>
                     </a>
                   </li>
@@ -231,13 +218,11 @@ const Dashbord = () => {
             {page === 1 && <CRUD />}
             {page === 2 && <Evenement />}
             {page === 3 && <Ressenssement />}
-            {page === 4 && <Association />}
+            {page === 4 && <ChoixAssociation />}
             {page === 5 && <ChoixPayement />}
             {page === 6 && <ChoixDemande />}
             {page === 7 && <Etat />}
             {page === 8 && <ChoixUtilisateur />}
-            {page === 9 && <Apropos />}
-            {page === 10 && <Qui />}
           
         </div>
       </div>

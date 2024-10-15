@@ -97,7 +97,11 @@ const Reception = () => {
                                             {reception.nomDonationFinancier}
                                         </td>
                                         <td className="text-left">
-                                            {reception.status ? 'Vrai' : 'Faux'}
+                                            {reception.status ? (
+                                                <i className="now-ui-icons ui-1_check" style={{ color: 'green' }} ></i>
+                                            ) : (
+                                                <i className="now-ui-icons ui-1_simple-remove" style={{ color: 'red' }} ></i>
+                                            )}
                                         </td>
                                         <td className="text-left">
                                         {new Date(reception.dateDonationFinancier).toISOString().split('T')[0]}

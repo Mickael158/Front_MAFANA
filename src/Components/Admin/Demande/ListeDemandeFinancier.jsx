@@ -152,7 +152,7 @@ const ListeDemandeFinancier = () => {
                                                     style={{ width: '50%' }}
                                                     onClick={() => handleSelectMember(demande)}
                                                 >
-                                                    Ok
+                                                    <i className="now-ui-icons ui-1_check" style={{ color: 'white' }} ></i>
                                                 </button>
                                             </td>
                                             <td className="text-center">

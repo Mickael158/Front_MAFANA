@@ -154,7 +154,7 @@ const ListeDemandeMateriel = () => {
                                                     style={{ width: '50%' }}
                                                     onClick={() => handleSelectMember(demande)}
                                                 >
-                                                    Valider
+                                                    <i className="now-ui-icons ui-1_check" style={{ color: 'white' }} ></i>
                                                 </button>
                                             </td>
                                             <td className="text-center">
