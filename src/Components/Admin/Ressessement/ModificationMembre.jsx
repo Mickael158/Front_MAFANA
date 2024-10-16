@@ -55,7 +55,7 @@ const ModificationMembre = () => {
 
   const restaurationMembre = async (id) => {
     try {
-      await axios.post(`https://localhost:8000/api/personneRestaurer/${id}`, {}, { 
+      await axios.post(`https://localhost:8000/api/restorer/${id}`, {}, { 
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
