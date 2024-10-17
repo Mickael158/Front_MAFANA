@@ -513,3 +513,23 @@ select pm.* from personne_membre pm
         AND (g.id = 1)
         AND (pmp.id_profession_id = 1)
         LIMIT 10;
+
+select dm.*    
+    FROM demande_materiel dm 
+        JOIN validation_demande_materiel vdm on dm.id = vdm.id_demande_materiel_id
+        JOIN personne_membre pm on pm.id=dm.id_personne_membre_id
+        WHERE 1=1
+    AND (pm.nom_membre='Mickael' OR pm.prenom_membre='Mickael') 
+    AND dm.id_materiel_id = 1
+    AND dm.date_demande_financier BETWEEN '2024-10-24' AND '2024-10-24'
+    LIMIT 10;
+
+select dm.*    
+    FROM demande_financier dm 
+        JOIN validation_demande_financier vdm on dm.id = vdm.id_demande_financier_id
+        JOIN personne_membre pm on pm.id=dm.id_personne_membre_id
+    WHERE 1=1
+    AND (pm.nom_membre='Mickael' OR pm.prenom_membre='Mickael') 
+    AND dm.montant > 0
+    AND dm.date_demande_financier BETWEEN '2024-10-24' AND '2024-10-24'
+    LIMIT 10;

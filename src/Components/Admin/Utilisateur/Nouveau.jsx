@@ -55,7 +55,7 @@ const Nouveau = () => {
             return; 
         }
         try {
-            await axios.post('https://localhost:8000/api/Utilisateur',
+            await axios.post('https://localhost:8000/api/Utilisateurs',
                 {Role:selectedRoles, idPersonne:selectedId,username:selectedEmail,Password:selectedPwd},
             {
                 headers:

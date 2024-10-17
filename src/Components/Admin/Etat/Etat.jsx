@@ -202,7 +202,9 @@ const Etat = () => {
                                                         </td>
                                                         <td className="text-right">
                                                             <button className="btn" style={{ backgroundColor: color }}>
-                                                                {member.pourcentage}%
+                                                                {Number.isInteger(member.pourcentage) 
+                                                                    ? member.pourcentage 
+                                                                    : member.pourcentage.toFixed(2)}%
                                                             </button>
                                                         </td>
                                                     </tr>

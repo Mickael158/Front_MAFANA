@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Demande from "./Demande";
 import ChoixListeDemande from "./ChoixListeDemande";
+import ChoixArchive from "./ChoixArchive";
 
 const ChoixDemande = () => {
     const [page, setPage] = useState(0);
@@ -19,12 +20,16 @@ const ChoixDemande = () => {
                       <button className="btn btn-success btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
                   setPage(1);
                 }}>Nouveau Demande</button>
+                <button className="btn btn-info btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
+                  setPage(2);
+                }}>Archive</button>
                     </div>
                 </div>
               </div>
               <div className="card-body">
                 {page === 1 && <Demande />}
                 {page === 0 && <ChoixListeDemande />}
+                {page === 2 && <ChoixArchive />}
               </div>
             </div>
     </>
