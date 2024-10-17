@@ -31,13 +31,12 @@ const Materiel = () => {
             return; 
         }
         try {
-            console.log(IdMateriel , selectedNom , nombre , image);
             await axios.post('https://127.0.0.1:8000/api/DonnationMateriels', {
                 utilisateur: token,
                 id_materiel_id: IdMateriel,
                 nom_donnateur_materiel: selectedNom,
                 nombre: nombre,
-                image: "aaa"
+                image: 'AAA'
             }, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -172,7 +171,7 @@ const Materiel = () => {
                                         />
                                     </div>
                                 </div>
-                                {/* <div className="col-md-3 pr-1">
+                                <div className="col-md-3 pr-1">
                                     <div className="form-group">
                                         <label>Image</label>
                                         <input
@@ -181,7 +180,7 @@ const Materiel = () => {
                                             onChange={(e) => setImage(e.target.files[0])}
                                         />
                                     </div>
-                                </div> */}
+                                </div>
                                 <div className="col-md-3 pr-1 mt-3">
                                     <button className="btn btn-success btn-block" type="submit">
                                         Donner

@@ -266,13 +266,16 @@ const PersonneById = async (id) => {
         'Authorization' : `Bearer ${token}`
       }
     })
+    console.log(response.data);
     setPersonneMembre({...PersonneMembre,
       Nom: response.data.nomMembre,
       Prenom: response.data.prenomMembre,
       Adresse: response.data.Address,
       Email: response.data.Email,
       Telephone: response.data.Telephone,
-      DateNaissance: response.data.dateDeNaissance
+      DateNaissance: response.data.dateDeNaissance,
+      IdGenre: response.data.idGenre,  
+      IdVillage: response.data.idVillage
     });
     setShowModal(true);
   } catch (error) {
@@ -563,8 +566,8 @@ const handleExport = async (event) => {
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
                       <label>Genre</label>
-                        <select className="form-control" value={ PersonneMembre.IdGenre } onChange={(e) => setPersonneMembre({...PersonneMembre,IdGenre : e.target.value,})}>
-                        <option>Choisir le Genre</option>
+                        <select className="form-control" value={ PersonneMembre.IdGenre.id } onChange={(e) => setPersonneMembre({...PersonneMembre,IdGenre : e.target.value,})}>
+                        <option>{ PersonneMembre.IdGenre.Nom_Genre }</option>
                         {Array.isArray(Genre) ? (
                             Genre.map(Genre => (
                                 <option key={Genre.id} value={Genre.id} className="form-control">
@@ -579,8 +582,8 @@ const handleExport = async (event) => {
                     <div className="col-md-5 pr-1">
                       <div className="form-group">
                       <label>Village</label>
-                        <select className="form-control" value={ PersonneMembre.IdVillage } onChange={(e) => setPersonneMembre({...PersonneMembre,IdVillage : e.target.value,})}>
-                        <option>Choisir un village</option>
+                        <select className="form-control" value={ PersonneMembre.IdVillage.id } onChange={(e) => setPersonneMembre({...PersonneMembre,IdVillage : e.target.value,})}>
+                        <option>{ PersonneMembre.IdVillage.Nom_Village }</option>
                         {Array.isArray(Village) ? (
                             Village.map(Village => (
                                 <option key={Village.id} value={Village.id} className="form-control">
