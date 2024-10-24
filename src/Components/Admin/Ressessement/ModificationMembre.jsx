@@ -62,6 +62,8 @@ const ModificationMembre = () => {
         }
       });
       toast.success('Membre Restauré');
+      await SelectMembreQuitte();
+      await recherche();
       setShowModalCorbeil(false);
     } catch (error) {
       console.error(error);
@@ -166,11 +168,11 @@ const ModificationMembre = () => {
         
     });
   };  
-  const recherche =  (event) => {
+  const recherche =  async (event) => {
     if(event){
       event.preventDefault();
   }
-    axios.post('https://localhost:8000/api/recherchePersonne',{
+    await axios.post('https://localhost:8000/api/recherchePersonne',{
         data: Data,
         village: Idvillage,
         genre: Idgenre,
@@ -280,10 +282,10 @@ const PersonneById = async (id) => {
   }
 } 
 
-const QuitteMembre = (event) => {
+const QuitteMembre = async (event) => {
   event.preventDefault();
   try{
-       axios.post(`https://127.0.0.1:8000/api/Quitte`,
+       await axios.post(`https://127.0.0.1:8000/api/Quitte`,
         {famille : devisData },
           {
               headers: 
@@ -292,6 +294,8 @@ const QuitteMembre = (event) => {
                 'Authorization' : `Bearer ${token}`
               }
             });
+            await SelectMembreQuitte();
+            await recherche();
             setShowModalQuitte(false);
             toast.success("Personne quitter inserer");
   }catch(error){
