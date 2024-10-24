@@ -134,7 +134,7 @@ const ListeDemandeMateriel = () => {
                                     <th className="text-left">Motif</th>
                                     <th className="text-right">Nombre</th>
                                     <th className="text-right">Pourcentage</th>
-                                    <th className="text-center">Action</th>
+                                    <th className="text-center">Valider</th>
                                     <th className="text-center">Refuser</th>
                                 </tr>
                             </thead>
@@ -142,7 +142,7 @@ const ListeDemandeMateriel = () => {
                                 {Array.isArray(listeDemande) && listeDemande.length > 0 ? (
                                     listeDemande.map(demande => (
                                         <tr key={demande.demandeMateriel.id}>
-                                            <td className="text-left">{demande.demandeMateriel.idPersonneMembre.Nom_Membre}</td>
+                                            <td className="text-left">{demande.demandeMateriel.idPersonneMembre.Nom_Membre} {demande.demandeMateriel.idPersonneMembre.Prenom_Membre} </td>
                                             <td className="text-left">{demande.demandeMateriel.idPersonneMembre.Telephone}</td>
                                             <td className="text-left">{demande.demandeMateriel.idMateriel.NomMateriel}</td>
                                             <td className="text-left">{demande.demandeMateriel.Motif}</td>

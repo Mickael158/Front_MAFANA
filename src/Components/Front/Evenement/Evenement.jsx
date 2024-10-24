@@ -79,10 +79,10 @@ const Evenement = () => {
                   <div className="author">
                     <div className="name">
                       <h6 className="mb-0 font-weight-bolder">
-                        Prochain evenement aurras lieu a {E.lieu_evenement}
+                        {E.nom}
                       </h6>
                       <div className="stats">
-                        <i className="far fa-clock"></i>et se derouleras le {new Date(E.date_evenement).toLocaleDateString()}
+                        <i className="far fa-clock"></i> Aurras lieu a {E.lieu_evenement}  , Débute le {new Date(E.date_evenement).toLocaleDateString()} et se termine le {new Date(E.date_fin_evenement).toLocaleDateString()}
                       </div>
                     </div>
                   </div>

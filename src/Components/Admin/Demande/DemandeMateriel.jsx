@@ -185,7 +185,7 @@ const DemandeMateriel = (event) => {
                                                     style={{ width: '50%' }}
                                                     onClick={() => handleSelectMember(member)}
                                                 >
-                                                    Choisir
+                                                <i className="now-ui-icons gestures_tap-01 fs-5"></i>
                                                 </button>
                                             </td>
                                         </tr>

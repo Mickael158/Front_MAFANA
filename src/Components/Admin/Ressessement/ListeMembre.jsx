@@ -205,7 +205,7 @@ const handleExport = async (event) => {
     toast.error('Veuillez sélectionner un fichier CSV.');
     return;
   }
-
+  console.log(`https://localhost:8000/api/import/${fileName}`);
   try {
     const response = await axios.post(`https://localhost:8000/api/import/${fileName}`, null, {
       headers: {

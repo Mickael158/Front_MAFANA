@@ -145,7 +145,11 @@ const ListeDemandeFinancier = () => {
                                             <td className="text-left">{demande.demandefinancier.idPersonneMembre.Telephone}</td>
                                             <td className="text-left">{demande.motif}</td>
                                             <td className="text-right">{demande.demandefinancier.Montant}Ar</td>
-                                            <td className="text-right">{demande.pourcentage}%</td>
+                                            <td className="text-right">
+                                                            {Number.isInteger(demande.pourcentage) 
+                                                                    ? demande.pourcentage 
+                                                                    : demande.pourcentage.toFixed(2)}%
+                                            </td>
                                             <td className="text-center">
                                                 <button
                                                     className="btn btn-success"

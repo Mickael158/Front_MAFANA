@@ -65,14 +65,14 @@ const Contact = () => {
                     <p className="mb-0 font-weight-bolder">{Asoociation.Siege}</p>
                   </div>
                 </div>
-                <div className="p-3 info-horizontal d-flex align-items-center text-center justify-content-center">
+                {/* <div className="p-3 info-horizontal d-flex align-items-center text-center justify-content-center">
                   <div className="icon icon-shape bg-gradient-success shadow-primary text-center">
                     <i className="fas fa-tty"></i>
                   </div>
                   <div className="description ps-3">
                     <p className="mb-0 font-weight-bolder"> {Asoociation.Telephone} </p>
                   </div>
-                </div>
+                </div> */}
           
                 <div className="p-3 info-horizontal d-flex align-items-center text-center justify-content-center">
                   <div className="icon icon-shape  bg-gradient-warning shadow-warning text-center">
