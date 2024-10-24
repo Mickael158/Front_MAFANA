@@ -144,7 +144,7 @@ const ListeDemandeFinancier = () => {
                                             <td className="text-left">{demande.demandefinancier.idPersonneMembre.Nom_Membre} {demande.demandefinancier.idPersonneMembre.Prenom_Membre} </td>
                                             <td className="text-left">{demande.demandefinancier.idPersonneMembre.Telephone}</td>
                                             <td className="text-left">{demande.motif}</td>
-                                            <td className="text-right">{demande.demandefinancier.Montant}Ar</td>
+                                            <td className="text-right">{demande.demandefinancier.Montant.toLocaleString()}Ar</td>
                                             <td className="text-right">
                                                             {Number.isInteger(demande.pourcentage) 
                                                                     ? demande.pourcentage 
@@ -186,7 +186,9 @@ const ListeDemandeFinancier = () => {
                     <Modal.Title>Confirmer demande Financier</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Mr. ou Mdm {selectedNom} a demandé {selectMontant}Ar pour cause {selectMotif} avec une pourcentage de {selectPourcentage}%.</p>
+                <p>
+                    Mr. ou Mdm {selectedNom} a demandé {selectMontant}Ar pour cause {selectMotif} avec un pourcentage de {Number.isInteger(selectPourcentage) ? selectPourcentage : selectPourcentage.toFixed(2)}%.
+                </p>
                     <form onSubmit={insertionValidationFinancier}>
                         <div className="row mb-5">
                             <div className="col-md-5 pr-1">

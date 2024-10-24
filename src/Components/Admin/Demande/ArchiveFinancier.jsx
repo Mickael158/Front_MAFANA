@@ -77,7 +77,7 @@ const ArchiveFinancier = () => {
                                         <tr key={donnationFinancier.id_demande_financier_id}>
                                             <td className="text-left">{donnationFinancier.nom_membre} {donnationFinancier.prenom_membre}</td>
                                             <td className="text-left">{donnationFinancier.motif}</td>
-                                            <td className="text-right">{donnationFinancier.montant}Ar</td>
+                                            <td className="text-right">{parseInt(donnationFinancier.montant).toLocaleString()} Ar</td>
                                         </tr>
                                     ))
                                 ) : (

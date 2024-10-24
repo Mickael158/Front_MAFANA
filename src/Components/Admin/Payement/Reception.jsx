@@ -108,7 +108,7 @@ const Reception = () => {
                                             
                                         </td>
                                         <td className="text-right">
-                                            {reception.montant}Ar
+                                            {reception.montant.toLocaleString()}Ar
                                         </td>
                                 </tr>
                             ) )

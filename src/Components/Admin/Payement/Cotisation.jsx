@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Modal } from 'react-bootstrap'; // Assuming you're using react-bootstrap for modal
+import { Button, Modal } from 'react-bootstrap'; // Assuming you're using react-bootstrap for modal
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 const Cotisation = () => {
@@ -122,6 +122,20 @@ const Cotisation = () => {
                     <h4 className="card-title">Membre Responsable</h4>
                 </div>
                 <div className="card-body">
+                <form >
+                    <div className="row">
+                        <div className="col-4">
+                            <input className="form-control" placeholder="rechercher..." ></input>
+                        </div>
+                        <div className="col-4">
+                            <input type="date" className="form-control" placeholder="rechercher..."></input>
+                        </div>
+                        <div className="col-4">
+                            <input type="date" className="form-control" placeholder="rechercher..."></input>
+                        </div>
+                    </div>
+                    <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
+                </form>
                     <div className="table-responsive">
                         <table className="table">
                             <thead className="text-dark">
@@ -186,7 +200,7 @@ const Cotisation = () => {
                                         <tr key={index}>
                                             <td>{divis.personnMembre.nomMembre} {divis.personnMembre.prenomMembre}</td>
                                             <td>{new Date(divis.datePayer).toLocaleDateString()}</td>
-                                            <td>{divis.Montant} Ar</td>
+                                            <td>{divis.Montant.toLocaleString()} Ar</td>
                                         </tr>
                                         
                                     ))
