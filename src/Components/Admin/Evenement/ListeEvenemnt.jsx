@@ -141,34 +141,34 @@ const modification = async (e) => {
             <table className="table">
               <thead className="text-dark">
                 <tr>
-                  <th>Nom de l'évènement</th>
-                  <th>Date de début</th>
-                  <th>Date fin</th>
-                  <th>Lieu</th>
-                  <th>Type d'événement</th>
-                  <th>Affichage</th>
-                  <th>detail</th>
-                  <th>Supprimer</th>
+                  <th className="text-left">Nom de l'évènement</th>
+                  <th className="text-left">Date de début</th>
+                  <th className="text-left">Date fin</th>
+                  <th className="text-left">Lieu</th>
+                  <th className="text-left">Type d'évènement</th>
+                  <th className="text-left">Affichage</th>
+                  <th className="text-center">Détail</th>
+                  <th className="text-center">Supprimer</th>
                 </tr>
               </thead>
               <tbody>
                 {Array.isArray(evenements) && evenements.length > 0 ? (
                   evenements.map((evenement) => (
                     <tr key={evenement.id}>
-                      <td>{evenement.Nom}</td>
-                      <td>
+                      <td className="text-left">{evenement.Nom}</td>
+                      <td className="text-left">
                         {new Date(evenement.dateEvenement)
                           .toISOString()
                           .split("T")[0]}
                       </td>
-                      <td>
+                      <td className="text-left">
                         {new Date(evenement.dateFinEvenement)
                           .toISOString()
                           .split("T")[0]}
                       </td>
-                      <td>{evenement.lieuEvenement}</td>
-                      <td>{evenement.idTypeEvenement.Nom_Type_Evenement}</td>
-                      <td>
+                      <td className="text-left">{evenement.lieuEvenement}</td>
+                      <td className="text-left">{evenement.idTypeEvenement.Nom_Type_Evenement}</td>
+                      <td className="text-center">
                         <div
                           className={`toggle-switch ${
                             evenement.publier === true ? "toggled" : ""
@@ -179,17 +179,17 @@ const modification = async (e) => {
                           <div className="toggle-button" />
                         </div>
                       </td>
-                      <td>
+                      <td className="text-center">
                         <button
                           className="btn btn-success btn-block"
                           style={{ width: "100%" }}
                           onClick={(e) => EvenenemntById(e, evenement.id)}
                         >
                           {/* <i className="now-ui-icons shopping_basket"></i> */}
-                          voir
+                          Voir
                         </button>
                       </td>
-                      <td>
+                      <td className="text-center">
                         <button
                           className="btn btn-danger btn-block"
                           style={{ width: "50%" }}

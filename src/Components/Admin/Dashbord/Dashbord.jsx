@@ -9,15 +9,34 @@ import ChoixDemande from "../Demande/ChoixDemande";
 import Etat from "../Etat/Etat";
 import ChoixUtilisateur from "../Utilisateur/ChoixUtilisateur";
 import ChoixAssociation from "../Association/ChoixAssociation";
+import axios from "axios";
 
 const Dashbord = () => {
+  const token = localStorage.getItem("token");
+  const [Notif, setNotif] = useState('');
   const [page, setPage] = useState(0);
   const [roles, setRoles] = useState([]);
   const [navOpen, setNavOpen] = useState(false); // État pour la navigation
   const navigate = useNavigate();
 
+  const fetchListeDemande = () => {
+    axios.get('https://localhost:8000/api/CountDemande',{
+        headers:
+        {
+          'Authorization' : `Bearer ${token}`
+        }
+      })
+        .then(response => {
+          setNotif(response.data);
+        })
+        .catch(error => {
+            console.error("Erreur lors de la récupération des données", error);
+        });
+};
+
   // Charger les rôles dès le chargement du composant
   useEffect(() => {
+    fetchListeDemande();
     const storedRoles = localStorage.getItem("decode");
     if (storedRoles) {
       setRoles(storedRoles.split(","));
@@ -77,15 +96,31 @@ const Dashbord = () => {
                   <li className={page === 3 ? "active" : ""} onClick={() => setPage(3)}>
                     <a href="#">
                       <i className="now-ui-icons business_badge"></i>
-                      <p>Ressessement</p>
+                      <p>Recensement</p>
                     </a>
                   </li>
                   <li className={page === 6 ? "active" : ""} onClick={() => setPage(6)}>
-                    <a href="#">
-                      <i className="now-ui-icons ui-1_bell-53"></i>
-                      <p>Demande</p>
-                    </a>
-                  </li>
+                        <a href="#">
+                          <i className="now-ui-icons ui-1_bell-53"></i>
+                          <p>Demande</p>
+                          {Notif > 0 && (
+                            <span
+                              style={{
+                                backgroundColor: "red",
+                                color: "white",
+                                borderRadius: "50%",
+                                padding: "1px 8px",
+                                fontSize: "12px",
+                                position: "absolute",
+                                top: "10px",
+                                right: "10px",
+                              }}
+                            >
+                              {Notif}
+                            </span>
+                          )}
+                        </a>
+                      </li>
                   <li className={page === 7 ? "active" : ""} onClick={() => setPage(7)}>
                     <a href="#">
                       <i className="now-ui-icons travel_info"></i>
@@ -138,7 +173,7 @@ const Dashbord = () => {
                 <li className={page === 3 ? "active" : ""} onClick={() => setPage(3)}>
                   <a href="#">
                     <i className="now-ui-icons business_badge"></i>
-                    <p>Ressessement</p>
+                    <p>Recensement</p>
                   </a>
                 </li>
               )}

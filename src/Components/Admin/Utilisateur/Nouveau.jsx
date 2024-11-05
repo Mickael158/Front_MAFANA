@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Modal } from 'react-bootstrap'; // Assuming you're using react-bootstrap for modal
+import { Button, Modal } from 'react-bootstrap'; // Assuming you're using react-bootstrap for modal
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -15,14 +15,36 @@ const Nouveau = () => {
     const [showModal, setShowModal] = useState(false);
     const [rolee, setRole] = useState([]);
     const [selectedRoles, setSelectedRoles] = useState([]); // State to track selected role IDs
-
-    const ListeMembre = () => {
-        axios.get('https://localhost:8000/api/getPersIndepNotUser', {
+    const [Data, setData] = useState(null);
+    const [Idvillage,setIdvillage] = useState(null);
+    const [Village,setVillage] = useState('');
+    const ListeVillage = () => {
+      axios.get('https://localhost:8000/api/village',{
+      headers: 
+      {
+          'content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+      },
+      }).then(response => {
+          setVillage(response.data)
+      });
+    }; 
+    const ListeMembre = (event) => {
+        if(event){
+            event.preventDefault();
+        }
+        axios.post('https://localhost:8000/api/Etat',{
+            data: Data,
+            village: Idvillage
+        },{
             headers: {
+                'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
         }).then(response => {
             setMembre(response.data);
+        }).catch(error => {
+            console.error("Erreur lors de la récupération des membres:", error);
         });
     };
 
@@ -38,12 +60,13 @@ const Nouveau = () => {
 
     useEffect(() => {
         ListeMembre();
+        ListeVillage();
     } , []);
 
     const handleSelectMember = (member) => {
-        setSelectedNom(member.nom_membre + ' ' + member.prenom_membre);
-        setSelectedId(member.id);
-        setSelectedEmail(member.email);
+        setSelectedNom(member.personnMembre.nomMembre + ' ' + member.personnMembre.prenomMembre);
+        setSelectedId(member.personnMembre.id);
+        setSelectedEmail(member.personnMembre.Email);
         setShowModal(true);
         Listerole();
     };
@@ -68,7 +91,6 @@ const Nouveau = () => {
             setSelectedRoles([]);
             setShowModal(false);
         } catch (error) {
-            console.log(error);
             toast.error("Erreur d'insertion");
         }
     }
@@ -94,15 +116,34 @@ const Nouveau = () => {
                     <h4 className="card-title">Choisissez les nouveaux utilisateurs</h4>
                 </div>
                 <div className="card-body">
+                <form onSubmit={ListeMembre}>
+                    <div className="row">
+                        <div className="col-3">
+                            <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
+                        </div>
+                        <div className="col-3">
+                            <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
+                            <option>Choisir un Village</option>
+                            {Array.isArray(Village) ? (
+                                Village.map(Village => (
+                                    <option key={Village.id} value={Village.id} className="form-control">
+                                    {Village.nomVillage}
+                                    </option>
+                                ) )
+                            ) : ( <option>Aucune Valeur</option> ) }
+                            </select>
+                        </div>
+                    </div>
+                    <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
+                </form>
                     <div className="table-responsive">
                         <table className="table">
                             <thead className="text-dark">
                                 <tr>
-                                    <th className="text-left">Nom du ,embre</th>
+                                    <th className="text-left">Nom du membre</th>
                                     <th className="text-left">Prénom</th>
                                     <th className="text-left">Téléphone</th>
                                     <th className="text-left">Email</th>
-                                    <th className="text-left">Situqtion</th>
                                     <th className="text-center">Cliquer pour choisir</th>
                                 </tr>
                             </thead>
@@ -110,11 +151,10 @@ const Nouveau = () => {
                                 {Array.isArray(Membre) ? (
                                     Membre.map(member => (
                                         <tr key={member.id}>
-                                            <td className="text-left">{member.nom_membre}</td>
-                                            <td className="text-left">{member.prenom_membre}</td>
-                                            <td className="text-left">{member.telephone}</td>
-                                            <td className="text-left">{member.email}</td>
-                                            <td className="text-left">{member.situation}</td>
+                                            <td className="text-left">{member.personnMembre.nomMembre}</td>
+                                            <td className="text-left">{member.personnMembre.prenomMembre}</td>
+                                            <td className="text-left">{member.personnMembre.Telephone}</td>
+                                            <td className="text-left">{member.personnMembre.Email}</td>
                                             <td className="text-center">
                                                 <button
                                                     className="btn btn-danger"

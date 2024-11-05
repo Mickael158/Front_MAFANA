@@ -11,15 +11,36 @@ const Cotisation = () => {
     const [showModal, setShowModal] = useState(false);
     const [devisData, setDevisData] = useState([]);
     const token = localStorage.getItem("token");
-
-    const ListeMembre = () => {
-        axios.get('https://localhost:8000/api/PersonneIndep',{
-            headers:
-            {
-              'Authorization' : `Bearer ${token}`
+    const [Data, setData] = useState(null);
+    const [Idvillage,setIdvillage] = useState(null);
+    const [Village,setVillage] = useState('');
+    const ListeVillage = () => {
+      axios.get('https://localhost:8000/api/village',{
+      headers: 
+      {
+          'content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+      },
+      }).then(response => {
+          setVillage(response.data)
+      });
+    };  
+    const ListeMembre = (event) => {
+        if(event){
+            event.preventDefault();
+        }
+        axios.post('https://localhost:8000/api/Etat',{
+            data: Data,
+            village: Idvillage
+        },{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
             }
-          }).then(response => {
+        }).then(response => {
             setMembre(response.data);
+        }).catch(error => {
+            console.error("Erreur lors de la récupération des membres:", error);
         });
     };
     const VoireDevis = () => {
@@ -64,10 +85,11 @@ const Cotisation = () => {
     
     useEffect(() => {
         ListeMembre(); 
-    }) , [];
+        ListeVillage();
+    }, []) ;
     const handleSelectMember = (member) => {
-        setSelectedNom(member.nom_membre + ' ' + member.prenom_membre);
-        setSelectedId(member.id);
+        setSelectedNom(member.personnMembre.nomMembre + ' ' + member.personnMembre.prenomMembre);
+        setSelectedId(member.personnMembre.id);
     };
     const totalMontant = devisData.flatMap(innerArray =>
         innerArray.map(divis => divis.Montant)
@@ -122,16 +144,22 @@ const Cotisation = () => {
                     <h4 className="card-title">Membre Responsable</h4>
                 </div>
                 <div className="card-body">
-                <form >
+                <form onSubmit={ListeMembre}>
                     <div className="row">
-                        <div className="col-4">
-                            <input className="form-control" placeholder="rechercher..." ></input>
+                        <div className="col-3">
+                            <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
                         </div>
-                        <div className="col-4">
-                            <input type="date" className="form-control" placeholder="rechercher..."></input>
-                        </div>
-                        <div className="col-4">
-                            <input type="date" className="form-control" placeholder="rechercher..."></input>
+                        <div className="col-3">
+                            <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
+                            <option>Choisir un Village</option>
+                            {Array.isArray(Village) ? (
+                                Village.map(Village => (
+                                    <option key={Village.id} value={Village.id} className="form-control">
+                                    {Village.nomVillage}
+                                    </option>
+                                ) )
+                            ) : ( <option>Aucune Valeur</option> ) }
+                            </select>
                         </div>
                     </div>
                     <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
@@ -144,19 +172,21 @@ const Cotisation = () => {
                                     <th className="text-left">Prénom</th>
                                     <th className="text-left">Téléphone</th>
                                     <th className="text-left">Email</th>
-                                    <th className="text-left">Situation</th>
+                                    <th className="text-right">Pourcentage</th>
                                     <th className="text-center">Cliquer pour choisir</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {Array.isArray(Membre) ? (
                                     Membre.map(member => (
-                                        <tr key={member.id}>
-                                            <td className="text-left">{member.nom_membre}</td>
-                                            <td className="text-left">{member.prenom_membre}</td>
-                                            <td className="text-left">{member.telephone}</td>
-                                            <td className="text-left">{member.email}</td>
-                                            <td className="text-left">{member.situation}</td>
+                                        <tr key={member.personnMembre.id}>
+                                            <td className="text-left">{member.personnMembre.nomMembre}</td>
+                                            <td className="text-left">{member.personnMembre.prenomMembre}</td>
+                                            <td className="text-left">{member.personnMembre.Telephone}</td>
+                                            <td className="text-left">{member.personnMembre.Email}</td>
+                                            <td className="text-right">{Number.isInteger(member.pourcentage) 
+                                                                    ? member.pourcentage 
+                                                                    : member.pourcentage.toFixed(2)} % </td>
                                             <td className="text-center">
                                                 <button
                                                     className="btn btn-danger"
@@ -184,13 +214,13 @@ const Cotisation = () => {
                     <Modal.Title>Devis</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Devis details pour {selectedNom}.</p>
+                    <p>Devis détails pour {selectedNom}.</p>
                     <table className="table">
                         <thead className="text-dark">
                             <tr>
-                                <th>Nom et prenom</th>
-                                <th>Date à payer</th>
-                                <th>Montant</th>
+                                <th className="text-left">Nom et prénom</th>
+                                <th className="text-left">Date à payer</th>
+                                <th className="text-right">Montant</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -198,9 +228,9 @@ const Cotisation = () => {
                                 devisData.flatMap(innerArray =>
                                     innerArray.map((divis, index) => (
                                         <tr key={index}>
-                                            <td>{divis.personnMembre.nomMembre} {divis.personnMembre.prenomMembre}</td>
-                                            <td>{new Date(divis.datePayer).toLocaleDateString()}</td>
-                                            <td>{divis.Montant.toLocaleString()} Ar</td>
+                                            <td className="text-left">{divis.personnMembre.nomMembre} {divis.personnMembre.prenomMembre}</td>
+                                            <td className="text-left">{new Date(divis.datePayer).toLocaleDateString()}</td>
+                                            <td className="text-right">{Number(divis.Montant).toLocaleString()} Ar</td>
                                         </tr>
                                         
                                     ))
@@ -210,8 +240,8 @@ const Cotisation = () => {
                                 <tr><td colSpan="6">Aucun membre trouvé</td></tr>
                             )}
                              <tr>
-                                    <td colSpan="2" style={{"fontWeight":"bold" , "color":"red"}}>Montant Total</td>
-                                    <td colSpan="1" style={{"fontWeight":"bold" , "color":"red"}}>{totalMontant} Ar</td>
+                                    <td colSpan="2" style={{"fontWeight":"bold" , "color":"red"}} className="text-right">Montant Total :</td>
+                                    <td colSpan="1" style={{"fontWeight":"bold" , "color":"red"}} className="text-right">{Number(totalMontant).toLocaleString()} Ar</td>
                             </tr>
                         </tbody>
                     </table>

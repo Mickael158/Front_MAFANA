@@ -47,7 +47,7 @@ const Apropos = () => {
           <div className="col-md-12">
               <div className="card">
               <div className="card-header">
-                <h5 className="title">Apropos de l'Association</h5>
+                <h5 className="title">A propos de l'Association</h5>
               </div>
               <div className="card-body">
                 <form onSubmit={Modifier}>

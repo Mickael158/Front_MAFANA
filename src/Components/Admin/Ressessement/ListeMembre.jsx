@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import * as XLSX from 'xlsx';
 
 const ListeMembre = () => {
   const [Membre,setMembre] = useState('');
@@ -224,13 +225,40 @@ const handleExport = async (event) => {
     toast.error('Erreur lors de l\'importation du fichier.');
   }
 };
+const exportToExcel = () => {
+  // Aplatir les données des membres pour l'exportation
+  const dataToExport = Membre.map(membre => ({
+      'Nom du Membre': membre.nom_membre,
+      'Prénom': membre.prenom_membre,
+      'Adresse': membre.address,
+      'Téléphone': membre.telephone,
+      'Date de naissance': new Date(membre.date_de_naissance).toLocaleDateString('fr-FR', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+      }),
+      'Email': membre.email,
+      'Profession': membre.profession || '', // Ajouter profession si présente
+      'Décédé': membre.decede ? 'Oui' : 'Non' // Exemple d'utilisation d'une condition pour l'état de décès
+  }));
+
+  // Créer une feuille de travail à partir des données aplaties
+  const ws = XLSX.utils.json_to_sheet(dataToExport);
+  // Créer un classeur
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Membres');
+
+  // Exporter le fichier Excel
+  XLSX.writeFile(wb, 'liste_membres.xlsx');
+};
+
 
   return (
     <>
     <ToastContainer/>
       <div className="card">
           <div className="card-header">
-            <h4 className="card-title">Membre résponsable</h4>
+            <h4 className="card-title">Membre responsable</h4>
             <input 
               type="file" 
               className="form-control" 
@@ -268,6 +296,11 @@ const handleExport = async (event) => {
                     <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
                 </form>
                 <div className="table-responsive">
+                    <div className="col-md-8 d-flex">
+                            <button className="btn btn-primary btn-block" style={{ width: '50%' }} type="button" onClick={exportToExcel}>
+                                Exporter en Excel
+                            </button>
+                    </div>
                   <table className="table">
                     <thead className=" text-dark">
                       <th className="text-left">
@@ -400,7 +433,7 @@ const handleExport = async (event) => {
 
             <Modal show={showModaldece} onHide={() => setShowModalDece(false)} dialogClassName="modal-lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Personne décédé {selectedNom} </Modal.Title>
+                    <Modal.Title>Personne décédées {selectedNom} </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <p>Date de décé</p>

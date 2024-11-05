@@ -70,6 +70,7 @@ const ListeDemandeFinancier = () => {
                     },
                 }
             );
+            fetchListeDemande();
             toast.success("Demande Financier confirmer");
             setShowModal(false); // Close the modal on successful validation
         } catch (error) {
@@ -93,6 +94,7 @@ const ListeDemandeFinancier = () => {
                     },
                 }
             );
+            fetchListeDemande();
             toast.success("Demande refuser");
         } catch (error) {
             console.error('Erreur de suppression', error);
@@ -187,7 +189,7 @@ const ListeDemandeFinancier = () => {
                 </Modal.Header>
                 <Modal.Body>
                 <p>
-                    Mr. ou Mdm {selectedNom} a demandé {selectMontant}Ar pour cause {selectMotif} avec un pourcentage de {Number.isInteger(selectPourcentage) ? selectPourcentage : selectPourcentage.toFixed(2)}%.
+                    Mr. ou Mdm {selectedNom} a demandé {selectMontant}Ar pour cause {selectMotif} avec un pourcentage de {parseFloat(selectPourcentage).toFixed(2)} %.
                 </p>
                     <form onSubmit={insertionValidationFinancier}>
                         <div className="row mb-5">
@@ -197,10 +199,10 @@ const ListeDemandeFinancier = () => {
                                     <input
                                         type="text"
                                         className="form-control"
-                                        placeholder="montant"
+                                        placeholder="montant en Ariary"
                                         value={selectMontantV}
                                         onChange={(e) => setMontantV(e.target.value)}
-                                    />
+                                    /> 
                                 </div>
                             </div>
                         </div>

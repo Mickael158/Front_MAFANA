@@ -44,16 +44,17 @@ const Apropos = () => {
                     <div className="col-md-12 ">
                         <div className="info">
                             <i className="material-icons text-gradient text-primary text-8xl">MA.FA.NA</i>
-                            <h4 className="font-weight-bolder mt-4">Bienvenu dans notre site, vous pouvez voir ici :</h4>
+                            <h4 className="font-weight-bolder mt-4">Bienvenue dans notre site, vous pouvez voir ici :</h4>
                             <ul className="fs-6" style={{ 'list-style-type': 'none'}}>
                                 <li className="bold fs-5"><i className="ni ni-circle-08 text-lg me-5 text-warning"></i>A PROPOS</li>
                                 <li className="bold fs-5"><i className="ni ni-hat-3 text-lg me-5 text-warning"></i>QUI SOMME NOUS</li>
                                 <li className="bold fs-5"><i className="ni ni-mobile-button text-lg me-5 text-warning"></i>CONTACT</li>
+                                <li className="bold fs-5"><i className="ni ni-calendar-grid-58 text-lg me-5 text-warning"></i>Nos évenements à venir</li>
                             </ul>
-                            <h4 className="font-weight-bolder mt-4">Si vous êtes connecté , vous pouvez :</h4>
+                            <h4 className="font-weight-bolder mt-4">Si vous êtes connectés , vous pouvez :</h4>
                             <ul className="fs-6" style={{ 'list-style-type': 'none'}}>
                                 <li className="bold fs-5"><i className="ni ni-settings-gear-65 text-lg me-5 text-warning"></i>Accédé au gestion de l'association</li>
-                                <li className="bold fs-5"><i className="ni ni-box-2 text-md me-5 text-warning"></i>Faire des actions financier ou matériel sur l'association</li>
+                                <li className="bold fs-5"><i className="ni ni-box-2 text-md me-5 text-warning"></i>Faire des actions financier ou matérieles sur l'association</li>
                                 <li className="bold fs-5"><i className="ni ni-single-02 text-lg me-5 text-warning"></i>Cela est reservé aux responsables</li>
                             </ul>
                         </div>

@@ -69,6 +69,7 @@ const ListeDemandeMateriel = () => {
                     },
                 }
             );
+            fetchListeDemande();
             setShowModal(false); 
             toast.success("Demande validé");
         } catch (error) {
@@ -90,6 +91,7 @@ const ListeDemandeMateriel = () => {
                     },
                 }
             );
+            fetchListeDemande();
             toast.success("Demande refuser");
         } catch (error) {
             console.error('Erreur de suppression', error);
@@ -147,7 +149,7 @@ const ListeDemandeMateriel = () => {
                                             <td className="text-left">{demande.demandeMateriel.idMateriel.NomMateriel}</td>
                                             <td className="text-left">{demande.demandeMateriel.Motif}</td>
                                             <td className="text-right">{demande.Nombre}</td>
-                                            <td className="text-right">{demande.pourcentage}%</td>
+                                            <td className="text-right">{demande.pourcentage.toFixed(2)}%</td>
                                             <td className="text-center">
                                                 <button
                                                     className="btn btn-success"
@@ -186,7 +188,7 @@ const ListeDemandeMateriel = () => {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Mr. ou Mdm {selectedNom} a demandé {selectMontant} pour cause {selectMotif} avec un pourcentage de {selectPourcentage}%.</p>
+                    <p>Mr. ou Mdm {selectedNom} a demandé {selectMontant} pour cause {selectMotif} avec un pourcentage de  {parseFloat(selectPourcentage).toFixed(2)}%.</p>
                     <form onSubmit={insertionValidationMateriel}>
                         <div className="row mb-5">
                             <div className="col-md-5 pr-1">

@@ -50,7 +50,7 @@ const General = () => {
       setChartData({
         labels: labels,
         datasets: [{
-          label: "Montant",
+          label: "Tresorerie",
           backgroundColor: "#1e3d60",
           borderWidth: 1,
           data: data

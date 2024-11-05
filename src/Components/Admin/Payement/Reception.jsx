@@ -108,11 +108,11 @@ const Reception = () => {
                                             
                                         </td>
                                         <td className="text-right">
-                                            {reception.montant.toLocaleString()}Ar
+                                            {Number(reception.montant).toLocaleString()} Ar
                                         </td>
                                 </tr>
                             ) )
-                        ) : ( <tr><td>Null</td></tr>) }
+                        ) : ( <tr><td>Pas de don financié</td></tr>) }
                             </tbody>
                         </table>
                     </div>

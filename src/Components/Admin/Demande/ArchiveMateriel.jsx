@@ -55,7 +55,7 @@ const ArchiveMateriel = () => {
     <>
       <div className="card">
         <div className="card-header">
-            <h4 className="card-title">Liste des Demandes Materiel deja valider</h4>
+            <h4 className="card-title">Liste des Demandes Materielles deja valider</h4>
         </div>
         <div className="card-body">
             <form onSubmit={ListeDonnationMateriel}>

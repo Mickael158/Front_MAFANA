@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -25,19 +26,41 @@ const DemandeMateriel = () => {
       console.error('Erreur de chargement des Catgorie', error);
     }
   };
-  const ListeMembre = () => {
-    axios.get('https://localhost:8000/api/PersonneIndep',{
-        headers:
-        {
-          'Authorization' : `Bearer ${token}`
-        }
+  const [Data, setData] = useState(null);
+    const [Idvillage,setIdvillage] = useState(null);
+    const [Village,setVillage] = useState('');
+    const ListeVillage = () => {
+      axios.get('https://localhost:8000/api/village',{
+      headers: 
+      {
+          'content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+      },
       }).then(response => {
-        setMembre(response.data);
-    });
-};
+          setVillage(response.data)
+      });
+    };  
+    const ListeMembre = (event) => {
+        if(event){
+            event.preventDefault();
+        }
+        axios.post('https://localhost:8000/api/Etat',{
+            data: Data,
+            village: Idvillage
+        },{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(response => {
+            setMembre(response.data);
+        }).catch(error => {
+            console.error("Erreur lors de la récupération des membres:", error);
+        });
+    };
 const handleSelectMember = (member) => {
-    setSelectedNom(member.nom_membre + ' ' + member.prenom_membre);
-    setSelectedId(member.id);
+    setSelectedNom(member.personnMembre.nomMembre + ' ' + member.personnMembre.prenomMembre);
+    setSelectedId(member.personnMembre.id);
 };
 const DemandeMateriel = (event) => {
   event.preventDefault();
@@ -81,6 +104,7 @@ const DemandeMateriel = (event) => {
   useEffect(() => {
     ListeMateriel();
     ListeMembre();
+    ListeVillage();
   } , []);
   return (
     <>
@@ -158,27 +182,49 @@ const DemandeMateriel = (event) => {
                     <h4 className="card-title">Membre Responsable</h4>
                 </div>
                 <div className="card-body">
+                <form onSubmit={ListeMembre}>
+                    <div className="row">
+                        <div className="col-3">
+                            <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
+                        </div>
+                        <div className="col-3">
+                            <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
+                            <option>Choisir un Village</option>
+                            {Array.isArray(Village) ? (
+                                Village.map(Village => (
+                                    <option key={Village.id} value={Village.id} className="form-control">
+                                    {Village.nomVillage}
+                                    </option>
+                                ) )
+                            ) : ( <option>Aucune Valeur</option> ) }
+                            </select>
+                        </div>
+                    </div>
+                        <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
+                    </form>
                     <div className="table-responsive">
                         <table className="table">
                             <thead className="text-dark">
                                 <tr>
-                                    <th>Nom du Membre</th>
-                                    <th>Prénom</th>
-                                    <th>Téléphone</th>
-                                    <th>Email</th>
-                                    <th>Dérnière Cotisation Payée</th>
-                                    <th>Action</th>
+                                <th className="text-left">Nom du Membre</th>
+                                    <th className="text-left">Prénom</th>
+                                    <th className="text-left">Téléphone</th>
+                                    <th className="text-left">Email</th>
+                                    <th className="text-center">Pourcentage</th>
+                                    <th className="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {Array.isArray(Membre) ? (
                                     Membre.map(member => (
                                         <tr key={member.id}>
-                                            <td>{member.nom_membre}</td>
-                                            <td>{member.prenom_membre}</td>
-                                            <td>{member.telephone}</td>
-                                            <td>{member.email}</td>
-                                            <td>{member.situation}</td>
+                                             <td className="text-left">{member.personnMembre.nomMembre}</td>
+                                            <td className="text-left">{member.personnMembre.prenomMembre}</td>
+                                            <td className="text-left">{member.personnMembre.Telephone}</td>
+                                            <td className="text-left">{member.personnMembre.Email}</td>
+                                            <td className="text-center">{Number.isInteger(member.pourcentage) 
+                                                                    ? member.pourcentage 
+                                                                    : member.pourcentage.toFixed(2)} % </td>
                                             <td>
                                                 <button
                                                     className="btn btn-danger"

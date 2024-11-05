@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Button, Modal } from 'react-bootstrap';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import * as XLSX from 'xlsx';
 
 const ModificationMembre = () => {
   const [PersonneMembre, setPersonneMembre] = useState({
@@ -357,6 +358,33 @@ const handleExport = async (event) => {
   }
 };
 
+
+const exportToExcel = () => {
+    // Aplatir les données des membres pour l'exportation
+    const dataToExport = Membre.map(membre => ({
+        'Nom': membre.nom_membre,
+        'Prénom': membre.prenom_membre,
+        'Adresse': membre.address,
+        'Téléphone': membre.telephone,
+        'Date de naissance': new Date(membre.date_de_naissance).toLocaleDateString('fr-FR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+        }),
+        'Email': membre.email,
+        'Décédé': membre.decede ? 'Oui' : 'Non' // Ajustez selon la logique de votre application
+    }));
+
+    // Créer une feuille de travail à partir des données aplaties
+    const ws = XLSX.utils.json_to_sheet(dataToExport);
+    // Créer un classeur
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Membres');
+
+    // Exporter le fichier Excel
+    XLSX.writeFile(wb, 'liste_membres.xlsx');
+};
+
   return (
     <>
     <ToastContainer/>
@@ -429,6 +457,11 @@ const handleExport = async (event) => {
                     <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
                 </form>
                 <div className="table-responsive">
+                <div className="col-md-8 d-flex">
+                            <button className="btn btn-primary btn-block" style={{ width: '50%' }} type="button" onClick={exportToExcel}>
+                                Exporter en Excel
+                            </button>
+                    </div>
                   <table className="table">
                     <thead className=" text-dark">
                       <th className="text-left">

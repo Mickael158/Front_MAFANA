@@ -16,7 +16,7 @@ const Contact = () => {
       <div className="row pt-lg-6 w-80 m-auto" id="contact">
       <div className="col-lg-3">
         <div className="position-sticky pb-lg-5 pb-3 mt-lg-0 mt-5 ps-1" style={{'top': '100px'}}>
-          <h3 className="text-info"><i className="fas fa-mail-bulk align-items-center justity-content-center"> </i>  Nos contacte</h3>
+          <h3 className="text-info"><i className="fas fa-mail-bulk align-items-center justity-content-center"> </i>  Nos contacts</h3>
           <h6 className="text-secondary font-weight-normal pe-3">Vous pouvez nous contactez dirèctement par ses informations </h6>
         </div>
       </div>
@@ -50,17 +50,15 @@ const Contact = () => {
           <div className="container">
             <div className="row ">
               <div className="col-lg-12 m-auto text-center">
-                <h3 className="pt-4 mt-lg-0">Boite de récéption de l'association</h3>
-                <p className="pe-5">La reponse de vos message peu prendre du temps</p>
-                <p  className="text-primary icon-move-right ">voici nos contactes
+                  <h3 className="pt-4 mt-lg-0">Boîte de réception de l'association</h3>
+                <p className="pe-5">La réponse de vos messages peu prendre du temps</p>
+                <p  className="text-primary icon-move-right ">voici nos contacts
                   <i className="fas fa-arrow-right text-sm ms-1"></i>
                 </p>
               </div>
               <div className="col-lg-8 mt-lg-0 mt-5 ps-lg-0 ps-0 m-auto d-flex flex-column justify-content-end align-items-start" >
                 <div className="p-3 info-horizontal d-flex align-items-center text-center justify-content-center">
-                  <div className="icon icon-shape bg-gradient-info shadow-info text-center">
-                    <i className="fab fa-facebook fs-5"></i>
-                  </div>
+                    <i className="ni ni-pin-3 text-lg me-5 text-primary"></i>
                   <div className="description ps-3">
                     <p className="mb-0 font-weight-bolder">{Asoociation.Siege}</p>
                   </div>
@@ -75,21 +73,21 @@ const Contact = () => {
                 </div> */}
           
                 <div className="p-3 info-horizontal d-flex align-items-center text-center justify-content-center">
-                  <div className="icon icon-shape  bg-gradient-warning shadow-warning text-center">
-                    <i className="fas fa-envelope"></i>
-                  </div>
+                  <i className="ni ni-mobile-button text-lg me-5 text-primary"></i>
+                  
                   <div className="description ps-3">
                     <p className="mb-0 font-weight-bolder">{Asoociation.Telephone}</p>
                   </div>
                 </div>
                 <div className="p-3 info-horizontal d-flex align-items-center text-center justify-content-center">
-                  <div className="icon icon-shape  bg-gradient-primary shadow-primary text-center">
-                    <i className="fas fa-map-marker-alt"></i>
-                  </div>
+                  
+                      <i className="ni ni-email-83 text-lg me-5 text-primary"></i>
+                  
                   <div className="description ps-3">
                     <p className="mb-0 font-weight-bolder">{Asoociation.Email}</p>
                   </div>
                 </div>
+                
               </div>
             </div>
           </div>

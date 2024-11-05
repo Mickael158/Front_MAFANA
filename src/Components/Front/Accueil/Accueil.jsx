@@ -73,7 +73,7 @@ const Accueil = () => {
           <div className="col-md-4">
             <div className="p-3 text-center">
               <h1 className="text-gradient text-info" id="state3" >{Valle}</h1>
-              <h5 className="mt-3">Vallée</h5>
+              <h5 className="mt-3">Valléé</h5>
               <p className="text-sm font-weight-normal">Au Sud de Madagascar</p>
             </div>
           </div>

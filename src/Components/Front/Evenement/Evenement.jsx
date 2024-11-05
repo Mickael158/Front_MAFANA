@@ -39,7 +39,7 @@ const Evenement = () => {
                       {evenements[0].nom}
                     </h2>
                     <h3 className="text-white">
-                      Aurras lieu a{" "}{evenements[0].lieu_evenement}
+                      Aura lieu à{" "}{evenements[0].lieu_evenement}
                     </h3>
                     <h4 className="text-white">
                       Débute le{" "}
@@ -82,7 +82,7 @@ const Evenement = () => {
                         {E.nom}
                       </h6>
                       <div className="stats">
-                        <i className="far fa-clock"></i> Aurras lieu a {E.lieu_evenement}  , Débute le {new Date(E.date_evenement).toLocaleDateString()} et se termine le {new Date(E.date_fin_evenement).toLocaleDateString()}
+                        <i className="far fa-clock"></i> Aura lieu à {E.lieu_evenement}  , débute le {new Date(E.date_evenement).toLocaleDateString()} et se termine le {new Date(E.date_fin_evenement).toLocaleDateString()}
                       </div>
                     </div>
                   </div>

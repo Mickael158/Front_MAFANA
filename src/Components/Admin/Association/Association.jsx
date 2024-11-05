@@ -131,12 +131,12 @@ const Association = () => {
                         <input type="text" className="form-control" placeholder="Date debut" value={Slogan} onChange={(e) => setSlogan(e.target.value)}/>
                       </div>
                     </div>
-                    <div className="col-md-6 px-1">
+                    {/* <div className="col-md-6 px-1">
                       <div className="form-group">
                         <label>Logo</label>
                         <input type="text" className="form-control" placeholder="Date debut" value={Logo} onChange={(e) => setLogo(e.target.value)}/>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="col-md-12 px-1">
                       <div className="form-group">
                         <label>Déscription</label>

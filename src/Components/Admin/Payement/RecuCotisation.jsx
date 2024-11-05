@@ -160,7 +160,7 @@ const RecuCotisation = () => {
                                         })} 
                                         </td>
                                         <td className="text-right">
-                                            {recu.montant_cotisation_total_payer.toLocaleString()} Ar
+                                            {Number(recu.montant_cotisation_total_payer).toLocaleString()} Ar
                                         </td>
                                 </tr>
                             ) )

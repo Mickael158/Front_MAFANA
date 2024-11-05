@@ -27,7 +27,7 @@ const Footer = () => {
 
 
 
-      <div className="col-md-2 col-sm-6 col-6 mb-4">
+      <div className="col-md-3 col-sm-6 col-6 mb-4">
         <div>
           <h6 className="text-sm">Contenus</h6>
           <ul className="flex-column ms-n3 nav">
@@ -63,9 +63,9 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="col-md-2 col-sm-6 col-6 mb-4">
+      <div className="col-md-3 col-sm-6 col-6 mb-4">
         <div>
-          <h6 className="text-sm">Téchnologie</h6>
+          <h6 className="text-sm">Technologie</h6>
           <ul className="flex-column ms-n3 nav">
             <li className="nav-item">
               <a className="nav-link" href="#" >
@@ -88,31 +88,26 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="col-md-2 col-sm-6 col-6 mb-4">
+      <div className="col-md-3 col-sm-6 col-6 mb-4">
         <div>
-          <h6 className="text-sm">....</h6>
+          <h6 className="text-sm">Contacts</h6>
           <ul className="flex-column ms-n3 nav">
+
             <li className="nav-item">
               <a className="nav-link" href="#" >
-                ....
+                {Asoociation.Siege}
               </a>
             </li>
 
             <li className="nav-item">
               <a className="nav-link" href="#" >
-                ...
+              {Asoociation.Telephone}
               </a>
             </li>
 
             <li className="nav-item">
               <a className="nav-link" href="#" >
-                ...
-              </a>
-            </li>
-
-            <li className="nav-item">
-              <a className="nav-link" href="#" >
-                ...
+              {Asoociation.Email}
               </a>
             </li>
 
@@ -120,30 +115,30 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="col-md-2 col-sm-6 col-6 mb-4 me-auto">
+      {/* <div className="col-md-2 col-sm-6 col-6 mb-4 me-auto">
         <div>
-          <h6 className="text-sm">...</h6>
+          <h6 className="text-sm"></h6>
           <ul className="flex-column ms-n3 nav">
             <li className="nav-item">
               <a className="nav-link" href="#" >
-                ...
+                
               </a>
             </li>
 
             <li className="nav-item">
               <a className="nav-link" href="#" >
-                ...
+                
               </a>
             </li>
 
             <li className="nav-item">
               <a className="nav-link" href="#" >
-                ...
+                
               </a>
             </li>
           </ul>
         </div>
-      </div>
+      </div> */}
 
       <div className="col-12">
         <div className="text-center">

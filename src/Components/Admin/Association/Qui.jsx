@@ -181,10 +181,19 @@ const Qui = () => {
                                         <div className="col-md-12 col-xs-12 px-1">
                                             <div className="form-group">
                                                 <label>Photo de la personne</label>
+                                                <input 
+                                                    type="file" 
+                                                    onChange={handleImageChange} 
+                                                    />
                                                 <input type="file" multiple className="form-control" style={{ height: '20px', border: '1px solid black !important' }} onChange={handleImageChange} />
                                             </div>
                                         </div>
+                                        <input 
+                                            type="file" 
+                                            onChange={handleImageChange} 
+                                            />
                                     </div>
+                                    
                                     <button type='submit' className='btn btn-success'>Valider</button>
                                 </form>
                                 <div className="col-lg-12 mt-2">

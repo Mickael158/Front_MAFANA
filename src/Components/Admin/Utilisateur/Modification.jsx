@@ -77,7 +77,7 @@ const Modification = () => {
              <div className="card">
                 <ToastContainer />
                 <div className="card-header">
-                    <h4 className="card-title">Choisisez l' utilisateur a modifier</h4>
+                    <h4 className="card-title">Choisisez l' utilisateur à modifier</h4>
                 </div>
                 <div className="card-body">
                     <div className="table-responsive">
@@ -87,7 +87,7 @@ const Modification = () => {
                                     <th className="text-left">Nom du Membre</th>
                                     <th className="text-left">Prénom</th>
                                     <th className="text-left">compte</th>
-                                    <th className="text-left">roles</th>
+                                    <th className="text-left">rôles</th>
                                     <th className="text-center">Cliquer pour choisir</th>
                                 </tr>
                             </thead>
@@ -120,10 +120,10 @@ const Modification = () => {
 
             <Modal show={showModal} onHide={() => setShowModal(false)} dialogClassName="modal-lg">
                 <Modal.Header closeButton>
-                    <Modal.Title>Attribution de role a un utilisateur</Modal.Title>
+                    <Modal.Title>Attribution de rôle à un utilisateur</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>Attribuer des roles spécifique a {selectedNom} </p>
+                    <p>Attribuer des rôles spécifiques à {selectedNom} </p>
                     <div className="card-body">
                         <form onSubmit={attribution}>
                             <div className="row">
@@ -140,7 +140,7 @@ const Modification = () => {
                             <div className="row mt-4">
                                 <div className="col-md-12 pr-1">
                                     <div className="form-group texte-center"style={{  "marginLeft":"40%"}} >
-                                        <label style={{  "marginLeft":"10%"}} >Les rôles a attribués</label>
+                                        <label style={{  "marginLeft":"10%"}} >Les rôles à attribuer</label>
                                         <div >
                                             {Array.isArray(rolee) && rolee.length > 0 ? (
                                                 rolee.map(role => (
