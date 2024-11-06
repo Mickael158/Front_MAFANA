@@ -411,7 +411,7 @@ const exportToExcel = () => {
                       </th>
                     </thead>
                     <tbody>
-                        {Array.isArray(Proffesion) ? (
+                        {Array.isArray(ProffesionPerso) ? (
                             ProffesionPerso.map(professionpers => (
                                 <tr key={professionpers.id}>
                                   <td>

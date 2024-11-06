@@ -69,11 +69,6 @@ const ModifierVillage = () => {
         ListeVallees();
       });
     
-      useEffect(() => {
-        if (vallees.length > 0) {
-          setIdValle(vallees[0].id);
-        }
-      }, [vallees]);
   return (
     <>
       <ToastContainer />

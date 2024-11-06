@@ -80,6 +80,7 @@ const ListeDemandeMateriel = () => {
     const insertionRefuserMateriel = async (event, id) => {
         event.preventDefault();
         try {
+            console.log(token);
             await axios.post(`https://localhost:8000/api/RefuserDemandeMateriel`,
                 {
                     id_demande_materiel_id: id,

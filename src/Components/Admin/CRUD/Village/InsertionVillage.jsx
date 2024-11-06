@@ -17,7 +17,6 @@ const InsertionVillage = () => {
         { headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` } }
       );
       setNomVillage('');
-      setIdValle(vallees.length > 0 ? vallees[0].id : '');
       toast.success("Village inserer !");
     } catch (error) {
       console.error('Erreur d\'insertion', error);
@@ -43,11 +42,6 @@ const InsertionVillage = () => {
     ListeVallees();
   });
 
-  useEffect(() => {
-    if (vallees.length > 0) {
-      setIdValle(vallees[0].id);
-    }
-  }, [vallees]);
 
   return (
     <>
