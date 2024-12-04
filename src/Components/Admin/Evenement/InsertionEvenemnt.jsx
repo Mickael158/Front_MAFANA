@@ -13,7 +13,9 @@ const InsertionEvenemnt = () => {
     const [Description,setDescription] = useState('');
     const [IdTypeEvenement,setIdTypeEvenement] = useState('');
     const [TypeEvenement,setTypeEvenement] = useState('');
+    const [actualizeList,setActualizeList] = useState(1);
     const token = localStorage.getItem('token');
+
 
     const ListeTypeEvenement = async () => {
         const response = await axios.get('https://localhost:8000/api/TypeEvenement',{
@@ -64,6 +66,8 @@ const Insertion = async (e) => {
         console.error(error);
         toast.error("Erreur d'insertion");
     }
+    const state = actualizeList;
+    setActualizeList(state+1);
 }
 
     useEffect(()=>{
@@ -81,7 +85,7 @@ const Insertion = async (e) => {
             <div className="card">
               <div className="card">
               <div className="card-header">
-                <h5 className="title">Insertion évènement</h5>
+                <h5 className="title">Insertion d'Événement</h5>
               </div>
               <div className="card-body">
                 <form onSubmit={Insertion}>

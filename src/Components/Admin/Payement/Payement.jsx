@@ -13,7 +13,7 @@ const Payement = () => {
             <div className="card">
               <div className="card-header">
                 <h5 className="title">VOUS CHOISISSEZ</h5>
-                <p className="category">Les operations de payement Chez<a href="#"> MA.FA.NA</a></p>
+                <p className="category">Les operations de paiement Chez<a href="#"> MA.FA.NA</a></p>
               </div>
               <div className="card-body all-icons">
                 <div className="row">
@@ -44,7 +44,7 @@ const Payement = () => {
                   >
                     <div className="font-icon-detail">
                       <i className="now-ui-icons shopping_cart-simple fs-2"></i>
-                      <p className="fs-6">Matériel</p>
+                      <p className="fs-6">Tragnambo</p>
                     </div>
                   </div>
                 </div>

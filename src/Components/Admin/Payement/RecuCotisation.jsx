@@ -83,11 +83,11 @@ const RecuCotisation = () => {
       <div className="card">
         
                 <div className="card-header">
-                    <h4 className="card-title">Tous les payement</h4>
+                    <h4 className="card-title">Tous les paiements</h4>
                     <div className="col-md-8 d-flex">
-                            <button className="btn btn-warning btn-block" style={{ width: '50%' }} type="button" onClick={exportToExcel}>
-                                Exporter en Excel
-                            </button>
+                        <button className="btn btn-primary btn-block" style={{ width: '10%' , height: '10%'  }} type="button" onClick={exportToExcel}>
+                            <i className="now-ui-icons arrows-1_cloud-upload-94" style={{ fontSize: '24px' }}></i>
+                        </button>
                     </div>
                 </div>
                 <div className="card-body">
@@ -96,9 +96,9 @@ const RecuCotisation = () => {
                         <div className="col-3">
                             <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
                         </div>
-                        <div className="col-3">
+                        <div className="col-2">
                         <select className="form-control" value={ IdVillage } onChange={(e) => setIdVillage(e.target.value)}>
-                        <option>Choisir un Village</option>
+                        <option>Choisir un Tragnobe</option>
                         {Array.isArray(Village) ? (
                             Village.map(Village => (
                                 <option key={Village.id} value={Village.id} className="form-control">
@@ -108,14 +108,17 @@ const RecuCotisation = () => {
                         ) : ( <option>Aucune Valeur</option> ) }
                         </select>
                         </div>
-                        <div className="col-3">
+                        <div className="col-2">
                             <input type="date" className="form-control" placeholder="rechercher..." value={DateDebut} onChange={(e) => setDateDebut(e.target.value)}></input>
                         </div>
-                        <div className="col-3">
+                        <div className="col-2">
                             <input type="date" className="form-control" placeholder="rechercher..." value={DateFin} onChange={(e) => setDateFin(e.target.value)}></input>
                         </div>
+                        <div className="col-3">
+                            <Button type="submit" className="btn btn-sm btn-success" style={{"width" : "40%" , "height" : "95%" , "marginTop" : "-0.3%"}}><i className="now-ui-icons ui-1_zoom-bold"></i>   Rechercher</Button>
+                        </div>
                     </div>
-                    <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
+                    
                 </form>
                     <div className="table-responsive">
                         <table className="table">
@@ -125,9 +128,9 @@ const RecuCotisation = () => {
                                     <th className="text-left">Prénom</th>
                                     <th className="text-left">Téléphone</th>
                                     <th className="text-left">Email</th>
-                                    <th className="text-left">Mois payer</th>
-                                    <th className="text-left">Date de payement</th>
-                                    <th className="text-right">Montant Payer</th>
+                                    <th className="text-left">Mois de cotisation</th>
+                                    <th className="text-left">Date de paiement</th>
+                                    <th className="text-right">Montant Payé</th>
                                 </tr>
                             </thead>
                             <tbody>

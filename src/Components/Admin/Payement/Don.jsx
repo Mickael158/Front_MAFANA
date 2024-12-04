@@ -112,7 +112,7 @@ const Don = () => {
                     )}
                   </div>
                 </div>
-                <div className="col-md-5 pr-1">
+                <div className="col-md-4 pr-1">
                   <div className="form-group">
                     <label>Montant</label>
                     <input

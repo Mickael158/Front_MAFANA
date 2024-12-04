@@ -11,13 +11,13 @@ const Famille = () => {
               <div className="card-header d-flex justify-content-between align-items-center">
                 <h5 className="title">FAMILLE</h5>
                 <div className="d-flex gap-2">
-                  <button class="btn btn-warning" onClick={() => {
+                  <button className="btn btn-info" onClick={() => {
                 setPage(0);
-              }}>Personne Marier</button>
-                  <button class="btn btn-success" onClick={() => {
+              }}>Personne Mariée</button>
+                  <button className="btn btn-info" onClick={() => {
                 setPage(1);
-              }}>Nouveau Marier</button>
-                  <button class="btn btn-info" onClick={() => {
+              }}>Nouveau Marié</button>
+                  <button className="btn btn-info" onClick={() => {
                 setPage(2);
               }}>Enfant</button>
                 </div>

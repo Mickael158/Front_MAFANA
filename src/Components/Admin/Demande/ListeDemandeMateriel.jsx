@@ -89,6 +89,7 @@ const ListeDemandeMateriel = () => {
                 {
                     headers: {
                         'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     },
                 }
             );
@@ -124,7 +125,7 @@ const ListeDemandeMateriel = () => {
             <div className="card">
                 <ToastContainer />
                 <div className="card-header">
-                    <h4 className="card-title">Liste des Demandes Materiel</h4>
+                    <h4 className="card-title">Liste des Demandes Tranobe</h4>
                 </div>
                 <div className="card-body">
                     <div className="table-responsive">

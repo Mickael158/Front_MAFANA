@@ -126,22 +126,17 @@ const Etat = () => {
                         <div className="col-md-4">
                             <h4 className="card-title">Etat Membres</h4>
                         </div>
-                        <div className="col-md-8 d-flex">
-                            <button className="btn btn-warning btn-block" style={{ width: '50%' }} type="button" onClick={exportToExcel}>
-                                Exporter en Excel
-                            </button>
-                        </div>
                     </div>
                 </div>
                 <div className="card-body">
                 <form onSubmit={ListeMembre}>
                     <div className="row">
-                        <div className="col-3">
+                        <div className="col-4">
                             <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
                         </div>
-                        <div className="col-3">
+                        <div className="col-4">
                             <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
-                            <option>Choisir un Village</option>
+                            <option>Choisir un Tranobe</option>
                             {Array.isArray(Village) ? (
                                 Village.map(Village => (
                                     <option key={Village.id} value={Village.id} className="form-control">
@@ -151,10 +146,18 @@ const Etat = () => {
                             ) : ( <option>Aucune Valeur</option> ) }
                             </select>
                         </div>
+                        <div className="col-4">
+                            <Button type="submit" className="btn btn-sm btn-success" style={{"width" : "30%" , "height" : "95%" , "marginTop" : "-0.3%"}}><i className="now-ui-icons ui-1_zoom-bold"></i> Rechercher</Button>
+                        </div>
                     </div>
-                    <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
-                </form>
+                    
+                </form> <br/>
                     <div className="card">
+                        <div className="col-md-8 d-flex">
+                            <button className="btn btn-primary btn-block" style={{ width: '10%' , height: '60%'  }} type="button" onClick={exportToExcel}>
+                            <i className="now-ui-icons arrows-1_cloud-upload-94" style={{ fontSize: '24px' }}></i>
+                            </button>
+                        </div>
                         <div className="card-header">
                             <h4 className="card-title">Etat de tous les membres</h4>
                         </div>
@@ -165,7 +168,7 @@ const Etat = () => {
                                         <tr>
                                             <th className="text-left">Nom</th>
                                             <th className="text-left">Téléphone</th>
-                                            <th className="text-left">Village</th>
+                                            <th className="text-left">Tranobe</th>
                                             <th className="text-left">Vallée</th>
                                             <th className="text-center">Détail</th>
                                             <th className="text-right">Cotisation</th>
@@ -193,11 +196,12 @@ const Etat = () => {
                                                         <td  className="text-left">{member.personnMembre.idVillage.Id_Vallee.Nom_Vallee}</td>
                                                         <td className="text-center">
                                                             <button
-                                                                className="btn btn-success btn-block"
+                                                                className="btn btn-block"
+                                                                style={{ backgroundColor: '#D3D3D3'}}
                                                                 type="button"
                                                                 onClick={() => VoireDevis(member)}
                                                             >
-                                                                Voire
+                                                                Voir <i className="now-ui-icons arrows-1_minimal-right" style={{ fontSize: '12px' }}></i>
                                                             </button>
                                                         </td>
                                                         <td className="text-right">
@@ -243,7 +247,7 @@ const Etat = () => {
                 </select> <p> est de valeur de  {CotisationAll ? CotisationAll : 0}Ar avec ces charges</p>
                     </div>
                     
-                <button className="btn btn-success" onClick={() =>VoireDevisBy(selectId , Taona)}>Voire</button>
+                <button className="btn btn-success" style={{ fontSize: '120%'}} onClick={() =>VoireDevisBy(selectId , Taona)}>Voire</button>
                 </Modal.Body>
                 <Modal.Footer>
                     <button className="btn btn-secondary" onClick={() => setShowModal(false) }>Fermer</button>

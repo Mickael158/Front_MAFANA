@@ -14,13 +14,13 @@ const ChoixAssociation = () => {
                 <div className="row">
                     <div className="col-md-4"><h4 className="card-title"> Association</h4></div>
                     <div className="col-md-8 d-flex">
-                    <button className="btn btn-warning btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
+                    <button className="btn btn-info btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
                   setPage(0);
                 }}>Association</button>
-                <button className="btn btn-primary btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
+                <button className="btn btn-info btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
                 setPage(1);
               }}>A propos</button>
-                      <button className="btn btn-success btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
+                      <button className="btn btn-info btn-block" style={{'width': '50%'}} type="submit" onClick={() => {
                   setPage(2);
                 }}>Qui somme Nous</button>
                         

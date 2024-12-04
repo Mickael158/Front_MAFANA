@@ -55,7 +55,7 @@ const ArchiveMateriel = () => {
     <>
       <div className="card">
         <div className="card-header">
-            <h4 className="card-title">Liste des Demandes Materielles deja valider</h4>
+            <h4 className="card-title">Liste des Demandes Tranobe Déjà Validées</h4>
         </div>
         <div className="card-body">
             <form onSubmit={ListeDonnationMateriel}>
@@ -65,7 +65,7 @@ const ArchiveMateriel = () => {
                     </div>
                     <div className="col-3">
                         <select className="form-control" value={ IdMateriel } onChange={(e) => seIdMateriel(e.target.value)}>
-                        <option>Choisir un village</option>
+                        <option>Choisir un Tragnobe</option>
                         {Array.isArray(Materiel) ? (
                             Materiel.map(materiel => (
                                 <option key={materiel.id} value={materiel.id} className="form-control">
@@ -75,21 +75,24 @@ const ArchiveMateriel = () => {
                         ) : ( <option>Aucune Valeur</option> ) }
                         </select>
                     </div>
-                    <div className="col-3">
+                    <div className="col-2">
                         <input type="date" className="form-control" value={DateDebut} onChange={(e) => setDateDebut(e.target.value)} />
                     </div>
-                    <div className="col-3">
+                    <div className="col-2">
                         <input type="date" className="form-control" value={DateFin} onChange={(e) => setDateFin(e.target.value)} />
                     </div>
+                    <div className="col-2">
+                        <button type="submit" className="btn btn-sm btn-success" style={{fontSize: '100%' , marginTop: '-0.0001%'}}><i className="now-ui-icons ui-1_zoom-bold"></i> Rechercher</button>
+                    </div>
                 </div>
-                <button type="submit" className="btn btn-sm btn-warning">Rechercher</button>
+                
             </form>
             <div className="table-responsive">
                 <table className="table">
                     <thead className="text-dark">
                         <tr>
                             <th className="text-left">Nom</th>
-                            <th className="text-left">Materiel</th>
+                            <th className="text-left">Tranobe</th>
                             <th className="text-right">Nombre</th>
                         </tr>
                     </thead>

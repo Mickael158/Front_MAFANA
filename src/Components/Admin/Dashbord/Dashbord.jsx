@@ -136,7 +136,7 @@ const Dashbord = () => {
                   <li className={page === 1 ? "active" : ""} onClick={() => setPage(1)}>
                     <a href="#">
                       <i className="now-ui-icons ui-1_settings-gear-63"></i>
-                      <p>CRUD</p>
+                      <p>Parametre</p>
                     </a>
                   </li>
                   <li className={page === 5 ? "active" : ""} onClick={() => setPage(5)}>
@@ -157,7 +157,7 @@ const Dashbord = () => {
                 <li className={page === 1 ? "active" : ""} onClick={() => setPage(1)}>
                   <a href="#">
                     <i className="now-ui-icons ui-1_settings-gear-63"></i>
-                    <p>CRUD</p>
+                    <p>Parametre</p>
                   </a>
                 </li>
               )}
@@ -218,7 +218,7 @@ const Dashbord = () => {
               </div>
               <div className="navbar-wrapper">
                 <a className="navbar-brand" href="#pablo">
-                  Statistique
+                  {/* Statistique */}
                 </a>
               </div>
               <button
@@ -238,7 +238,7 @@ const Dashbord = () => {
                 <ul className="navbar-nav">
                   <li className="nav-item">
                     <a className="nav-link" href="#pablo">
-                      <i className="now-ui-icons users_single-02"></i>
+                      {/* <i className="now-ui-icons users_single-02"></i> */}
                       <p>
                         <span className="d-lg-none d-md-block">Deconnexion</span>
                       </p>

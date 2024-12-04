@@ -107,7 +107,7 @@ const Cotisation = () => {
                             <div className="row mb-5">
                                 <div className="col-md-5 pr-1">
                                     <div className="form-group">
-                                        <label>Nom de la personne à payer</label>
+                                        <label>Nom de la personne membre</label>
                                         <input
                                             type="text"
                                             className="form-control"
@@ -146,12 +146,12 @@ const Cotisation = () => {
                 <div className="card-body">
                 <form onSubmit={ListeMembre}>
                     <div className="row">
-                        <div className="col-3">
+                        <div className="col-4">
                             <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
                         </div>
-                        <div className="col-3">
+                        <div className="col-4">
                             <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
-                            <option>Choisir un Village</option>
+                            <option>Choisir un Tragnombe</option>
                             {Array.isArray(Village) ? (
                                 Village.map(Village => (
                                     <option key={Village.id} value={Village.id} className="form-control">
@@ -161,8 +161,11 @@ const Cotisation = () => {
                             ) : ( <option>Aucune Valeur</option> ) }
                             </select>
                         </div>
+                        <div className="col-4">
+                            <Button type="submit" className="btn btn-sm btn-success" style={{"width" : "40%" , "height" : "95%" , "marginTop" : "-0.3%"}}><i className="now-ui-icons ui-1_zoom-bold"></i>   Rechercher</Button>
+                        </div>
                     </div>
-                    <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
+                    
                 </form>
                     <div className="table-responsive">
                         <table className="table">

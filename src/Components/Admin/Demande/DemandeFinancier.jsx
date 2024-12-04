@@ -85,7 +85,7 @@ const DemandeFinancier = () => {
         <ToastContainer />
                 <div className="card">
                     <div className="card-header">
-                        <h5 className="title">Faire une demande financié</h5>
+                        <h5 className="title">Faire une demande financière</h5>
                     </div>
                     <div className="card-body">
                         <form onSubmit={DemandeFinancier}>
@@ -136,12 +136,12 @@ const DemandeFinancier = () => {
                 <div className="card-body">
                 <form onSubmit={ListeMembre}>
                     <div className="row">
-                        <div className="col-3">
+                        <div className="col-4">
                             <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
                         </div>
-                        <div className="col-3">
+                        <div className="col-4">
                             <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
-                            <option>Choisir un Village</option>
+                            <option>Choisir un Tranobe</option>
                             {Array.isArray(Village) ? (
                                 Village.map(Village => (
                                     <option key={Village.id} value={Village.id} className="form-control">
@@ -151,8 +151,11 @@ const DemandeFinancier = () => {
                             ) : ( <option>Aucune Valeur</option> ) }
                             </select>
                         </div>
+                        <div className="col-4">
+                            <Button type="submit" className="btn btn-sm btn-success" style={{fontSize: '110%' , marginTop: '-0.0001%'}}> <i className="now-ui-icons ui-1_zoom-bold"></i> Rechercher</Button>
+                        </div>
                     </div>
-                        <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
+                        
                     </form>
                     <div className="table-responsive">
                         <table className="table">

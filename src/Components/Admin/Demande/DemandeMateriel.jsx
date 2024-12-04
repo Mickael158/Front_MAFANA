@@ -112,7 +112,7 @@ const DemandeMateriel = (event) => {
       <div>
           <div className="card">
               <div className="card-header">
-                  <h5 className="title">Demande Matériel</h5>
+                  <h5 className="title">Demande Tranobe</h5>
               </div>
               <div className="card-body">
                   <form onSubmit={DemandeMateriel} >
@@ -131,13 +131,13 @@ const DemandeMateriel = (event) => {
                             </div>
                           <div className="col-md-4 pr-1">
                               <div className="form-group">
-                                  <label>Le matériel a demande</label>
+                                  <label>Tranobe à demander</label>
                                   <select 
                                       className="form-control" 
                                       value={IdMateriel} 
                                       onChange={(e) => setIdMateriel(e.target.value)}
                                       >
-                                     <option className="form-control">Choisir un matériel</option>
+                                     <option className="form-control">Choisir un Tranobe</option>
                                       {Array.isArray(Materiel) ? (
                                           Materiel.map((m) => (
                                           <option className="form-control" key={m.id} value={m.id}>
@@ -184,12 +184,12 @@ const DemandeMateriel = (event) => {
                 <div className="card-body">
                 <form onSubmit={ListeMembre}>
                     <div className="row">
-                        <div className="col-3">
+                        <div className="col-4">
                             <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
                         </div>
-                        <div className="col-3">
+                        <div className="col-4">
                             <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
-                            <option>Choisir un Village</option>
+                            <option>Choisir un Tragnombe</option>
                             {Array.isArray(Village) ? (
                                 Village.map(Village => (
                                     <option key={Village.id} value={Village.id} className="form-control">
@@ -199,8 +199,11 @@ const DemandeMateriel = (event) => {
                             ) : ( <option>Aucune Valeur</option> ) }
                             </select>
                         </div>
+                        <div className="col-4">
+                            <Button type="submit" className="btn btn-sm btn-success" style={{fontSize: '110%' , marginTop: '-0.0001%'}}> <i className="now-ui-icons ui-1_zoom-bold"></i> Rechercher</Button>
+                        </div>
                     </div>
-                        <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
+                        
                     </form>
                     <div className="table-responsive">
                         <table className="table">

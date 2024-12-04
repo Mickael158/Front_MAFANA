@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Modal } from 'react-bootstrap'; 
 
-const ListeEvenement = () => {
+const ListeEvenement = ({actualizeEvent}) => {
   const [evenements, setEvenement] = useState([]);
   const token = localStorage.getItem("token");
   const [showModal, setShowModal] = useState(false);
@@ -87,7 +87,7 @@ const modification = async (e) => {
   useEffect(() => {
     getEvenements();
     ListeTypeEvenement();
-  }, []);
+  }, [actualizeEvent]);
 
   // Fonction pour supprimer un événement
   const SuppressionEvenement = async (event, id) => {

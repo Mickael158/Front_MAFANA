@@ -124,9 +124,9 @@ const Decede = (event) => {
                 'Authorization' : `Bearer ${token}`
               }
             });
-            setShowModalDece(false);
-            ListeMembre(); 
-            toast.success("Declaration decede inserer");
+      recherche(); 
+      toast.success("Declaration decede inserer");
+      setShowModalDece(false);
   }catch(error){
     toast.error('Erreur d\'insertion' , error);
   }
@@ -164,7 +164,7 @@ const QuitteMembre = (event) => {
               }
             });
             setShowModalQuitte(false);
-            ListeMembre(); 
+            recherche(); 
             toast.success("Personne quitter inserer");
   }catch(error){
       toast.error('Erreur d\'insertion' , error);
@@ -259,20 +259,29 @@ const exportToExcel = () => {
       <div className="card">
           <div className="card-header">
             <h4 className="card-title">Membre responsable</h4>
-            <input 
-              type="file" 
-              className="form-control" 
-              accept=".csv" 
-              onChange={handleFileChange} 
-            />
-            <div className="d-flex gap-2">
+            <div className="row">
+              <div className="col-md-9 px-1">
+                <input 
+                  type="file" 
+                  className="form-control" 
+                  accept=".csv" 
+                  onChange={handleFileChange} 
+                />
+              </div>
+              <div className="col-md- px-1">
+                <div className="d-flex gap-2">
               <button 
-                className="btn btn-warning" 
+                className="btn btn-success"  
+                style={{"margin-top" : "-0.3%"}}
                 onClick={handleExport}
               >
-                Exporter le fichier CSV ci-dessus
+               <i className="now-ui-icons arrows-1_cloud-download-93"></i> Importer
               </button>
             </div>
+              </div>
+            </div>
+            
+            
         </div>
               <div className="card-body">
               <form onSubmit={recherche}>
@@ -281,24 +290,28 @@ const exportToExcel = () => {
                             <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)}></input>
                         </div>
                         <div className="col-3">
-                        <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
-                        <option>Choisir un Village</option>
-                        {Array.isArray(Village) ? (
-                            Village.map(Village => (
-                                <option key={Village.id} value={Village.id} className="form-control">
-                                  {Village.nomVillage}
-                                </option>
-                            ) )
-                        ) : ( <option>Aucune Valeur</option> ) }
-                        </select>
+                          <select className="form-control" value={ Idvillage } onChange={(e) => setIdvillage(e.target.value)}>
+                            <option>Choisir un Tranobe</option>
+                            {Array.isArray(Village) ? (
+                                Village.map(Village => (
+                                    <option key={Village.id} value={Village.id} className="form-control">
+                                      {Village.nomVillage}
+                                    </option>
+                                ) )
+                            ) : ( <option>Aucune Valeur</option> ) }
+                          </select>
+                        </div>
+                        <div className="col-3">
+                          <Button type="submit" className="btn btn-sm btn-success" style={{"width" : "40%" , "height" : "95%" , "marginTop" : "-0.3%"}}><i className="now-ui-icons ui-1_zoom-bold"></i>   Rechercher</Button>
                         </div>
                     </div>
-                    <Button type="submit" className="btn btn-sm btn-warning">Rechercher</Button>
+                    
                 </form>
+                <br />
                 <div className="table-responsive">
                     <div className="col-md-8 d-flex">
-                            <button className="btn btn-primary btn-block" style={{ width: '50%' }} type="button" onClick={exportToExcel}>
-                                Exporter en Excel
+                            <button className="btn btn-primary btn-block" style={{ width: '10%' , height: '10%'  }} type="button" onClick={exportToExcel}>
+                             <i className="now-ui-icons arrows-1_cloud-upload-94" style={{ fontSize: '24px' }}></i>
                             </button>
                     </div>
                   <table className="table">
@@ -358,20 +371,22 @@ const exportToExcel = () => {
                                         </td>
                                         <td className="text-center">
                                         <button
-                                        className="btn btn-success btn-block"
+                                        className="btn btn-block"
+                                        style={{ backgroundColor: '#D3D3D3'}}
                                         type="button"
                                         onClick={() => handleSelectMember(Membre)}
                                     >
-                                        Voire
+                                        Voire <i className="now-ui-icons arrows-1_minimal-right" style={{ fontSize: '12px' }}></i>
                                     </button>
                                         </td>
                                         <td>
                                         <button
-                                        className="btn btn-success btn-block"
+                                        className="btn btn-block"
+                                        style={{ backgroundColor: '#D3D3D3'}}
                                         type="button"
                                         onClick={() => handleSelectMemberDece(Membre)}
                                     >
-                                        Marquer
+                                        Marquer <i className="now-ui-icons ui-1_simple-remove" style={{ fontSize: '12px' }}></i>
                                     </button>
                                         </td>
                                 </tr>

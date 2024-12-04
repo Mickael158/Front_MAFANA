@@ -12,7 +12,7 @@ const Navbars = () => {
                 <span className="navbar-toggler-bar bar3"></span>
               </button>
             </div>
-            <a className="navbar-brand" href="#pablo">Statistique</a>
+             <a className="navbar-brand" href="#pablo"></a> 
           </div>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-bar navbar-kebab"></span>
@@ -23,7 +23,7 @@ const Navbars = () => {
             <ul className="navbar-nav">
               <li className="nav-item">
                 <a className="nav-link" href="#pablo">
-                  <i className="now-ui-icons users_single-02"></i>
+                  {/* <i className="now-ui-icons users_single-02"></i> */}
                   <p>
                     <span className="d-lg-none d-md-block">Deconnexion</span>
                   </p>

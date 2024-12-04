@@ -123,7 +123,7 @@ const ListeDemandeFinancier = () => {
             <div className="card">
                 <ToastContainer />
                 <div className="card-header">
-                    <h4 className="card-title">Liste des Demandes Financier</h4>
+                    <h4 className="card-title">Liste des Demandes Financières</h4>
                 </div>
                 <div className="card-body">
                     <div className="table-responsive">

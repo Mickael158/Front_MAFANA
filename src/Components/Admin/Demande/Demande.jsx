@@ -33,7 +33,7 @@ const Payement = () => {
                   >
                     <div className="font-icon-detail">
                       <i className="now-ui-icons shopping_cart-simple fs-2"></i>
-                      <p className="fs-6">Matériel</p>
+                      <p className="fs-6">Tragnombe</p>
                     </div>
                   </div>
                 </div>

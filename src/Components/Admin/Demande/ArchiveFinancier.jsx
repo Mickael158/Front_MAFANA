@@ -42,7 +42,7 @@ const ArchiveFinancier = () => {
         <>
             <div className="card">
                 <div className="card-header">
-                    <h4 className="card-title">Liste des Demandes Financier deja valider</h4>
+                    <h4 className="card-title">Liste des Demandes Financières Déjà Validées.</h4>
                 </div>
                 <div className="card-body">
                      <form onSubmit={ListeDonnationFinancier}>
@@ -50,17 +50,20 @@ const ArchiveFinancier = () => {
                             <div className="col-3">
                                 <input className="form-control" placeholder="rechercher..." value={Data} onChange={(e) => setData(e.target.value)} />
                             </div>
-                            <div className="col-3">
+                            <div className="col-2">
                                 <input className="form-control" placeholder="rechercher..." value={Montant} onChange={(e) => setMontant(e.target.value)} />
                             </div>
-                            <div className="col-3">
+                            <div className="col-2">
                                 <input type="date" className="form-control" value={DateDebut} onChange={(e) => setDateDebut(e.target.value)} />
                             </div>
-                            <div className="col-3">
+                            <div className="col-2">
                                 <input type="date" className="form-control" value={DateFin} onChange={(e) => setDateFin(e.target.value)} />
                             </div>
+                            <div className="col-3">
+                                <button type="submit" className="btn btn-sm btn-success" style={{fontSize: '100%' , marginTop: '-0.0001%'}}> <i className="now-ui-icons ui-1_zoom-bold"></i> Rechercher</button>
+                            </div>
                         </div>
-                        <button type="submit" className="btn btn-sm btn-warning">Rechercher</button>
+                        
                     </form>
                     <div className="table-responsive">
                         <table className="table">
